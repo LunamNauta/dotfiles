@@ -1,4 +1,3 @@
-# Installation
 # Install Instructions
 
 ## Windows (pwsh)

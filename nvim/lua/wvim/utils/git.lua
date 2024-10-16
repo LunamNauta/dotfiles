@@ -3,7 +3,7 @@ wvim.git = wvim.git or {}
 
 function wvim.git.UploadConfig()
     local git_dir = vim.fn.stdpath("config")
-    local git_command = "!git"
+    local git_command = "silent !git"
     local commit_msg = "Upload from 'UploadConfig' (" .. vim.fn.strftime("%c") .. ")"
     vim.cmd(git_command .. " add nvim")
     vim.cmd(git_command .. " commit -m \"" .. commit_msg .. "\"")

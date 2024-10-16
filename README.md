@@ -1,6 +1,8 @@
-# Installation Instructions
+# LunamNauta/dotfiles
 
-## Windows (pwsh)
+## Installation
+
+### Windows (pwsh)
 ```
 git clone https://github.com/LunamNauta/dotfiles
 cd dotfiles

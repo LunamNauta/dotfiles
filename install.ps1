@@ -3,7 +3,12 @@ function Install-Firefox{
     $FIREFOX_PROFILE_NAME = Read-Host "Firefox Profile Name"
     $FIREFOX_PROFILE_PATH = $env:APPDATA + "\Mozilla\Firefox\Profiles\" + $FIREFOX_PROFILE_NAME
     if (Test-Path $FIREFOX_PROFILE_PATH){
-        git clone https://github.com/arkenfox/user.js/ $FIREFOX_PROFILE_PATH
+        $ARKENFOX_REPO = "https://github.com/arkenfox/user.js/"
+        if (-Not (Test-Path $FIREFOX_PROFILE_PATH\.git)){
+            git -C $FIREFOX_PROFILE_PATH init .
+            git -C $FIREFOX_PROFILE_PATH remote add origin $ARKENFOX_REPO
+            git -C $FIREFOX_PROFILE_PATH pull origin master
+        }
         if (Test-Path $FIREFOX_PROFILE_PATH\user-overrides.js){Remove-Item $FIREFOX_PROFILE_PATH\user-overrides.js -Force}
         New-Item -ItemType SymbolicLink -Path $FIREFOX_PROFILE_PATH -name user-overrides.js -value $pwd/firefox/user-overrides.js
         & "$FIREFOX_PROFILE_PATH\updater.bat"

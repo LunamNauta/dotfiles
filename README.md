@@ -2,5 +2,5 @@
 
 ## Windows (pwsh)
 ```
-pwsh install.ps1
+git clone https://github.com/LunamNauta/dotfiles ; pwsh install.ps1
 ```

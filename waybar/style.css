@@ -1,0 +1,103 @@
+@import "mocha.css";
+
+*{
+    font-size: 20px;
+    font-family: "JetbrainsMono Nerd Font";
+}
+
+window#waybar{
+    background-color: transparent;
+    color: #000000;
+}
+
+#tray{
+    background: #1a1a1a;
+}
+
+#workspaces button{
+    color: #ffffff;
+}
+#workspaces button.focused{
+    color: #000000;
+    background: @lavender;
+}
+#workspaces button:hover{
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+#workspaces button:hover{
+    background: #1a1a1a;
+    border: #1a1a1a;
+}
+
+#workspaces{
+    margin-top: 6px;
+    margin-left: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    transition: none;
+    color: #161320;
+    background: @base;
+}
+
+#clock{
+    margin-top: 6px;
+    margin-left: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    transition: none;
+    color: #161320;
+    background: #ABE9B3;
+}
+
+#network{
+    margin-top: 6px;
+    margin-left: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    transition: none;
+    color: #161320;
+    background: @mauve;
+}
+
+#cpu{
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #96CDFB;
+}
+
+#memory {
+    margin-top: 6px;
+    margin-left: 8px;
+    padding-left: 10px;
+    margin-bottom: 0px;
+    padding-right: 10px;
+    border-radius: 10px;
+    transition: none;
+    color: #161320;
+    background: #DDB6F2;
+}
+
+#disk{
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: @maroon;
+}

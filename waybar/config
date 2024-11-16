@@ -1,0 +1,47 @@
+{
+	"layer": "top",
+	"position": "top",
+    "height": 20,
+
+	"modules-left": ["cpu", "memory", "disk"],
+	"modules-center": ["hyprland/workspaces"],
+	"modules-right": ["network", "clock"],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "format": "{name}"
+	},
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "  {:%I:%M:%S %p      %d/%h/%Y}"
+    },
+
+    "cpu": {
+        "interval": 15,
+        "format": "  {}%",
+        "max-length": 10
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "  {}%",
+        "max-length": 10
+    },
+
+    "disk": {
+        "interval": 60,
+        "format": "  {percentage_used:2}%",
+        "max-length": 10
+    }
+}

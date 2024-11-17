@@ -4,8 +4,27 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+include catppuccin-mocha
+
 xwayland disable
 font CaskaydiaCove Nerd Font Mono 12
+
+#
+# windows
+#
+#default_border pixel 3
+titlebar_border_thickness 1
+gaps inner 0
+gaps outer 0
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $lavender $base  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $base
+client.unfocused         $overlay0 $base $text  $rosewater $base
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+#for_window [app_id="firefox"] border none
 
 ### Variables
 #

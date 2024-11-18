@@ -8,12 +8,12 @@ font CaskaydiaCove Nerd Font Mono 12
 titlebar_border_thickness 1
 gaps inner 0
 gaps outer 0
-# Target                 Title     BG        Text   Indicator  Border
-client.focused           $lavender $lavender $base  $rosewater $lavender
-client.focused_inactive  $overlay0 $base     $text  $rosewater $base
-client.unfocused         $overlay0 $base     $text  $rosewater $base
-client.urgent            $peach    $base     $peach $overlay0  $peach
-client.placeholder       $overlay0 $base     $text  $overlay0  $overlay0
+# Target                 Title     BG         Text   Indicator  Border
+client.focused           $lavender $subtext0  $crust $rosewater $base
+client.focused_inactive  $overlay0 $crust     $text  $rosewater $crust
+client.unfocused         $overlay0 $crust     $text  $rosewater $crust
+client.urgent            $peach    $crust     $peach $overlay0  $peach
+client.placeholder       $overlay0 $crust     $text  $overlay0  $overlay0
 client.background        $base
 
 ### Variables

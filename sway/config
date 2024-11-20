@@ -1,20 +1,27 @@
+### Basic appearance
 include catppuccin-mocha
+font Cascadia Code 12
+exec lxpolkit
 
-### Fuck X11
-xwayland disable
-font CaskaydiaCove Nerd Font Mono 12
-
-### Window Layout
+### Window borders
+default_border normal 1
+default_floating_border normal 0
+for_window [title="^.*"] title_format ""
 titlebar_border_thickness 1
+titlebar_padding 1
 gaps inner 0
 gaps outer 0
-# Target                 Title     BG         Text   Indicator  Border
-client.focused           $lavender $subtext0  $crust $rosewater $base
-client.focused_inactive  $overlay0 $crust     $text  $rosewater $crust
-client.unfocused         $overlay0 $crust     $text  $rosewater $crust
-client.urgent            $peach    $crust     $peach $overlay0  $peach
-client.placeholder       $overlay0 $crust     $text  $overlay0  $overlay0
+# Set border colors for all windows
+# BG is only used if text is applied, and text is only applied to xwayland windows
+#                       Title      BG     Text   Indicator  Border
+client.focused           $lavender $red   $crust $rosewater $base
+client.focused_inactive  $crust    $crust $text  $rosewater $crust
+client.unfocused         $crust    $crust $text  $rosewater $crust
+client.urgent            $peach    $crust $peach $overlay0  $peach
+client.placeholder       $overlay0 $crust $text  $overlay0  $overlay0
 client.background        $base
+# Shame xwayland windows with a red banner
+for_window [shell="^((?!xdg_shell).)*$"] title_format "[%shell]"
 
 ### Variables
 set $mod Mod4
@@ -23,25 +30,37 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu fuzzel
-set $filemanager pcmanfm-qt
+set $app_menu ~/.config/fuzzel/usrapps.sh
+set $sys_menu ~/.config/fuzzel/sysapps.sh
+set $games_menu ~/.config/fuzzel/gameapps.sh
+set $filemanager nemo
 
-### Output
+### Input and output
+input 1133:16517:Logitech_G604 {
+    left_handed disabled
+    tap enabled
+    natural_scroll disabled
+    dwt enabled
+    accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    pointer_accel 0.1 # set mouse sensitivity (between -1 and 1)
+}
 output * bg ~/Pictures/Backgrounds/CatBackground1.jpg fill
-output Virtual-1 resolution 1920x1080 position 1920,0 
+output HDMI-A-1 resolution  1920x1080@119.982Hz position 0,0
 
-### Basic Keybinds
+### Basic keybinds
 bindsym $mod+q exec $term
 bindsym $mod+t exec $term tmux
-bindsym $mod+c kill
-bindsym $mod+r exec $menu
-
 bindsym $mod+e exec $filemanager
 floating_modifier $mod normal
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+c kill
 
-### Movement Keybinds
+### App menus
+bindsym $mod+p exec $app_menu
+bindsym $mod+o exec $sys_menu
+bindsym $mod+i exec $games_menu
+
+### Movement keybinds (Focus)
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
@@ -51,6 +70,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+### Movement keybinds (Move)
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -60,7 +80,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-### Workspace Keybinds
+### Workspace keybinds (Focus)
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
@@ -72,6 +92,7 @@ bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
+### Workspace keybinds (Move)
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
@@ -83,7 +104,7 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-### Layout Keybinds
+### Layout keybinds
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+s layout stacking
@@ -94,11 +115,11 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
-### Scratchpad Keybinds
+### Scratchpad keybinds
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-### Resize Keybinds
+### Resize keybinds
 mode "resize" {
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
@@ -117,17 +138,20 @@ bindsym $mod+d mode "resize"
 
 ### Utilities
 # Special keys to adjust volume via PulseAudio
-bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+#bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+#bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+#bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+#bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 # Special keys to adjust brightness via brightnessctl
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+#bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+#bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 # Special key to take a screenshot with grim
-bindsym Print exec grim
+#bindsym Print exec grim
 
-### Status-bar setup
+### RELEASE MEEEE!
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+### Status-bar
 bar {
     swaybar_command waybar
 }

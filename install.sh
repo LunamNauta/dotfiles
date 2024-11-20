@@ -22,7 +22,6 @@ set-config-link "$SCRIPTPATH/tmux" "$HOME/.config/tmux"
 
 # Basic Config Files
 set-config-link "$SCRIPTPATH/.tmux.conf" "$HOME/.tmux.conf"
-set-config-link "$SCRIPTPATH/.bash_profile" "$HOME/.bash_profile"
 set-config-link "$SCRIPTPATH/.bashrc" "$HOME/.bashrc"
 
 unset -f set-config-link

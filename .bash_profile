@@ -20,3 +20,6 @@ if [ "$(tty)" = "/dev/tty1" ]; then
         hyprland
     fi
 fi
+
+ssh-start(){ eval "$(ssh-agent -s)"; }
+ssh-add-key(){ ssh-add "$HOME/.ssh/$1"; }

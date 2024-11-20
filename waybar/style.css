@@ -2,7 +2,8 @@
 
 *{
     font-size: 15px;
-    font-family: "CaskaydiaCove Nerd Font Mono";
+    font-family: "CaskaydiaMono NFM";
+    border-radius: 10px;
 }
 
 window#waybar{
@@ -10,8 +11,25 @@ window#waybar{
     color: #000000;
 }
 
-#tray{
-    background: #1a1a1a;
+.modules-right{
+	background-color: @crust;
+    color: @text;
+    margin: 5px 0 5px 0;
+    padding: 10px 10px 10px 10px;
+}
+
+.modules-left{
+	background-color: @crust;
+    color: @text;
+    margin: 5px 0 5px 0;
+    padding: 10px 10px 10px 10px;
+}
+
+.modules-center{
+	background-color: @crust;
+    color: @text;
+    margin: 5px 5px 5px 5px;
+    padding: 2px 3px 2px 3px;
 }
 
 #workspaces button{
@@ -30,121 +48,17 @@ window#waybar{
     border: #1a1a1a;
 }
 
-#workspaces{
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: @base;
-}
-#window{
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: @rosewater;
-}
-
-#clock{
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: #ABE9B3;
-}
-
+#clock,
+#network,
+#bluetooth,
 #custom-power{
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: #ABE9B3;
+    padding: 0 10px;
 }
 
-#network{
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: @mauve;
-}
-
-#bluetooth{
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: @mauve;
-}
-
-#cpu{
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	margin-bottom: 10px;
-	padding-right: 10px;
-	border-radius: 10px;
-	transition: none;
-	color: #161320;
-	background: #96CDFB;
-}
-
-#temperature{
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	margin-bottom: 10px;
-	padding-right: 10px;
-	border-radius: 10px;
-	transition: none;
-	color: #161320;
-	background: #96CDFB;
-}
-
-#memory {
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    margin-bottom: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #161320;
-    background: #DDB6F2;
-}
-
-#disk{
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	margin-bottom: 10px;
-	padding-right: 10px;
-	border-radius: 10px;
-	transition: none;
-	color: #161320;
-	background: @maroon;
+#cpu,
+#temperature,
+#memory,
+#disk,
+#window{
+    padding: 0 10px;
 }

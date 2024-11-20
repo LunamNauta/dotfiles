@@ -1,7 +1,7 @@
 {
 	"layer": "top",
 	"position": "top",
-    "height": 20,
+    "height": 50,
 
 	"modules-left": ["cpu", "temperature#1", "temperature#2", "memory", "disk", "sway/window"],
 	"modules-center": ["sway/workspaces"],
@@ -17,19 +17,21 @@
         "on-click": "~/.config/fuzzel/powermenu.sh"
     },
     
-    //Bootdrive
+    //CPU
     "temperature#1": {
+        "interval": 1,
         // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp3_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", "", "", ""]
     },
-    //Wifi card
+    //GPU Junction
     "temperature#2": {
+        "interval": 1,
         // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "hwmon-path": "/sys/devices/pci0000:00/0000:00:03.1/0000:09:00.0/0000:0a:00.0/0000:0b:00.0/hwmon/hwmon3/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{icon} {temperatureC}°C",
@@ -64,25 +66,25 @@
 
     "clock": {
         "interval": 1,
-        "format": "  {:%I:%M:%S %p      %d/%h/%Y}"
+        "format": " {:%I:%M:%S %p    %d/%h/%Y}"
     },
 
     "cpu": {
         "interval": 15,
-        "format": "  {}%",
+        "format": " {}%",
         "max-length": 10,
         "on-click": "gnome-system-monitor"
     },
 
     "memory": {
         "interval": 30,
-        "format": "  {}%",
+        "format": " {}%",
         "max-length": 10
     },
 
     "disk": {
         "interval": 60,
-        "format": "  {percentage_used:2}%",
+        "format": " {percentage_used:2}%",
         "max-length": 10,
         "on-click": "baobab"
     }

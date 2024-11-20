@@ -1,6 +1,6 @@
 ### Basic appearance
 include catppuccin-mocha
-font Cascadia Code 12
+font CaskaydiaMono NFM 12
 exec lxpolkit
 
 ### Window borders

@@ -1,7 +1,7 @@
 wvim={}
 wvim.languages={}
-wvim.languages.treesitter={"cpp", "c", "lua", "python", "rust", "javascript", "html", "cmake", "c_sharp"}
-wvim.languages.mason_lspconfig={"clangd", "lua_ls", "pylsp", "rust_analyzer", "ts_ls", "html", "cmake", "omnisharp"}
+wvim.languages.treesitter={"cpp", "c", "lua", "python", "rust", "javascript", "html", "cmake", "c_sharp", "vim"}
+wvim.languages.mason_lspconfig={"clangd", "lua_ls", "pylsp", "rust_analyzer", "ts_ls", "html", "cmake", "omnisharp", "vimls"}
 wvim.languages.mason_lspconfig_opts={
     --If on windows, mason-lspconfig's clangd cannot find MSYS2 headers. This 'cmd' is needed in order to locate headers in such a build system
     --["clangd"]={cmd=wvim.is_windows and {"C:\\msys64\\ucrt64\\bin\\clangd.exe"} or nil},

@@ -32,21 +32,20 @@ window#waybar{
     padding: 2px 3px 2px 3px;
 }
 
-#workspaces button{
-    color: #ffffff;
-}
-#workspaces button.focused{
-    color: #000000;
-    background: @lavender;
-}
-#workspaces button:hover{
-    box-shadow: inherit;
-    text-shadow: inherit;
-}
-#workspaces button:hover{
-    background: #1a1a1a;
-    border: #1a1a1a;
-}
+#workspaces button{color: #ffffff;}
+#workspaces button.focused{color: #000000; background: @lavender;}
+#workspaces button:hover{box-shadow: inherit; text-shadow: inherit;}
+#workspaces button:hover{background: #1a1a1a; border: #1a1a1a;}
+
+/*
+#bluetooth button{color: #ffffff;}
+#bluetooth button.focused{color: #000000; background: @lavender;}
+#bluetooth button:hover{box-shadow: inherit; text-shadow: inherit;}
+#bluetooth button:hover{background: #1a1a1a; border: #1a1a1a;}
+#bluetooth:hover{box-shadow: inherit; text-shadow: inherit;}
+*/
+#network:hover{background: @lavender; border: #1a1a1a;}
+
 
 #clock,
 #network,

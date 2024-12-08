@@ -33,6 +33,7 @@ set $term foot
 set $app_menu ~/.config/fuzzel/usrapps.sh
 set $sys_menu ~/.config/fuzzel/sysapps.sh
 set $games_menu ~/.config/fuzzel/gameapps.sh
+set $cmd_menu ~/.config/fuzzel/keymaps.sh
 set $filemanager nemo
 
 ### Input and output
@@ -44,7 +45,7 @@ input 1133:16517:Logitech_G604 {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
     pointer_accel 0.1 # set mouse sensitivity (between -1 and 1)
 }
-output * bg ~/Pictures/Backgrounds/CatBackground1.jpg fill
+output * bg ~/Pictures/Backgrounds/CatBackground3.png fill
 output HDMI-A-1 resolution  1920x1080@119.982Hz position 0,0
 
 ### Basic keybinds
@@ -59,6 +60,7 @@ bindsym $mod+c kill
 bindsym $mod+p exec $app_menu
 bindsym $mod+o exec $sys_menu
 bindsym $mod+i exec $games_menu
+bindsym $mod+u exec $cmd_menu
 
 ### Movement keybinds (Focus)
 bindsym $mod+$left focus left

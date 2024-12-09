@@ -20,6 +20,9 @@ return{{
     },
     config=function(_, opts)
         require("noice").setup(opts)
-        require("notify").setup({background_colour="#000000"})
+        require("notify").setup({
+            top_down=false,
+            background_colour="#000000"
+        })
     end
 }}

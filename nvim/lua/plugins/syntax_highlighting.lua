@@ -1,5 +1,6 @@
 return{{
     "nvim-treesitter/nvim-treesitter",
+    version="0.9.2",
     lazy=false,
     opts={
         ensure_installed = wvim.languages.treesitter,

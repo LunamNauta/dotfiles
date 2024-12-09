@@ -220,7 +220,7 @@ fi
 compinit
 
 export EDITOR=nvim
-ssh-start(){ eval "$ssh-agent -s"; }
+ssh-start(){ eval "$(ssh-agent -s)"; }
 ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }
 
 clear

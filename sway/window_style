@@ -11,7 +11,7 @@ smart_borders 1
 #client.unfocused         $crust    $crust    $text  $rosewater $crust
 
 #                        Title     Backgound Text   Indicator  Border
-client.focused           $base     #404a89   $lavender $rosewater $base
+client.focused           $base     #404a89   $lavender $rosewater #404a89
 client.unfocused         $crust    $crust    $text  $rosewater $crust
 client.focused_inactive  $crust    $crust    $text  $rosewater $crust
 client.urgent            $peach    $crust    $peach $overlay0  $peach

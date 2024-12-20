@@ -116,7 +116,7 @@ configure_prompt() {
 # The following block is surrounded by two delimiters.
 # These delimiters must not be modified. Thanks.
 # START KALI CONFIG VARIABLES
-PROMPT_ALTERNATIVE=twoline
+PROMPT_ALTERNATIVE=oneline
 NEWLINE_BEFORE_PROMPT=yes
 # STOP KALI CONFIG VARIABLES
  
@@ -222,5 +222,28 @@ compinit
 export EDITOR=nvim
 ssh-start(){ eval "$(ssh-agent -s)"; }
 ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }
+
+#alias cdfzf='cd $(find . -type d | fzf)'
+
+cdfzf(){
+    if [ -n "$1" ]; then
+        NEW_PWD="$(find $1 -type d | fzf)"
+    else
+        NEW_PWD="$(find $PWD -type d | fzf)"
+    fi
+    if [ -n "$NEW_PWD" ]; then
+        cd "$NEW_PWD"
+    fi
+}
+edfzf(){
+    if [ -n "$1" ]; then
+        NEW_FILE="$(find $1 -type f | fzf)"
+    else
+        NEW_FILE="$(find $PWD -type f | fzf)"
+    fi
+    if [ -n "$NEW_FILE" ]; then
+        nvim "$NEW_FILE"
+    fi
+}
 
 clear

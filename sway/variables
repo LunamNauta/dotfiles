@@ -8,6 +8,7 @@ set $term foot
 set $app_menu ~/.config/fuzzel/usrapps.sh
 set $sys_menu ~/.config/fuzzel/sysapps.sh
 #set $games_menu ~/.config/fuzzel/gameapps.sh
+set $power_menu ~/.config/fuzzel/powermenu.sh
 set $game_launcher lutris
 set $cmd_menu ~/.config/fuzzel/keymaps.sh
 set $filemanager nemo

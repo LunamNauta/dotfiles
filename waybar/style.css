@@ -3,7 +3,7 @@
 *{
     font-size: 15px;
     font-family: "CaskaydiaMono NF";
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 window#waybar{
@@ -12,30 +12,50 @@ window#waybar{
 }
 
 .modules-right{
-	background-color: @crust;
+	background-color: @base;
     color: @text;
     margin: 5px 0 5px 0;
     padding: 10px 10px 10px 10px;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
 }
 
 .modules-left{
-	background-color: @crust;
+	background-color: @base;
     color: @text;
     margin: 5px 0 5px 0;
     padding: 10px 10px 10px 10px;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
 }
 
 .modules-center{
-	background-color: @crust;
+	background-color: @base;
     color: @text;
     margin: 5px 5px 5px 5px;
     padding: 2px 3px 2px 3px;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
 }
 
-#workspaces button{color: #ffffff;}
+#workspaces button{
+    color: @lavender;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
 #workspaces button.focused{color: #000000; background: @lavender;}
+/*
 #workspaces button:hover{box-shadow: inherit; text-shadow: inherit;}
 #workspaces button:hover{background: #1a1a1a; border: #1a1a1a;}
+*/
 
 /*
 #bluetooth button{color: #ffffff;}

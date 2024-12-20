@@ -1,11 +1,18 @@
 {
 	"layer": "top",
 	"position": "top",
-    "height": 50,
+    "height": 20,
+    "bar_id": "bar-0",
+    "ipc": true,
 
-	"modules-left": ["cpu", "temperature#1", "temperature#2", "memory", "disk", "sway/window"],
-	"modules-center": ["sway/workspaces"],
-	"modules-right": ["bluetooth", "network", "clock", "custom/power"],
+	//"modules-left": ["cpu", "temperature#1", "temperature#2", "memory", "disk", "sway/window"],
+	//"modules-center": ["sway/workspaces"],
+	//"modules-right": ["bluetooth", "network", "clock", "custom/power"],
+
+	"modules-left": ["cpu", "temperature#1", "temperature#2", "memory", "disk#1", "disk#2", "sway/window"],
+	"modules-center": ["clock"],
+	"modules-right": ["sway/workspaces", "bluetooth", "network", "custom/power"],
+
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -66,7 +73,8 @@
 
     "clock": {
         "interval": 1,
-        "format": " {:%I:%M:%S %p    %d/%h/%Y}"
+        "format": " {:%I:%M:%S %p    %B %d, %Y}",
+        "on-click": "gnome-calendar"
     },
 
     "cpu": {
@@ -82,9 +90,17 @@
         "max-length": 10
     },
 
-    "disk": {
+    "disk#1": {
         "interval": 60,
-        "format": " {percentage_used:2}%",
+        "path": "/",
+        "format": " / {percentage_used:2}%",
+        "max-length": 10,
+        "on-click": "baobab"
+    },
+    "disk#2": {
+        "interval": 60,
+        "path": "/home",
+        "format": " ~ {percentage_used:2}%",
         "max-length": 10,
         "on-click": "baobab"
     }

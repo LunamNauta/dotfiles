@@ -1,0 +1,5 @@
+### App menus
+bindsym $mod+p exec $app_menu
+bindsym $mod+o exec $sys_menu
+bindsym $mod+i exec $game_launcher
+bindsym $mod+u exec $cmd_menu

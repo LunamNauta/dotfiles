@@ -52,20 +52,47 @@ window#waybar{
     border-right: 2px solid;
 }
 #workspaces button.focused{color: #000000; background: @lavender;}
-/*
-#workspaces button:hover{box-shadow: inherit; text-shadow: inherit;}
-#workspaces button:hover{background: #1a1a1a; border: #1a1a1a;}
-*/
 
-/*
-#bluetooth button{color: #ffffff;}
-#bluetooth button.focused{color: #000000; background: @lavender;}
-#bluetooth button:hover{box-shadow: inherit; text-shadow: inherit;}
-#bluetooth button:hover{background: #1a1a1a; border: #1a1a1a;}
-#bluetooth:hover{box-shadow: inherit; text-shadow: inherit;}
-*/
-#network:hover{background: @lavender; border: #1a1a1a;}
-
+#network:hover{
+    color: #000000;
+    background: @lavender;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+#bluetooth:hover{
+    color: #000000;
+    background: @lavender; 
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+#custom-power:hover{
+    color: #000000;
+    background: @lavender; 
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+#cpu:hover{
+    color: #000000;
+    background: @lavender; 
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+#disk:hover{
+    color: #000000;
+    background: @lavender; 
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
 
 #clock,
 #network,

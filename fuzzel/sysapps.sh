@@ -9,13 +9,13 @@ Passwords/Keys\0icon\x1forg.gnome.seahorse.Application\n\
 Disks\0icon\x1forg.gnome.DiskUtility\n\
 Disk Usage\0icon\x1forg.gnome.baobab\n\
 Printers\0icon\x1fprinter\n\
-System Monitor\0icon\x1forg.gnome.SystemMonitor\n\
+System Monitor\0icon\x1fhtop\n\
 USB Image (Writer)\0icon\x1fmintstick\n\
 USB Image (Format)\0icon\x1fmintstick\n\
 Update Manager\0icon\x1fmintupdate\n\
 Driver Manager\0icon\x1fmintdrivers\n\
 System Settings\0icon\x1fpreferences-desktop\n\
-" | fuzzel --dmenu -l 13 -p "Sys App: \
+" | rofi -dmenu -i -p "Sys App: \
 ")"
 
 case $SELECTION in
@@ -36,7 +36,7 @@ case $SELECTION in
     *"Printers")
         exec system-config-printer;;
     *"System Monitor")
-        exec gnome-system-monitor;;
+        foot htop;;
     *"USB Image (Writer)")
         exec mintstick -m iso;;
     *"USB Image (Format)")

@@ -11,8 +11,13 @@
 
 	"modules-left": ["cpu", "temperature#1", "temperature#2", "memory", "disk#1", "disk#2", "sway/window"],
 	"modules-center": ["clock"],
-	"modules-right": ["sway/workspaces", "bluetooth", "network", "custom/power"],
+	"modules-right": ["sway/workspaces", "tray"],
 
+    
+    "tray": {
+        "icon-size": 24,
+        "spacing": 1,
+    },
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -53,7 +58,7 @@
         "format-linked": " {ifname} (No IP)",
         "format-disconnected": "⚠ Disconnected",
         //"format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "cinnamon-settings network"
+        "on-click": "exec_always nm-applet --indicator"
     },
 
     "bluetooth": {

@@ -1,3 +1,6 @@
+exec nm-applet
+exec blueman-applet
+
 # Variables
 include variables
 

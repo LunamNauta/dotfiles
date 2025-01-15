@@ -219,6 +219,9 @@ if [ -f /etc/zsh_command_not_found ]; then
 fi
 compinit
 
+alias modrinth='flatpak run com.modrinth.ModrinthApp'
+alias minecraft-launcher="$HOME/personal/non_repo_apps/appimages/minecraft-launcher"
+
 export EDITOR=nvim
 ssh-start(){ eval "$(ssh-agent -s)"; }
 ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }

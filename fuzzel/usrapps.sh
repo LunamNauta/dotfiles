@@ -12,7 +12,7 @@ LibreOffice (Impress)\0icon\x1flibreoffice-impress\n\
 Thunderbird Mail\0icon\x1fthunderbird\n\
 KeePassXC\0icon\x1fkeepassxc\n\
 Steam\0icon\x1fsteam\n\
-" | fuzzel --dmenu -l 11 -p "Usr App: \
+" | rofi -width 10 -dmenu -i -p "Usr App: \
 ")"
 
 case $SELECTION in
@@ -23,15 +23,15 @@ case $SELECTION in
     *"LibreOffice (Main)")
         exec libreoffice;;
     *"LibreOffice (Writer)")
-        exec lowriter;;
+        exec libreoffice --writer;;
     *"LibreOffice (Calc)")
-        exec localc;;
+        exec libreoffice --calc;;
     *"LibreOffice (Base)")
-        exec lobase;;
+        exec libreoffice --base;;
     *"LibreOffice (Math)")
-        exec lomath;;
+        exec libreoffice --math;;
     *"LibreOffice (Impress)")
-        exec loimpress;;
+        exec libreoffice --impress;;
     *"Thunderbird Mail")
         exec thunderbird;;
 	*"KeePassXC")

@@ -8,7 +8,7 @@ Reboot\n\
 Reboot to UEFI\n\
 Hard reboot\n\
 Shutdown"\
-| fuzzel --dmenu -l 7 -p "Power: \
+| rofi -width 10 -dmenu -i -p "Power: \
 ")"
 
 case $SELECTION in

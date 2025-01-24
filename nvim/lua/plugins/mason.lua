@@ -1,7 +1,6 @@
 return{{
     'williamboman/mason.nvim',
-    lazy = false,
-    dependencies = {'williamboman/mason-lspconfig.nvim'},
+    dependencies={'williamboman/mason-lspconfig.nvim'},
     opts = {
         mason = {},
         mason_lspconfig = {

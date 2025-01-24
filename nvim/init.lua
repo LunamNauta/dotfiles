@@ -1,3 +1,3 @@
-require("wvim_core")
-require("lazy_bootstrap")
-require("wvim_extra")
+require('settings.basic')
+require('plugin_manager')
+require('settings.extra')

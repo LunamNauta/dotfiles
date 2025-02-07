@@ -10,4 +10,5 @@ input 1133:16517:Logitech_G604 {
 
 ### Output
 output * bg ~/Pictures/Backgrounds/CatBackground3.png fill
-output HDMI-A-1 resolution  1920x1080@119.982Hz position 0,0
+output HDMI-A-1 resolution  1920x1080@60Hz position 0,0
+# output HDMI-A-1 resolution  1920x1080@119.982Hz position 0,0

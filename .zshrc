@@ -219,8 +219,8 @@ if [ -f /etc/zsh_command_not_found ]; then
 fi
 compinit
 
-alias modrinth='flatpak run com.modrinth.ModrinthApp'
 alias minecraft-launcher="$HOME/personal/non_repo_apps/appimages/minecraft-launcher"
+alias code=codium
 
 export EDITOR=nvim
 ssh-start(){ eval "$(ssh-agent -s)"; }
@@ -250,3 +250,10 @@ edfzf(){
 }
 
 clear
+
+# bun completions
+[ -s "/home/loki/.bun/_bun" ] && source "/home/loki/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

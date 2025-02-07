@@ -15,6 +15,7 @@ set-config-link(){
 }
 
 # Basic Config Folders
+set-config-link "$SCRIPTPATH/alacritty" "$HOME/.config/alacritty"
 set-config-link "$SCRIPTPATH/waybar" "$HOME/.config/waybar"
 set-config-link "$SCRIPTPATH/fuzzel" "$HOME/.config/fuzzel"
 set-config-link "$SCRIPTPATH/rofi" "$HOME/.config/rofi"

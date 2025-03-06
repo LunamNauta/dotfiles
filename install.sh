@@ -16,13 +16,11 @@ set-config-link(){
 
 # Basic Config Folders
 set-config-link "$SCRIPTPATH/alacritty" "$HOME/.config/alacritty"
-set-config-link "$SCRIPTPATH/waybar" "$HOME/.config/waybar"
-set-config-link "$SCRIPTPATH/fuzzel" "$HOME/.config/fuzzel"
-set-config-link "$SCRIPTPATH/rofi" "$HOME/.config/rofi"
-set-config-link "$SCRIPTPATH/foot" "$HOME/.config/foot"
+set-config-link "$SCRIPTPATH/hypr" "$HOME/.config/hypr"
+set-config-link "$SCRIPTPATH/wofi" "$HOME/.config/wofi"
 set-config-link "$SCRIPTPATH/nvim" "$HOME/.config/nvim"
-set-config-link "$SCRIPTPATH/sway" "$HOME/.config/sway"
 set-config-link "$SCRIPTPATH/tmux" "$HOME/.config/tmux"
+set-config-link "$SCRIPTPATH/eww" "$HOME/.config/eww"
 set-config-link "$SCRIPTPATH/.zsh" "$HOME/.zsh"
 
 # Basic Config Files

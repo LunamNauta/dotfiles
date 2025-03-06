@@ -1,3 +1,6 @@
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/opt/omnisharp-roslyn/OmniSharp"
+
 Wvim = {}
 Wvim.colorscheme = 'catppuccin'
 Wvim.keymaps = {
@@ -32,7 +35,11 @@ Wvim.languages = {
         langs = {'javascript', 'typescript'}
     },
     ['omnisharp'] = {
-        langs = {'c_sharp'}
+        langs = {'c_sharp'},
+        opts = {cmd = {omnisharp_bin, '--languageserver', '--hostPID', tostring(pid)}}
+    },
+    ['jdtls'] = {
+        langs = {'java'}
     }
 }
 

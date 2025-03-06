@@ -1,0 +1,119 @@
+(defvar eww "$HOME/personal/non_repo_apps/built/eww/target/release/eww -c $HOME/.config/eww/bar")
+
+;; Workspaces Widgets ;;
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/bar/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/bar/scripts/get-active-workspace")
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/bar/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+    (box    :space-evenly true
+            :orientation "v"
+            :valign "start"
+      (label :text "${workspaces}${current_workspace}" :visible false)
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id}" :class "${workspace.id == current_workspace ? "workspace-entry-current" : "workspace-entry"}" )
+            )
+          )
+        )
+      )
+    )
+  )
+
+;; Clock Widgets ;;
+(defwidget time []
+	(box	:orientation "v" 
+			:class "time" 
+			:valign "end"
+	(button	:onclick "scripts/popup calendar"	
+			:class "time-hour" hour)
+	(button	:onclick "scripts/popup calendar"	
+			:class "time-min"  min)))
+(defpoll hour	:interval "1s"	"date '+%H'")
+(defpoll min	:interval "1s"	"date '+%M'")
+
+;; Powermenu Widgets ;;
+(defwidget power []
+	(eventbox	:onhover "${eww} update power=true"	
+				:onhoverlost "${eww} update power=false" 
+	(box		:orientation "v"					
+				:space-evenly "false" 	 
+				:vexpand "false" 	
+				:class "powermenu"
+	(revealer	:transition "slideup"				
+				:reveal power			 
+				:duration "550ms"
+	(box		:orientation "v"					
+				:space-evenly "false"
+
+  	(button		:class "button-reboot"					
+	  			:tooltip "Reboot"		 
+				:onclick "reboot"	"󰜉")
+
+	(button		:class "button-quit" 				
+				:tooltip "Logout" 		 
+				:onclick "hyprctl dispatch exit" "󰍃")
+
+	(button		:class "button-lock" 				
+				:tooltip "Lock Screen"	 
+				:onclick "betterlockscreen -l"	"")))
+
+	(button		:class "button-shutdown"					
+				:tooltip "Shutdown"		 
+				:onclick "shutdown now"	""))))
+(defvar power false)
+
+;; Top Widgets ;;
+(defwidget top []
+	(box	:orientation "v" 
+			:space-evenly "false" 
+			:valign "start" 
+(workspaces)))
+
+;; Bottom Widgets ;;
+(defwidget bottom []
+	(box	:orientation "v" 
+			:space-evenly false 
+(time)
+(power)))
+
+;; End Widgets ;;
+(defwidget end []
+	(box :orientation "v" 
+		 :space-evenly "false" 
+		 :valign "end" 
+		 :spacing 5
+(bottom)))
+
+; Bar Widgets ;;
+(defwidget bar []
+	(box :class "eww_bar" 
+		 :orientation "v" 
+		 :vexpand "false" 
+		 :hexpand "false"
+(top)
+(end)))
+
+;; Bar Windows ;;
+(defvar show_bar false)
+(defwindow bar
+	:geometry (geometry :x "0" 
+						:y "0" 
+						:height "100%" 
+						:width "47px")
+	:monitor 0
+	:reserve (struts :distance "35px" 
+					 :side "left")
+	:wm-ignore false
+	:hexpand "false"
+	:vexpand "false"
+    (eventbox   :halign "start" 
+                :onhover "${eww} update show_bar=true"
+                :onhoverlost "${eww} update show_bar=false"
+        (revealer   :transition "slideright"
+                    :reveal show_bar
+                    :duration "550ms"
+            (bar)
+        )
+    )
+)

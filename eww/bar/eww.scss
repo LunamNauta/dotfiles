@@ -1,0 +1,89 @@
+/* Created   by https://github.com/rxyhn 
+   Designed  by https://github.com/rxyhn
+   Maintaned by https://github.com/rxyhn
+*/
+
+// Global
+*{
+  all: unset;
+}
+
+@import "mocha";
+
+// Variable Color
+$background: #1A1B26;
+$foreground: #A9B1D6;
+
+$black: #24283B;
+$gray: #565F89;
+$red: #F7768E;
+$green: #73DACA;
+$yellow: #E0AF68;
+$blue: #7AA2F7;
+$magenta: #BB9AF7;
+$cyan: #7DCFFF;
+$white: $foreground;
+
+// EWW BAR
+.eww_bar{
+  background-color: $base;
+  padding: .3rem;
+  color: $lavender;
+  border-radius: 0.5em;
+  border: 0.1em solid;
+}
+
+// Workspaces
+.workspace-entry {
+  font-family: "CaskaydiaMono NF";
+  font-weight: bold;
+  font-size: 1.2em;
+  background-color: $black;
+  color: $white;
+}
+.workspace-entry-current{
+  font-family: "CaskaydiaMono NF";
+  font-weight: bold;
+  font-size: 1.2em;
+  border-color: $lavender;
+  border-radius: 1.2em;
+  border: 0.1em solid;
+  color: $lavender;
+}
+
+
+// Clock
+.time {
+  font-family: "CaskaydiaMono NF";
+  font-weight: bold;
+  font-size: 2em;
+  background-color: $black;
+  color: $white;
+  border-radius: 5px;
+  padding: .7rem 0 .5rem 0;
+  margin: .5rem 0 .5rem 0;
+}
+
+
+// Powermenu
+.powermenu {
+  font-family: "CaskaydiaMono NF";
+  font-size: 2em;
+  font-weight: bold;
+}
+.button-reboot, .button-lock, .button-quit, .button-shutdown{
+  padding: .5rem .2rem .3rem .2rem;
+}
+.button-shutdown{
+  margin-bottom: .5rem;
+  color: $red;
+}
+.button-reboot{
+  color: $yellow
+}
+.button-quit{
+  color: $magenta;
+}
+.button-lock{
+  color: $blue;
+}

@@ -1,9 +1,0 @@
-### Basic keybinds
-bindsym $mod+q exec $term
-bindsym $mod+t exec $term tmux
-bindsym $mod+e exec $filemanager
-floating_modifier $mod normal
-bindsym $mod+Shift+c reload
-bindsym $mod+c kill
-bindsym $mod+d exec --no-startup-id killall -SIGUSR1 waybar
-

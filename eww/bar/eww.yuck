@@ -18,7 +18,7 @@
         )
       )
     )
-  )
+)
 
 ;; Clock Widgets ;;
 (defwidget time []
@@ -56,12 +56,33 @@
 
 	(button		:class "button-lock" 				
 				:tooltip "Lock Screen"	 
-				:onclick "betterlockscreen -l"	"")))
+				:onclick "betterlockscreen -l"	"")))
 
 	(button		:class "button-shutdown"					
 				:tooltip "Shutdown"		 
 				:onclick "shutdown now"	""))))
 (defvar power false)
+
+
+;; Systray widgets ;;
+(defwidget system-systray []
+  (systray
+    :class "system-systray"
+    :pack_direction "ttb"
+    :spacing 5
+    :orientation "v"
+    :space-evenly true
+    :icon-size 28
+    :prepend-new true
+  )
+)
+
+;; Control Panel Widgets ;;	
+(defwidget control []
+	(box :orientation "v" 
+		 :space-evenly false  
+		 :class "control"
+(system-systray)))
 
 ;; Top Widgets ;;
 (defwidget top []
@@ -83,6 +104,7 @@
 		 :space-evenly "false" 
 		 :valign "end" 
 		 :spacing 5
+(control)
 (bottom)))
 
 ; Bar Widgets ;;

@@ -35,14 +35,14 @@ $white: $foreground;
 
 // Workspaces
 .workspace-entry {
-  font-family: "CaskaydiaMono NF";
+  font-family: "JetBrainsMono NFM";
   font-weight: bold;
   font-size: 1.2em;
   background-color: $black;
   color: $white;
 }
 .workspace-entry-current{
-  font-family: "CaskaydiaMono NF";
+  font-family: "JetBrainsMono NFM";
   font-weight: bold;
   font-size: 1.2em;
   border-color: $lavender;
@@ -51,10 +51,19 @@ $white: $foreground;
   color: $lavender;
 }
 
+// Control
+.control {
+  font-family: "JetBrainsMono NFM";
+  font-weight: bold;
+  font-size: 2em;
+  background-color: $black;
+  color: $white;
+}
+
 
 // Clock
 .time {
-  font-family: "CaskaydiaMono NF";
+  font-family: "JetBrainsMono NFM";
   font-weight: bold;
   font-size: 2em;
   background-color: $black;
@@ -67,7 +76,7 @@ $white: $foreground;
 
 // Powermenu
 .powermenu {
-  font-family: "CaskaydiaMono NF";
+  font-family: "JetBrainsMono NFM";
   font-size: 2em;
   font-weight: bold;
 }

@@ -33,6 +33,44 @@ $white: $foreground;
   border: 0.1em solid;
 }
 
+// Tooltips
+tooltip{
+  font-family: "JetBrainsMono NFM";
+  font-weight: bold;
+  font-size: 1.2em;
+  background-color: $base;
+  border-color: $lavender;
+  border-radius: 1.2em;
+  border: 0.1em solid;
+  color: $lavender;
+}
+tooltip * {
+  color: $text;
+  text-shadow: none;
+}
+
+// Systray
+menu {
+  font-family: "JetBrainsMono NFM";
+  font-weight: bold;
+  font-size: 0.7em;
+  background-color: $base;
+  border-color: $lavender;
+  border-radius: 1.2em;
+  border: 0.1em solid;
+  color: $lavender;
+
+  menuitem {
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: $text;
+  }
+  menuitem:hover {
+    background-color: $lavender;
+    color: $base;
+  }
+}
+
 // Workspaces
 .workspace-entry {
   font-family: "JetBrainsMono NFM";
@@ -53,6 +91,15 @@ $white: $foreground;
 
 // Control
 .control {
+  font-family: "JetBrainsMono NFM";
+  font-weight: bold;
+  font-size: 2em;
+  background-color: $black;
+  color: $white;
+}
+
+// Battery
+.bat {
   font-family: "JetBrainsMono NFM";
   font-weight: bold;
   font-size: 2em;

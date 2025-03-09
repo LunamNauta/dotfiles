@@ -1,0 +1,94 @@
+#!/bin/sh
+
+bat=/sys/class/power_supply/BAT0/
+per="$(cat "$bat/capacity")"
+charging=$(cat "$bat/status")
+power_now=$(cat "$bat/power_now")
+energy_now=$(cat "$bat/energy_now")
+energy_full=$(cat "$bat/energy_full")
+
+icon() {
+
+if [ "$per" -gt "90" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰂋"
+    else
+	    icon="󰂂"
+    fi
+elif [ "$per" -gt "80" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰂊"
+    else
+	    icon="󰂁"
+    fi
+elif [ "$per" -gt "70" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰢞"
+    else
+	    icon="󰂀"
+    fi
+elif [ "$per" -gt "60" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰂉"
+    else
+	    icon="󰁿"
+    fi
+elif [ "$per" -gt "50" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰢝"
+    else
+	    icon="󰁾"
+    fi
+elif [ "$per" -gt "40" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰂈"
+    else
+	    icon="󰁽"
+    fi
+elif [ "$per" -gt "30" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰂇"
+    else
+	    icon="󰁼"
+    fi
+elif [ "$per" -gt "20" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰂆"
+    else
+	    icon="󰁻"
+    fi
+elif [ "$per" -gt "10" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰢜"
+    else
+	    icon="󰁺"
+    fi
+	notify-send -u critical "Battery Low" "Connect Charger"
+elif [ "$per" -gt "0" ]; then
+    if [ "$charging" = "Charging" ]; then
+        icon="󰢟"
+    else
+	    icon="󰂎"
+    fi
+	notify-send -u critical "Battery Low" "Connect Charger"
+else
+    echo "?" && exit
+fi
+echo "$icon"
+}
+
+percent() {
+echo $per
+}
+
+[ "$1" = "icon" ] && icon && exit
+[ "$1" = "percent" ] && percent && exit
+if [ "$1" = "time" ]; then
+    if [ $charging = "Charging" ]; then
+        echo "$(bc <<< "scale=2; $energy_full/$power_now")"
+    else
+        echo "$(bc <<< "scale=2; $energy_now/$power_now")"
+    fi
+    exit
+fi
+exit

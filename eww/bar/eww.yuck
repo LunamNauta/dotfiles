@@ -20,6 +20,21 @@
     )
 )
 
+;; Battery Widgets ;;
+(defwidget bat []
+	(box	:orientation "v"	
+			:space-evenly "false"
+	(label	:class "bat"		
+			:halign "end"		
+			:text battery
+			:tooltip 
+"Battery: ${battery-cappacity}%
+Time Left: ${time_left} hrs"
+            )))
+(defpoll battery			:interval "1s"	"scripts/battery icon")
+(defpoll battery-cappacity	:interval "1s"	"scripts/battery percent")
+(defpoll time_left          :interval "1s"  "scripts/battery time")
+
 ;; Clock Widgets ;;
 (defwidget time []
 	(box	:orientation "v" 
@@ -56,7 +71,7 @@
 
 	(button		:class "button-lock" 				
 				:tooltip "Lock Screen"	 
-				:onclick "betterlockscreen -l"	"")))
+				:onclick "scripts/lock"	"")))
 
 	(button		:class "button-shutdown"					
 				:tooltip "Shutdown"		 
@@ -65,7 +80,7 @@
 
 
 ;; Systray widgets ;;
-(defwidget system-systray []
+(defwidget systemtray []
   (systray
     :class "system-systray"
     :pack_direction "ttb"
@@ -82,7 +97,7 @@
 	(box :orientation "v" 
 		 :space-evenly false  
 		 :class "control"
-(system-systray)))
+(systemtray)))
 
 ;; Top Widgets ;;
 (defwidget top []
@@ -94,7 +109,8 @@
 ;; Bottom Widgets ;;
 (defwidget bottom []
 	(box	:orientation "v" 
-			:space-evenly false 
+			:space-evenly false
+(bat)
 (time)
 (power)))
 

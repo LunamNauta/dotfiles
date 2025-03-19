@@ -34,38 +34,54 @@
 
 ;; Powermenu Widgets ;;
 (defwidget power []
-	(eventbox	:onhover "${eww} update power=true"	
-				:onhoverlost "${eww} update power=false" 
-	(box		:orientation "v"					
-				:space-evenly "false" 	 
-				:vexpand "false" 	
-				:class "powermenu"
-	(revealer	:transition "slideup"				
-				:reveal power			 
-				:duration "550ms"
-	(box		:orientation "v"					
-				:space-evenly "false"
-
-  	(button		:class "button-reboot"					
-	  			:tooltip "Reboot"		 
-				:onclick "reboot"	"󰜉")
-
-	(button		:class "button-quit" 				
-				:tooltip "Logout" 		 
-				:onclick "hyprctl dispatch exit" "󰍃")
-
-	(button		:class "button-lock" 				
-				:tooltip "Lock Screen"	 
-				:onclick "betterlockscreen -l"	"")))
-
-	(button		:class "button-shutdown"					
-				:tooltip "Shutdown"		 
-				:onclick "shutdown now"	""))))
+	(eventbox
+        :onhover "${eww} update power=true"	
+		:onhoverlost "${eww} update power=false" 
+	    (box
+            :orientation "v"					
+			:space-evenly "false" 	 
+			:vexpand "false" 	
+			:class "powermenu"
+	        (revealer
+                :transition "slideup"				
+			    :reveal power			 
+			    :duration "550ms"
+	            (box
+                    :orientation "v"					
+				    :space-evenly "false"
+  	                (button
+                        :class "button-reboot"					
+	  			        :tooltip "Reboot"		 
+				        :onclick "reboot"
+                        "󰜉"
+                    )
+	                (button
+                        :class "button-quit" 				
+				        :tooltip "Logout" 		 
+				        :onclick "hyprctl dispatch exit"
+                        "󰍃"
+                    )
+	                (button
+                        :class "button-lock" 				
+				        :tooltip "Lock Screen"	 
+				        :onclick "scripts/lock"
+                        ""
+                    )
+                )
+            )
+	        (button
+                :class "button-shutdown"					
+			    :tooltip "Shutdown"		 
+			    :onclick "shutdown now"	""
+            )
+        )
+    )
+)
 (defvar power false)
 
 
 ;; Systray widgets ;;
-(defwidget system-systray []
+(defwidget systemtray []
   (systray
     :class "system-systray"
     :pack_direction "ttb"
@@ -82,7 +98,7 @@
 	(box :orientation "v" 
 		 :space-evenly false  
 		 :class "control"
-(system-systray)))
+(systemtray)))
 
 ;; Top Widgets ;;
 (defwidget top []
@@ -94,7 +110,7 @@
 ;; Bottom Widgets ;;
 (defwidget bottom []
 	(box	:orientation "v" 
-			:space-evenly false 
+			:space-evenly false
 (time)
 (power)))
 

@@ -32,7 +32,7 @@ Wvim.languages = {
         opts = {settings = {['rust-analyzer'] = {diagnostics = {enable = true}}}}
     },
     ['ts_ls'] = {
-        langs = {'javascript', 'typescript'}
+        langs = {'javascript', 'typescript', 'tsx'}
     },
     ['omnisharp'] = {
         langs = {'c_sharp'},

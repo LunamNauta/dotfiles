@@ -1,0 +1,111 @@
+*{
+  all: unset;
+}
+
+@import "mocha";
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$fg-color: #{"@theme_fg_color"};
+$bg-color: #{"@theme_bg_color"};
+
+.right-widgets{
+  margin: 0em 4.5em 0em 0em;
+}
+
+.workspaces{
+  background-color: $base;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 100%;
+  padding: 0.2em 0.2em 0.2em 0.2em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 20px 20px 20px 20px;
+}
+.workspace.occupied,
+.workspace.empty,
+.workspace.button,
+.workspace.active{
+  background-color: transparent;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 115%;
+}
+.workspace.occupied{
+  background-color: $surface0;
+  border-radius: 20px 20px 20px 20px;
+}
+.workspace.button,
+.workspace.active{
+  padding: 0.2em 0.6em 0.2em 0.6em;
+  margin: 0.066em 0.2em 0.066em 0.2em;
+}
+.workspace.active{
+  background-color: $lavender;
+  color: $surface0;
+  border-radius: 20px 20px 20px 20px;
+}
+
+.clock,
+.clock.time,
+.clock.date{
+  background-color: transparent;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 100%;
+}
+.clock{
+  background-color: $base;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 20px 20px 20px 20px;
+}
+
+.mem.circ,
+.mem.pct,
+.mem{
+  background-color: $base;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 100%;
+  padding: 0 0.5em 0 0.5em;
+}
+.mem.circ{
+  font-size: 50%;
+}
+.mem{
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 20px 20px 20px 20px;
+}
+
+.cpu.circ,
+.cpu.pct,
+.cpu{
+  background-color: $base;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 100%;
+  padding: 0 0.5em 0 0.5em;
+}
+.cpu.circ{
+  font-size: 50%;
+}
+.cpu{
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 20px 20px 20px 20px;
+}
+
+window.Bar {
+    background: $crust;
+    color: $fg-color;
+    font-weight: bold;
+     label {
+        margin: 0em;
+    }
+}

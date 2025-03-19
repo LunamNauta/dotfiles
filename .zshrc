@@ -14,6 +14,8 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
  
 # hide EOL sign ('%')
 PROMPT_EOL_MARK=""
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
  
 # configure key keybindings
 bindkey -e                                        # emacs key bindings
@@ -116,7 +118,7 @@ configure_prompt() {
 # The following block is surrounded by two delimiters.
 # These delimiters must not be modified. Thanks.
 # START KALI CONFIG VARIABLES
-PROMPT_ALTERNATIVE=oneline
+PROMPT_ALTERNATIVE=twoline
 NEWLINE_BEFORE_PROMPT=yes
 # STOP KALI CONFIG VARIABLES
  
@@ -127,9 +129,9 @@ if [ "$color_prompt" = yes ]; then
     configure_prompt
  
     # enable syntax-highlighting
-    if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
         source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
-        source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
 else
     PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%(#.#.$) '
@@ -218,9 +220,6 @@ if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 compinit
-
-alias minecraft-launcher="$HOME/personal/non_repo_apps/appimages/minecraft-launcher"
-alias code=codium
 
 export EDITOR=nvim
 ssh-start(){ eval "$(ssh-agent -s)"; }

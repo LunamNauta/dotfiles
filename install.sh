@@ -21,6 +21,7 @@ set-config-link "$SCRIPTPATH/wofi" "$HOME/.config/wofi"
 set-config-link "$SCRIPTPATH/nvim" "$HOME/.config/nvim"
 set-config-link "$SCRIPTPATH/tmux" "$HOME/.config/tmux"
 set-config-link "$SCRIPTPATH/eww" "$HOME/.config/eww"
+set-config-link "$SCRIPTPATH/ags" "$HOME/.config/ags"
 set-config-link "$SCRIPTPATH/.zsh" "$HOME/.zsh"
 
 # Basic Config Files

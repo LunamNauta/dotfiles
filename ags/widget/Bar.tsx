@@ -5,11 +5,15 @@ import { Workspaces  } from './hyprland'
 import { Clock } from './clock'
 import { Mem } from './mem'
 import { Cpu } from './cpu'
+import { Power } from "./power"
 
 const Right = () =>
-<box className={'right-widgets'} halign={Gtk.Align.END}>
+<box 
+    className={'right-widgets'} 
+    halign={Gtk.Align.END}>
     <Cpu />
     <Mem />
+    <Power />
 </box>
 
 const Center = () =>

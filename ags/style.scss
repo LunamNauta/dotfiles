@@ -8,6 +8,45 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
+.power.main_button{
+  background-color: $base;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 130%;
+  padding: 0.2em 1em 0.2em 0.8em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 20px 20px 20px 20px;
+}
+.power.main_button:hover{
+  background-color: $lavender;
+  color: $crust;
+}
+.power.dropdown{
+  background-color: $crust;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 100%;
+  padding: 0.2em 1em 0.2em 0.8em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 0px 0px 0px 20px;
+}
+.power.button{
+  background-color: $base;
+  color: $text;
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 130%;
+  padding: 0.5em 0.9em 0.5em 0.9em;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  border-radius: 20px 20px 20px 20px;
+}
+.power.button:hover{
+  background-color: $lavender;
+  color: $crust;
+}
+
 .right-widgets{
   margin: 0em 4.5em 0em 0em;
 }
@@ -101,11 +140,10 @@ $bg-color: #{"@theme_bg_color"};
   border-radius: 20px 20px 20px 20px;
 }
 
-window.Bar {
-    background: $crust;
-    color: $fg-color;
-    font-weight: bold;
-     label {
-        margin: 0em;
-    }
+window.Bar{
+  background: $crust;
+  font-weight: bold;
+  label{
+    margin: 0em;
+  }
 }

@@ -3,7 +3,7 @@ function format_string(format: string, data: any){
         return data[key];
     });
 }
-function round_decimal(number: number, digits: number){
+function format_percent(number: number, digits: number){
     let str = (parseFloat(number.toFixed(digits)) * 100).toString()
     if (str.length < digits) str += '.' + ('0'.repeat(digits - str.length))
     else if (str.length == digits) str += '0'
@@ -13,5 +13,5 @@ function round_decimal(number: number, digits: number){
 
 export{
     format_string,
-    round_decimal
+    format_percent
 }

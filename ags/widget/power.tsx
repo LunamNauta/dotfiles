@@ -12,7 +12,8 @@ let touched_power_menu = false
 const power_options = [
     {icon: '󰜉', func: 'reboot'},
     {icon: '󰍃', func: 'hyprctl dispatch exit'},
-    {icon: '', func: 'hyprlock'}
+    {icon: '', func: 'hyprlock'},
+    {icon: '󰒲', func: 'systemctl suspend'}
 ]
 
 function hover_lost(){

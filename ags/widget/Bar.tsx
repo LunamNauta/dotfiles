@@ -23,9 +23,8 @@ const Right = () =>
 <box 
     className={'right-widgets'} 
     halign={Gtk.Align.END}>
+    <Clock />
     <Wifi />
-    <Cpu />
-    <Mem />
 </box>
 
 const Center = () =>
@@ -36,7 +35,8 @@ const Center = () =>
 const Left = () =>
 <box className={'left-widgets'} halign={Gtk.Align.START}>
     <Power />
-    <Clock />
+    <Cpu />
+    <Mem />
 </box>
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {

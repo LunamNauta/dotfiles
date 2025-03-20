@@ -5,7 +5,7 @@ import Hyprland from "gi://AstalHyprland"
 const hypr = Hyprland.get_default()
 const dispatch = (ws: string) => hypr.message(`dispatch workspace ${ws}`)
 
-const workspace_names = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+const workspace_names = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 function get_grouped_workspaces(occupied_workspaces){
     let out: {is_occupied: boolean, workspaces: string[]}[] = []
     for (const workspace of workspace_names){
@@ -20,6 +20,7 @@ function get_grouped_workspaces(occupied_workspaces){
     return out
 }
 
+const focused_workspace = bind(hypr, 'focused_workspace')
 const Workspaces = () => {
     return <box className={'workspaces'}>
         {bind(hypr, 'workspaces').as((workspaces) => {
@@ -27,7 +28,7 @@ const Workspaces = () => {
                 {get_grouped_workspaces(workspaces).map(workspace_group => {
                     const workspace_class = `workspace ${workspace_group.is_occupied ? 'occupied' : 'empty'}`
                     return <eventbox className={workspace_class} onScroll={(_, event) => {
-                            if (hypr.get_focused_workspace().id < 10 && event.delta_y > 0) dispatch('+1')
+                            if (hypr.get_focused_workspace().id < 9 && event.delta_y > 0) dispatch('+1')
                             if (hypr.get_focused_workspace().id > 0 && event.delta_y < 0) dispatch('-1')
                         }}>
                         <box>
@@ -41,10 +42,11 @@ const Workspaces = () => {
                                     </button>
                                 }
                                 return <button
-                                            className={bind(hypr.get_workspace_by_name(workspace)?.monitor, 'activeWorkspace').as(active_workspace => active_workspace.name == workspace ? 'workspace active' : 'workspace button')} valign={Gtk.Align.CENTER}
+                                            className={focused_workspace.as(focused => focused.name == workspace ? 'workspace active' : 'workspace button')}
+                                            valign={Gtk.Align.CENTER}
                                             onClick={() => dispatch(workspace)}
                                         >
-                                    {workspace}
+                                    {focused_workspace.as(focused => focused.name == workspace ? '•' : workspace)}
                                 </button>
                             })}
                         </box>

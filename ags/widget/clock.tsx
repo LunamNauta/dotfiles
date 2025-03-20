@@ -13,6 +13,9 @@ const Clock = () =>
         label={timeFmt()}
     />
     <label
+        label={'•'}
+    />
+    <label
         className="clock date"
         onDestroy={() => dateFmt.drop()}
         label={dateFmt()}

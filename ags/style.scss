@@ -8,41 +8,29 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
-.power.main_button{
-  background-color: $base;
+.wifi,
+.wifi.button,
+.wifi.menu{
+  background-color: $crust;
   color: $text;
-  font-family: "CaskaydiaCove NF";
+  font-family: "JetBrainsMono NF";
   font-weight: bold;
-  font-size: 130%;
-  padding: 0.2em 1em 0.2em 0.8em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
+  font-size: 120%;
+  padding: 0.2em 0.4em 0.2em 0.2em;
   border-radius: 20px 20px 20px 20px;
 }
-.power.main_button:hover{
+.wifi.button{
+  padding: 0.2em 0.6em 0.2em 0.2em;
+}
+.wifi.button:hover{
   background-color: $lavender;
   color: $crust;
 }
-.power.dropdown{
-  background-color: $crust;
-  color: $text;
-  font-family: "CaskaydiaCove NF";
-  font-weight: bold;
-  font-size: 100%;
-  padding: 0.2em 1em 0.2em 0.8em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 0px 0px 0px 20px;
+.wifi.menu-toggle-icon{
+  margin: 0em 0.1em 0em 0em;
 }
-.power.button{
-  background-color: $base;
-  color: $text;
-  font-family: "CaskaydiaCove NF";
-  font-weight: bold;
-  font-size: 130%;
-  padding: 0.5em 0.9em 0.5em 0.9em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
-}
-.power.button:hover{
+.wifi.menu-toggle-icon:hover,
+.wifi.menu-ssid:hover{
   background-color: $lavender;
   color: $crust;
 }
@@ -54,7 +42,7 @@ $bg-color: #{"@theme_bg_color"};
 .workspaces{
   background-color: $base;
   color: $text;
-  font-family: "CaskaydiaCove NF";
+  font-family: "JetBrainsMono NF";
   font-weight: bold;
   font-size: 100%;
   padding: 0.2em 0.2em 0.2em 0.2em;
@@ -67,7 +55,7 @@ $bg-color: #{"@theme_bg_color"};
 .workspace.active{
   background-color: transparent;
   color: $text;
-  font-family: "CaskaydiaCove NF";
+  font-family: "JetBrainsMono NF";
   font-weight: bold;
   font-size: 115%;
 }
@@ -91,7 +79,7 @@ $bg-color: #{"@theme_bg_color"};
 .clock.date{
   background-color: transparent;
   color: $text;
-  font-family: "CaskaydiaCove NF";
+  font-family: "JetBrainsMono NF";
   font-weight: bold;
   font-size: 100%;
 }

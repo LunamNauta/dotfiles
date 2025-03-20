@@ -6,6 +6,7 @@ import { Clock } from './clock'
 import { Mem } from './mem'
 import { Cpu } from './cpu'
 import { Power } from "./power"
+import { Wifi } from "./wifi"
 
 /*
 const Right = () =>
@@ -24,7 +25,7 @@ const Right = () =>
     halign={Gtk.Align.END}>
     <Cpu />
     <Mem />
-    <Power />
+    <Wifi />
 </box>
 
 const Center = () =>

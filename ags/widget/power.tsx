@@ -10,6 +10,7 @@ let power_menu_exists = false
 let touched_power_menu = false
 
 const power_options = [
+    {icon: '󰐥', func: 'poweroff'},
     {icon: '󰜉', func: 'reboot'},
     {icon: '󰍃', func: 'hyprctl dispatch exit'},
     {icon: '', func: 'hyprlock'},
@@ -26,15 +27,14 @@ function kill_power_menu(){
     power_menu_exists = false
     touched_power_menu = false
 }
-function spawn_power_menu(gdkmonitor: Gdk.Monitor) {
+function spawn_power_menu() {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     touched_power_menu = true
     if (power_menu_exists) return
     power_menu = <window
-        gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.NORMAL}
-        anchor={RIGHT | TOP}
+        anchor={LEFT | TOP}
         application={App}
         layer={Astal.Layer.OVERLAY}>
         <eventbox className={'power dropdown'} onHover={() => touched_power_menu = true} onHoverLost={hover_lost}>
@@ -51,10 +51,10 @@ function spawn_power_menu(gdkmonitor: Gdk.Monitor) {
 }
 
 const Power = () =>
-<eventbox onHover={() => spawn_power_menu()} onHoverLost={hover_lost}>
+<eventbox onHover={() => touched_power_menu = true} onHoverLost={hover_lost}>
     <box className={'power'}>
-        <button className={'power main_button'} onClick={() => exec('poweroff')}>
-            <label label={'󰐥'} />
+        <button className={'power main_button'} onClick={spawn_power_menu}>
+            <label label={'󱐥'} />
         </button>
     </box>
 </eventbox>

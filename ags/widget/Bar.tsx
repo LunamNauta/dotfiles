@@ -23,9 +23,9 @@ const Right = () =>
 <box 
     className={'right-widgets'} 
     halign={Gtk.Align.END}>
+    <Wifi />
     <Cpu />
     <Mem />
-    <Wifi />
 </box>
 
 const Center = () =>
@@ -35,6 +35,7 @@ const Center = () =>
 
 const Left = () =>
 <box className={'left-widgets'} halign={Gtk.Align.START}>
+    <Power />
     <Clock />
 </box>
 

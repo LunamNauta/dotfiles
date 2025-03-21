@@ -1,5 +1,5 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { Variable, GLib, bind } from "astal"
+import { Variable, GLib, bind, exec, execAsync } from "astal"
 
 import { Workspaces  } from './hyprland'
 import { Clock } from './clock'
@@ -19,6 +19,14 @@ const Right = () =>
 </box>
 */
 
+const SystemMonitor = () =>
+<button className={'system-monitor'} onClick={() => execAsync('alacritty -e gtop')}>
+    <box>
+        <Cpu />
+        <Mem />
+    </box>
+</button>
+
 const Right = () =>
 <box 
     className={'right-widgets'} 
@@ -35,8 +43,7 @@ const Center = () =>
 const Left = () =>
 <box className={'left-widgets'} halign={Gtk.Align.START}>
     <Power />
-    <Cpu />
-    <Mem />
+    <SystemMonitor />
 </box>
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {

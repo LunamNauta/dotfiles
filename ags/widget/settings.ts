@@ -9,11 +9,11 @@ const userOptions = {
     },
     cpu:{
         interval: 1000,
-        format: " {cpu}%"
+        format: "{cpu}%"
     },
     memory: {
         interval: 1000,
-        format: " {mem}%"
+        format: "{mem}%"
     }
 }
 

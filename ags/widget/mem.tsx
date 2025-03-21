@@ -14,11 +14,15 @@ const memUsageFmt = () => memUsageFlt(usage => format_string(userOptions.memory.
 
 const Mem = () =>
 <box className="mem">
-    <CircularProgress className={'mem circ'}
+    <circularprogress className={'mem circ'}
         value={memUsageFlt()}
         inverted={true}
         rounded={true}
-    />
+    >
+        <box>
+            <label className={'mem circ-icon'} label={''} />
+        </box>
+    </circularprogress>
     <label
         className="mem pct"
         label={memUsageFmt()}

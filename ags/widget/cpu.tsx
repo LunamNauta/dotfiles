@@ -18,11 +18,15 @@ const cpuUsageFmt = () => cpuUsageFlt(usage => format_string(userOptions.cpu.for
 
 const Cpu = () =>
 <box className="cpu">
-    <CircularProgress className={'cpu circ'}
+    <circularprogress className={'cpu circ'}
         value={cpuUsageFlt()}
         inverted={true}
         rounded={true}
-    />
+    >
+        <box>
+            <label className={'cpu circ-icon'} label={''} />
+        </box>
+    </circularprogress>
     <label
         className="cpu pct"
         label={cpuUsageFmt()}

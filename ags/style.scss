@@ -37,7 +37,7 @@ $bg-color: #{"@theme_bg_color"};
 
 .power.main_button{
   background-color: $base;
-  color: $text;
+  color: $lavender;
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 130%;
@@ -51,7 +51,7 @@ $bg-color: #{"@theme_bg_color"};
 }
 .power.dropdown{
   background-color: $crust;
-  color: $text;
+  color: $lavender;
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 100%;
@@ -61,7 +61,7 @@ $bg-color: #{"@theme_bg_color"};
 }
 .power.button{
   background-color: $base;
-  color: $text;
+  color: $lavender;
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 130%;
@@ -73,12 +73,6 @@ $bg-color: #{"@theme_bg_color"};
   background-color: $lavender;
   color: $crust;
 }
-
-/*
-.right-widgets{
-  margin: 0em 4.5em 0em 0em;
-}
-*/
 
 .workspaces{
   background-color: $base;
@@ -131,42 +125,36 @@ $bg-color: #{"@theme_bg_color"};
   border-radius: 20px 20px 20px 20px;
 }
 
-.mem.circ,
-.mem.pct,
-.mem{
+.system-monitor{
   background-color: $base;
-  color: $text;
-  font-family: "CaskaydiaCove NF";
-  font-weight: bold;
-  font-size: 100%;
-  padding: 0 0.5em 0 0.5em;
-}
-.mem.circ{
-  font-size: 50%;
-}
-.mem{
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
+  color: $lavender;
   border-radius: 20px 20px 20px 20px;
 }
+.system-monitor:hover{
+  background-color: $lavender;
+  color: $crust;
+}
 
+.mem.circ,
+.mem.pct,
+.mem,
 .cpu.circ,
 .cpu.pct,
 .cpu{
-  background-color: $base;
-  color: $text;
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 100%;
   padding: 0 0.5em 0 0.5em;
 }
+.mem.circ,
 .cpu.circ{
-  font-size: 50%;
+  background-color: $surface1;
+  font-size: 25%;
 }
-.cpu{
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
+.mem.circ-icon,
+.cpu.circ-icon{
+  padding: 0.7em 0.7em 0.7em 0.8em;
+  font-size: 400%;
 }
 
 window.Bar{

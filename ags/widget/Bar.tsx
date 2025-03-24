@@ -1,64 +1,48 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { Variable, GLib, bind, exec, execAsync } from "astal"
+import { Variable } from "astal"
 
-import { Workspaces  } from './hyprland'
-import { Clock } from './clock'
-import { Mem } from './mem'
-import { Cpu } from './cpu'
-import { Power } from "./power"
-import { Wifi } from "./wifi"
+import { Clock } from "./clock"
+import { Cpu } from "./cpu"
+import { Mem } from "./mem"
+import { Workspaces } from "./hyprland"
+import { System_Tray } from "./system_tray"
 
-/*
-const Right = () =>
-<box 
-    className={'right-widgets'} 
-    halign={Gtk.Align.END}>
+const System_Monitor = () =>
+<box className={'system-monitor'}>
     <Cpu />
     <Mem />
-    <Power />
 </box>
-*/
 
-const SystemMonitor = () =>
-<button className={'system-monitor'} onClick={() => execAsync('alacritty -e gtop')}>
-    <box>
-        <Cpu />
-        <Mem />
-    </box>
-</button>
-
-const Right = () =>
-<box 
-    className={'right-widgets'} 
-    halign={Gtk.Align.END}>
+const Left_Widgets = () =>
+<box className={'left-widgets'} halign={Gtk.Align.START}>
     <Clock />
-    <Wifi />
 </box>
 
-const Center = () =>
+const Center_Widgets = () =>
 <box className={'center-widgets'} halign={Gtk.Align.CENTER}>
     <Workspaces />
 </box>
 
-const Left = () =>
-<box className={'left-widgets'} halign={Gtk.Align.START}>
-    <Power />
-    <SystemMonitor />
+const Right_Widgets = () =>
+<box className={'right-widgets'} halign={Gtk.Align.END}>
+    <System_Monitor />
+    <System_Tray />
 </box>
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     return <window
-        className="Bar"
+        className="bar"
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}
         application={App}>
-        <centerbox>
-            <Left />
-            <Center />
-            <Right />
+        <centerbox className={'bar box'}
+            startWidget={<Left_Widgets />}
+            centerWidget={<Center_Widgets />}
+            endWidget={<Right_Widgets />}
+        >
         </centerbox>
     </window>
 }

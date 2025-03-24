@@ -4,99 +4,28 @@
 
 @import "mocha";
 
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
-
-.wifi,
-.wifi.button,
-.wifi.menu{
-  background-color: $crust;
-  color: $text;
-  font-family: "JetBrainsMono NF";
-  font-weight: bold;
-  font-size: 120%;
-  padding: 0.2em 0.4em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
-}
-.wifi.button{
-  padding: 0.2em 0.6em 0.2em 0.2em;
-}
-.wifi.button:hover{
-  background-color: $lavender;
-  color: $crust;
-}
-.wifi.menu-toggle-icon{
-  margin: 0em 0.1em 0em 0em;
-}
-.wifi.menu-toggle-icon:hover,
-.wifi.menu-ssid:hover{
-  background-color: $lavender;
-  color: $crust;
-}
-
-.power.main_button{
-  background-color: $base;
-  color: $lavender;
-  font-family: "CaskaydiaCove NF";
-  font-weight: bold;
-  font-size: 130%;
-  padding: 0.2em 1em 0.2em 0.8em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
-}
-.power.main_button:hover{
-  background-color: $lavender;
-  color: $crust;
-}
-.power.dropdown{
-  background-color: $crust;
-  color: $lavender;
-  font-family: "CaskaydiaCove NF";
-  font-weight: bold;
-  font-size: 100%;
-  padding: 0.2em 1em 0.2em 0.8em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 0px 0px 20px 20px;
-}
-.power.button{
-  background-color: $base;
-  color: $lavender;
-  font-family: "CaskaydiaCove NF";
-  font-weight: bold;
-  font-size: 130%;
-  padding: 0.5em 0.9em 0.5em 0.9em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
-}
-.power.button:hover{
-  background-color: $lavender;
-  color: $crust;
-}
-
 .workspaces{
   background-color: $base;
   color: $text;
   font-family: "JetBrainsMono NF";
   font-weight: bold;
-  font-size: 100%;
-  padding: 0.2em 0.2em 0.2em 0.2em;
-  margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
+  padding: 0.2em;
+  margin: 0.2em;
+  border-radius: 20px;
 }
 .workspace.occupied,
 .workspace.empty,
 .workspace.button,
 .workspace.active{
-  background-color: transparent;
-  color: $text;
   font-family: "JetBrainsMono NF";
   font-weight: bold;
-  font-size: 115%;
+  font-size: 110%;
+  background-color: transparent;
+  color: $text;
 }
 .workspace.occupied{
   background-color: $surface0;
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 20px;
 }
 .workspace.button,
 .workspace.active{
@@ -106,33 +35,89 @@ $bg-color: #{"@theme_bg_color"};
 .workspace.active{
   background-color: $lavender;
   color: $surface0;
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 20px;
 }
 
 .clock,
 .clock.time,
 .clock.date{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
   background-color: transparent;
   color: $text;
-  font-family: "JetBrainsMono NF";
-  font-weight: bold;
-  font-size: 100%;
 }
 .clock{
   background-color: $base;
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  //margin: 0.2em 0.2em 0.2em 0.2em;
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 20px;
+  padding: 0.25em;
+  margin: 0.2em;
 }
 
 .system-monitor{
   background-color: $base;
-  color: $lavender;
+  color: $text;
   border-radius: 20px 20px 20px 20px;
+  padding: 0.25em;
+  margin: 0.2em;
 }
-.system-monitor:hover{
+.system-tray{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  background-color: $crust;
+  color: $text;
+  border-radius: 20px 20px 20px 20px;
+  padding: 0.25em;
+  margin: 0.2em;
+}
+.system-tray.main-button{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 140%;
+  background-color: $base;
+  color: $text;
+  padding: 0.3em 0.6em
+}
+.system-tray.main-button:hover{
   background-color: $lavender;
   color: $crust;
+}
+.system-tray.window{
+  background-color: transparent;
+}
+.system-tray.menu{
+  margin: 0.5em;
+  padding: 1em;
+  font-size: 115%;
+}
+.system-tray.uptime{
+  background-color: $base;
+  padding: 0.5em;
+}
+.system-tray.power-button{
+  background-color: $base;
+  padding: 0.3em 0.6em;
+  margin: 0.2em;
+  font-size: 140%;
+}
+.system-tray.power-button:hover{
+  background-color: $lavender;
+  color: $crust;
+}
+.system-tray.toggles{
+  background-color: $base;
+}
+.system-tray.toggled,
+.system-tray.untoggled{
+  padding: 0.3em 0.6em;
+  font-size: 140%;
+}
+.system-tray.toggled{
+  background-color: $lavender;
+  color: $crust;
+}
+.system-tray.untoggled{
+  background-color: $surface0;
+  color: $text;
 }
 
 .mem.circ,
@@ -144,23 +129,32 @@ $bg-color: #{"@theme_bg_color"};
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 100%;
-  padding: 0 0.5em 0 0.5em;
+}
+.mem.pct{
+  margin: 0 0 0 0.5em
+}
+.cpu.pct{
+  margin: 0 1em 0 0.5em
 }
 .mem.circ,
 .cpu.circ{
-  background-color: $surface1;
   font-size: 25%;
+  background-color: $surface1;
 }
 .mem.circ-icon,
 .cpu.circ-icon{
-  padding: 0.7em 0.7em 0.7em 0.8em;
-  font-size: 400%;
+  font-size: 300%;
+  padding: 0.7em;
 }
 
-window.Bar{
-  background: $crust;
+.bar{
   font-weight: bold;
-  label{
-    margin: 0em;
-  }
+  background: transparent;
+  label{margin: 0em;}
+}
+.bar.box{
+  background-color: $crust;
+  //border-radius: 1em;
+  padding: 0.3em;
+  //margin: 0.5em;
 }

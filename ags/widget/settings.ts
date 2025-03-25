@@ -18,6 +18,11 @@ const userOptions = {
     memory: {
         interval: 1000,
         format: "{mem}%"
+    },
+    battery: {
+        interval: 1000,
+        format_pct: "{battery}%",
+        format_dis: "{battery} W"
     }
 }
 

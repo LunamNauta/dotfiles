@@ -4,6 +4,11 @@
 
 @import "mocha";
 
+tooltip{
+  background-color: $crust;
+  color: $text;
+}
+
 .color-picker{
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
@@ -21,7 +26,7 @@
 .workspaces{
   background-color: $base;
   color: $text;
-  font-family: "JetBrainsMono NF";
+  font-family: "CaskaydiaCove NF";
   font-weight: bold;
   padding: 0.2em;
   margin: 0.2em;
@@ -31,7 +36,7 @@
 .workspace.empty,
 .workspace.button,
 .workspace.active{
-  font-family: "JetBrainsMono NF";
+  font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 110%;
   background-color: transparent;
@@ -145,26 +150,35 @@
 .mem,
 .cpu.circ,
 .cpu.pct,
-.cpu{
+.cpu
+.bat.circ,
+.bat.pct,
+.bat{
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   font-size: 100%;
 }
-.mem.pct{
-  margin: 0 0 0 0.5em
+.mem.pct,
+.bat.pct{
+  margin: 0 0.5em 0 0.5em
 }
 .cpu.pct{
   margin: 0 1em 0 0.5em
 }
 .mem.circ,
-.cpu.circ{
+.cpu.circ,
+.bat.circ{
   font-size: 25%;
   background-color: $surface1;
 }
 .mem.circ-icon,
-.cpu.circ-icon{
+.cpu.circ-icon,
+.bat.circ-icon{
   font-size: 300%;
-  padding: 0.7em;
+  padding: 0.7em 0.7em 0.7em 0.8em;
+}
+.bat.circ-icon{
+  padding: 0.7em 0.7em 0.7em 1em;
 }
 
 .bar{

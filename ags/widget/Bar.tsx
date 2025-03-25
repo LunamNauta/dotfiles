@@ -7,11 +7,13 @@ import { Mem } from "./mem"
 import { Workspaces } from "./hyprland"
 import { System_Tray } from "./system_tray"
 import { Color_Picker } from "./color_picker"
+import { Battery } from "./battery"
 
 const System_Monitor = () =>
 <box className={'system-monitor'}>
     <Cpu />
     <Mem />
+    <Battery />
 </box>
 
 const Left_Widgets = () =>

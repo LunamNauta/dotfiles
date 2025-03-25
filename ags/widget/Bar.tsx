@@ -7,14 +7,14 @@ import { Mem } from "./mem"
 import { Workspaces } from "./hyprland"
 import { System_Tray } from "./system_tray"
 import { Color_Picker } from "./color_picker"
-import { Battery } from "./battery"
+import { Battery, has_battery } from "./battery"
 
-const System_Monitor = () =>
-<box className={'system-monitor'}>
-    <Cpu />
-    <Mem />
-    <Battery />
-</box>
+const System_Monitor = () => {
+    const widgets = [<Cpu />, <Mem />, has_battery ? <Battery /> : null]
+    return <box className={'system-monitor'}>
+        {widgets.map(w => {return w})}
+    </box>
+}
 
 const Left_Widgets = () =>
 <box className={'left-widgets'} halign={Gtk.Align.START}>

@@ -7,6 +7,7 @@ import { format_string, format_percent } from "./utilities";
 import { userOptions } from './settings'
 
 const battery = AstalBattery.get_default()
+const has_battery = battery.get_online()
 const battery_icon = Variable('󱃍')
 const battery_discharge = Variable(battery.get_energy_rate())
 const battery_pct = Variable(0).poll(userOptions.battery.interval, () => {
@@ -63,5 +64,6 @@ const Battery = () =>
 </box>
 
 export{
-    Battery
+    Battery,
+    has_battery
 }

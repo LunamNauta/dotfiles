@@ -6,6 +6,7 @@ import { Cpu } from "./cpu"
 import { Mem } from "./mem"
 import { Workspaces } from "./hyprland"
 import { System_Tray } from "./system_tray"
+import { Color_Picker } from "./color_picker"
 
 const System_Monitor = () =>
 <box className={'system-monitor'}>
@@ -26,6 +27,7 @@ const Center_Widgets = () =>
 const Right_Widgets = () =>
 <box className={'right-widgets'} halign={Gtk.Align.END}>
     <System_Monitor />
+    <Color_Picker />
     <System_Tray />
 </box>
 

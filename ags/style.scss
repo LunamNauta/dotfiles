@@ -4,6 +4,20 @@
 
 @import "mocha";
 
+.color-picker{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 0em 1.1em;
+  margin: 0 0.2em 0 0.7em;
+  background-color: $base;
+  color: $text;
+}
+.color-picker:hover{
+  background-color: $lavender;
+  color: $crust;
+}
+
 .workspaces{
   background-color: $base;
   color: $text;
@@ -56,18 +70,17 @@
 .system-monitor{
   background-color: $base;
   color: $text;
-  border-radius: 20px 20px 20px 20px;
-  padding: 0.25em;
-  margin: 0.2em;
+  border-radius: 20px;
+  //padding: 0.25em;
+  //margin: 0.2em;
 }
 .system-tray{
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
   background-color: $crust;
   color: $text;
-  border-radius: 20px 20px 20px 20px;
-  padding: 0.25em;
-  margin: 0.2em;
+  border-radius: 20px;
+  //margin: 0.2em;
 }
 .system-tray.main-button{
   font-family: "CaskaydiaCove NF";
@@ -75,7 +88,10 @@
   font-size: 140%;
   background-color: $base;
   color: $text;
-  padding: 0.3em 0.6em
+  //padding: 0.3em 0.6em;
+  padding: 0 0.7em;
+  margin: 0 0 0 0.2em;
+  border-radius: 50%;
 }
 .system-tray.main-button:hover{
   background-color: $lavender;
@@ -98,6 +114,7 @@
   padding: 0.3em 0.6em;
   margin: 0.2em;
   font-size: 140%;
+  border-radius: 50%;
 }
 .system-tray.power-button:hover{
   background-color: $lavender;
@@ -105,11 +122,14 @@
 }
 .system-tray.toggles{
   background-color: $base;
+  margin: 0.5em 0
 }
 .system-tray.toggled,
 .system-tray.untoggled{
   padding: 0.3em 0.6em;
   font-size: 140%;
+  border-radius: 50%;
+  margin: 0.2em;
 }
 .system-tray.toggled{
   background-color: $lavender;

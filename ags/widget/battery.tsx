@@ -7,10 +7,11 @@ import { format_string, format_percent } from "./utilities";
 import { userOptions } from './settings'
 
 const battery = AstalBattery.get_default()
-const has_battery = battery.get_online()
+const has_battery = Variable(false)
 const battery_icon = Variable('󱃍')
 const battery_discharge = Variable(battery.get_energy_rate())
 const battery_pct = Variable(0).poll(userOptions.battery.interval, () => {
+    has_battery.set(battery.get_online())
     battery_discharge.set(battery.get_energy_rate())
     const pct = battery.get_energy() / battery.get_energy_full()
     if (battery.get_charging()){

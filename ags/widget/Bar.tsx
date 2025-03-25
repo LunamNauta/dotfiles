@@ -10,9 +10,14 @@ import { Color_Picker } from "./color_picker"
 import { Battery, has_battery } from "./battery"
 
 const System_Monitor = () => {
-    const widgets = [<Cpu />, <Mem />, has_battery ? <Battery /> : null]
+    if (has_battery()) return <box className={'system-monitor'}>
+        <Cpu />
+        <Mem />
+        <Battery />
+    </box>
     return <box className={'system-monitor'}>
-        {widgets.map(w => {return w})}
+        <Cpu />
+        <Mem />
     </box>
 }
 

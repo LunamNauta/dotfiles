@@ -10,7 +10,7 @@ import { Color_Picker } from "./color_picker"
 import { Battery, has_battery } from "./battery"
 
 const System_Monitor = () => {
-    if (has_battery()) return <box className={'system-monitor'}>
+    if (has_battery) return <box className={'system-monitor'}>
         <Cpu />
         <Mem />
         <Battery />

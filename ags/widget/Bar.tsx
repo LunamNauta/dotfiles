@@ -6,12 +6,19 @@ import { MemMon_Widget } from "./memmon"
 import { Workspaces } from "./workspaces"
 import { Active_Workspace_Widget } from "./active_workspace"
 import { System_Menu_Widget } from "./system_menu"
+import { BatMon_Widget, has_battery } from "./batmon"
 
-const System_Monitor_Widgets = () =>
-<box className={'system-monitor'}>
-    <CPUMon_Widget />
-    <MemMon_Widget />
-</box>
+const System_Monitor_Widgets = () => {
+    if (has_battery) return <box className={'system-monitor'}>
+        <CPUMon_Widget />
+        <MemMon_Widget />
+        <BatMon_Widget />
+    </box>
+    return <box className={'system-monitor'}>
+        <CPUMon_Widget />
+        <MemMon_Widget />
+    </box>
+}
 
 /*----------------------------------------------------------------*/
 

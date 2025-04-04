@@ -46,20 +46,24 @@
 }
 
 .cpumon.pct,
-.memmon.pct{
+.memmon.pct,
+.batmon.pct{
   margin: 0 0 0 0.5em;
 }
 .cpumon.circ,
-.memmon.circ{
+.memmon.circ,
+.batmon.circ{
   font-size: 20%;
   background-color: $surface1;
 }
 .cpumon.circ-icon,
-.memmon.circ-icon{
+.memmon.circ-icon,
+.batmon.circ-icon{
   font-size: 500%;
   padding: 0.5em 0.5em 0.5em 0.55em;
 }
-.memmon{
+.memmon,
+.batmon{
   margin: 0 0 0 0.75em;
 }
 

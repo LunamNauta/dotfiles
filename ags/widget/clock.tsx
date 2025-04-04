@@ -1,25 +1,21 @@
 import { Variable, GLib  } from "astal"
 
-import { userOptions } from './settings'
+const fmted_time = Variable('').poll(1000, () => GLib.DateTime.new_now_local().format('%H:%M:%S')!)
+const fmted_date = Variable('').poll(1000, () => GLib.DateTime.new_now_local().format('%A, %d/%m')!)
 
-const timeFmt = Variable('').poll(userOptions.time.interval, () => GLib.DateTime.new_now_local().format(userOptions.time.format)!)
-const dateFmt = Variable('').poll(userOptions.date.interval, () => GLib.DateTime.new_now_local().format(userOptions.date.format)!)
-
-const Clock = () =>
+const Clock_Widget = () =>
 <box className={'clock'}>
     <label
         className="clock time"
-        onDestroy={() => timeFmt.drop()}
-        label={timeFmt()}
+        label={fmted_time()}
     />
     <label label={'•'}/>
     <label
         className="clock date"
-        onDestroy={() => dateFmt.drop()}
-        label={dateFmt()}
+        label={fmted_date()}
     />
 </box>
 
 export{
-    Clock
+    Clock_Widget
 }

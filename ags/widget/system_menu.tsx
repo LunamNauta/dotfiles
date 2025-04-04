@@ -2,8 +2,6 @@ import { bind, exec, execAsync, Variable } from "astal";
 import { App, Astal } from "astal/gtk3";
 import GLib from "gi://GLib?version=2.0";
 import Gtk from "gi://Gtk"
-import { userOptions } from "./settings";
-import { format_string } from "./utilities";
 import AstalNetwork from "gi://AstalNetwork";
 import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 
@@ -17,8 +15,8 @@ let system_menu: SystemMenu = {
 }
 
 let start_time = GLib.DateTime.new_now_local().to_unix()
-let current_time_flt = Variable(start_time).poll(userOptions.uptime.interval, () => GLib.DateTime.new_now_local().to_unix() - start_time)
-let current_time_fmt = () => current_time_flt(uptime => format_string(userOptions.uptime.format, {uptime_hours: Math.floor(uptime/3600), uptime_minutes: Math.floor(uptime/60)}))
+let current_time_flt = Variable(start_time).poll(1000, () => GLib.DateTime.new_now_local().to_unix() - start_time)
+let current_time_fmt = () => current_time_flt(uptime => Math.floor(uptime/3600).toString() + 'h, ' + Math.floor(uptime/60).toString() + 'm')
 const Uptime_Widget = () =>
 <box className={'system-tray uptime'} halign={Gtk.Align.START}>
     <label label={current_time_fmt()} />
@@ -152,15 +150,14 @@ function spawn_system_menu() {
     </window>
 }
 
-const System_Tray = () =>
-<eventbox onHover={() => system_menu.touched = true} onHoverLost={hide_system_menu}>
-    <box className={'system-tray'}>
-        <button className={'system-tray main-button'} onClick={spawn_system_menu}>
-            <label label={'󰣇'} />
-        </button>
+const System_Menu_Widget = () =>
+<eventbox className={'system-tray'} onHover={() => system_menu.touched = true} onHoverLost={hide_system_menu} onClick={spawn_system_menu}>
+    <box>
+        <label className={'system-tray network-icon'} label={network_icon()} />
+        <label className={'system-tray bluetooth-icon'} label={bluetooth_icon()} />
     </box>
 </eventbox>
 
 export{
-    System_Tray
+    System_Menu_Widget
 }

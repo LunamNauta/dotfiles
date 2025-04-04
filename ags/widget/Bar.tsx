@@ -1,57 +1,50 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable } from "astal"
+import { Clock_Widget } from "./clock"
+import { CPUMon_Widget } from "./cpumon"
+import { MemMon_Widget } from "./memmon"
+import { Workspaces } from "./workspaces"
+import { Active_Workspace_Widget } from "./active_workspace"
+import { System_Menu_Widget } from "./system_menu"
 
-import { Clock } from "./clock"
-import { Cpu } from "./cpu"
-import { Mem } from "./mem"
-import { Workspaces } from "./hyprland"
-import { System_Tray } from "./system_tray"
-import { Color_Picker } from "./color_picker"
-import { Battery, has_battery } from "./battery"
-
-const System_Monitor = () => {
-    if (has_battery) return <box className={'system-monitor'}>
-        <Cpu />
-        <Mem />
-        <Battery />
-    </box>
-    return <box className={'system-monitor'}>
-        <Cpu />
-        <Mem />
-    </box>
-}
-
-const Left_Widgets = () =>
-<box className={'left-widgets'} halign={Gtk.Align.START}>
-    <Clock />
+const System_Monitor_Widgets = () =>
+<box className={'system-monitor'}>
+    <CPUMon_Widget />
+    <MemMon_Widget />
 </box>
 
+/*----------------------------------------------------------------*/
+
+const Left_Widgets = () =>
+<centerbox className={'main-bar left-widgets'}>
+    <box halign={Gtk.Align.START}> <Active_Workspace_Widget /> </box>
+    <box/>
+    <box halign={Gtk.Align.END}> <Clock_Widget /> </box>
+</centerbox>
+
 const Center_Widgets = () =>
-<box className={'center-widgets'} halign={Gtk.Align.CENTER}>
+<box className={'main-bar center-widgets'}>
     <Workspaces />
 </box>
 
 const Right_Widgets = () =>
-<box className={'right-widgets'} halign={Gtk.Align.END}>
-    <System_Monitor />
-    <Color_Picker />
-    <System_Tray />
-</box>
+<centerbox className={'main-bar right-widgets'}>
+    <box halign={Gtk.Align.START}> <System_Monitor_Widgets /> </box>
+    <box/>
+    <box halign={Gtk.Align.END}> <System_Menu_Widget /> </box>
+</centerbox>
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
-    const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
-
     return <window
-        className="bar"
+        className={"main-bar"}
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        anchor={TOP | LEFT | RIGHT}
+        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
         application={App}>
-        <centerbox className={'bar box'}
-            startWidget={<Left_Widgets />}
-            centerWidget={<Center_Widgets />}
-            endWidget={<Right_Widgets />}
-        >
+        <centerbox className={'main-bar center-box'}>
+            <Left_Widgets />
+            <Center_Widgets />
+            <Right_Widgets />
         </centerbox>
     </window>
 }

@@ -39,8 +39,12 @@ arch_packages=(
     zsh-autosuggestions
 
     # Desktop
-    hyprland
+    hyprpolkitagent
+    hyprsunset
     hyprpaper
+    hypridle
+    hyprlock
+    hyprland
     nemo
     ly
 
@@ -99,3 +103,6 @@ gsettings set org.cinnamon.desktop.default-applications.terminal exec alacritty
 
 log_message "Setting up default apps..."
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+
+log_message "Setting user shell..."
+sudo chsh -s /usr/bin/zsh loki

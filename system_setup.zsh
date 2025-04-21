@@ -21,6 +21,7 @@ arch_packages=(
     moreutils
     unzip
     qt6ct
+    lact
     git
 
     # Fonts
@@ -39,22 +40,26 @@ arch_packages=(
     zsh-autosuggestions
 
     # Desktop
+    gnome-disk-utility
     hyprpolkitagent
     hyprsunset
     hyprpaper
     hypridle
     hyprlock
     hyprland
+    baobab
     nemo
+    wofi
     ly
 
     # Libraries
+    python-dbus
     libgtop
 )
 aur_packages=(
     librewolf-bin
     aylurs-gtk-shell-git
-    xdg-terminal-exec
+    xdg-terminal-exec-mkhl
     #ros2-jazzy
 )
 
@@ -81,7 +86,12 @@ if ! command -v yay &> /dev/null; then
     cd yay
     makepkg -si
     cd ../
-    rm -r yay
+    sudo rm -rf yay
+fi
+
+if ! command -v rustup &> /dev/null; then
+    log_message "Installing rustup..." # Needed for xdg-terminal-exec-mkhl. Choose rustup during installation
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
 log_message "Installing aur packages..."
@@ -92,6 +102,7 @@ sudo pacman -Qdtq | ifne sudo pacman -Rns -
 sudo pacman -Qqd | ifne sudo pacman -Rsu
 
 log_message "Enabling services..."
+sudo systemctl enable --now lactd
 sudo systemctl enable ly
 
 log_message "Creating dotfile symlinks..."

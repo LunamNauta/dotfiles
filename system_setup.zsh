@@ -1,3 +1,5 @@
+# Make sure to enable the multilib repository
+
 arch_packages=(
     # System requirements
     base
@@ -13,7 +15,7 @@ arch_packages=(
     gcc
     npm
 
-    # Networking
+    # Networking / Bluetooth
     networkmanager
     pipewire-pulse
     pipewire
@@ -22,6 +24,7 @@ arch_packages=(
 
     # Utilities
     moreutils
+    flatpak
     unzip
     qt6ct
     lact
@@ -55,15 +58,25 @@ arch_packages=(
     wofi
     ly
 
+    # Gaming
+    steam
+
     # Libraries
     python-dbus
     libgtop
+    mesa
+    lib32-mesa
+    vulkan-radeon
+    lib32-vulkan-radeon
 )
 aur_packages=(
     librewolf-bin
     aylurs-gtk-shell-git
     xdg-terminal-exec-mkhl
     #ros2-jazzy
+)
+flathub_packages=(
+    com.modrinth.ModrinthApp
 )
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
@@ -100,6 +113,9 @@ fi
 log_message "Installing aur packages..."
 yay -S --needed ${aur_packages[@]}
 
+log_message "Installing flathub packages"
+flatpak install flathub ${flathub_packages[@]}
+
 log_message "Removing orphaned packages..."
 sudo pacman -Qdtq | ifne sudo pacman -Rns -
 sudo pacman -Qqd | ifne sudo pacman -Rsu
@@ -116,6 +132,7 @@ zsh $SCRIPTPATH/install.zsh
 log_message "Setting up GTK..."
 gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"
 gsettings set org.cinnamon.desktop.default-applications.terminal exec alacritty
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 log_message "Setting up default apps..."
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search

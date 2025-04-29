@@ -23,12 +23,17 @@ arch_packages=(
     dhcp
 
     # Utilities
+    dosfstools
     moreutils
     flatpak
+    docker
     unzip
     qt6ct
     lact
+    wget
+    less
     git
+    bc
 
     # Fonts
     ttf-cascadia-code-nerd
@@ -123,6 +128,7 @@ sudo pacman -Qqd | ifne sudo pacman -Rsu
 log_message "Enabling services..."
 systemctl --user start pipewire-pulse
 sudo systemctl enable --now bluetooth
+sudo systemctl enable --now docker
 sudo systemctl enable --now lactd
 sudo systemctl enable ly
 

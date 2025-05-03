@@ -1,87 +1,34 @@
-# Make sure to enable the multilib repository
-
 arch_packages=(
-    # System requirements
-    base
-    base-devel
-    linux
-    linux-firmware
-    grub
-    efibootmgr
-
     # Build tools
     cmake
     make
     gcc
     npm
 
-    # Networking / Bluetooth
-    networkmanager
-    pipewire-pulse
-    pipewire
-    blueman
-    dhcp
-
     # Utilities
     dosfstools
     moreutils
+    openssh
     flatpak
     docker
     unzip
-    qt6ct
     lact
     wget
     less
     git
     bc
 
-    # Fonts
-    ttf-cascadia-code-nerd
-    ttf-cascadia-mono-nerd
-
-    # Icons
-    papirus-icon-theme
-
     # Terminal Life
-    alacritty
     neovim
     yazi
     zsh
     zsh-syntax-highlighting
     zsh-autosuggestions
-
-    # Desktop
-    gnome-disk-utility
-    hyprpolkitagent
-    hyprsunset
-    hyprpaper
-    hypridle
-    hyprlock
-    hyprland
-    baobab
-    nemo
-    wofi
-    ly
-
-    # Gaming
-    steam
-
-    # Libraries
-    python-dbus
-    libgtop
-    mesa
-    lib32-mesa
-    vulkan-radeon
-    lib32-vulkan-radeon
 )
 aur_packages=(
-    librewolf-bin
-    aylurs-gtk-shell-git
     xdg-terminal-exec-mkhl
-    #ros2-jazzy
 )
 flathub_packages=(
-    com.modrinth.ModrinthApp
 )
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
@@ -126,22 +73,16 @@ sudo pacman -Qdtq | ifne sudo pacman -Rns -
 sudo pacman -Qqd | ifne sudo pacman -Rsu
 
 log_message "Enabling services..."
-systemctl --user start pipewire-pulse
-sudo systemctl enable --now bluetooth
 sudo systemctl enable --now docker
-sudo systemctl enable --now lactd
-sudo systemctl enable ly
 
 log_message "Creating dotfile symlinks..."
 zsh $SCRIPTPATH/install.zsh
-
-log_message "Setting up GTK..."
-gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"
-gsettings set org.cinnamon.desktop.default-applications.terminal exec alacritty
-gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 log_message "Setting up default apps..."
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 log_message "Setting user shell..."
 sudo chsh -s /usr/bin/zsh loki
+
+SCRIPTDIR=${0:a:h}
+cp -r $SCRIPTDIR/alacritty $APPDATA

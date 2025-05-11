@@ -18,13 +18,13 @@ set-config-link(){
 mkdir "$HOME/.config"
 set-config-link "$SCRIPTPATH/alacritty" "$HOME/.config/alacritty"
 set-config-link "$SCRIPTPATH/qt6ct" "$HOME/.config/qt6ct"
+set-config-link "$SCRIPTPATH/swaylock" "$HOME/.config/swaylock"
+set-config-link "$SCRIPTPATH/sway" "$HOME/.config/sway"
 set-config-link "$SCRIPTPATH/hypr" "$HOME/.config/hypr"
 set-config-link "$SCRIPTPATH/wofi" "$HOME/.config/wofi"
 set-config-link "$SCRIPTPATH/nvim" "$HOME/.config/nvim"
 set-config-link "$SCRIPTPATH/tmux" "$HOME/.config/tmux"
 set-config-link "$SCRIPTPATH/yazi" "$HOME/.config/yazi"
-set-config-link "$SCRIPTPATH/eww" "$HOME/.config/eww"
-set-config-link "$SCRIPTPATH/ags" "$HOME/.config/ags"
 set-config-link "$SCRIPTPATH/.zsh" "$HOME/.zsh"
 
 # Basic Config Files

@@ -1,0 +1,144 @@
+*{
+  all: unset;
+}
+
+@import "mocha";
+
+.clock,
+.system-monitor{
+  background-color: $base;
+  border-radius: 0.3em;
+  padding: 0.2em;
+}
+
+.workspaces{
+  font-family: "CaskaydiaCove NF";
+  background-color: $base;
+  font-weight: bold;
+  padding: 0.3em;
+  margin: 0.2em;
+  border-radius: 0.3em;
+}
+.workspace.occupied,
+.workspace.empty,
+.workspace.button,
+.workspace.active{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 110%;
+  background-color: transparent;
+  color: $text;
+  padding: 0.2em 0.6em 0.2em 0.6em;
+  margin: 0.066em 0.2em 0.066em 0.2em;
+}
+.workspace.occupied{
+  background-color: $surface0;
+  border-radius: 0.3em;
+}
+.workspace.active{
+  background-color: $lavender;
+  color: $surface0;
+  border-radius: 0.3em;
+}
+
+.cpumon.pct,
+.memmon.pct{
+  margin: 0 0 0 0.5em;
+}
+.cpumon.circ,
+.memmon.circ{
+  font-size: 20%;
+  background-color: $surface1;
+}
+.cpumon.circ-icon,
+.memmon.circ-icon{
+  font-size: 500%;
+  padding: 0.5em 0.5em 0.5em 0.55em;
+}
+.memmon{
+  margin: 0 0 0 0.75em;
+}
+
+.system-tray{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 120%;
+  background-color: $base;
+  color: $text;
+  padding: 0 0.7em;
+  border-radius: 0.3em;
+}
+.system-tray.network-icon,
+.system-tray.bluetooth-icon{
+  background-color: transparent;
+}
+.system-tray:hover{
+  background-color: $lavender;
+  color: $crust;
+  .network-icon,
+  .bluetooth-icon{
+    color: $base;
+  }
+}
+.system-tray.window{
+  background-color: transparent;
+}
+.system-tray.menu{
+  background-color: $crust;
+  margin: 0.5em;
+  padding: 1em;
+  font-size: 100%;
+}
+.system-tray.uptime{
+  background-color: $base;
+  padding: 0.5em;
+}
+.system-tray.power-button{
+  background-color: $base;
+  padding: 0.3em 0.6em;
+  margin: 0.2em;
+  font-size: 120%;
+  border-radius: 0.3em;
+}
+.system-tray.power-button:hover{
+  background-color: $lavender;
+  color: $crust;
+}
+.system-tray.toggles{
+  background-color: $base;
+  margin: 0.5em 0
+}
+.system-tray.toggled,
+.system-tray.untoggled{
+  padding: 0.3em 0.6em;
+  font-size: 120%;
+  border-radius: 0.3em;
+  margin: 0.2em;
+}
+.system-tray.toggled{
+  background-color: $lavender;
+  color: $crust;
+}
+.system-tray.untoggled{
+  background-color: $surface0;
+  color: $text;
+}
+
+
+.main-bar{
+  font-family: "CaskaydiaCove NF";
+  font-weight: bold;
+  font-size: 100%;
+  background-color: $crust;
+  color: $text;
+  label{margin: 0em;}
+}
+.main-bar.center-box{
+  padding: 0.3em;
+}
+.main-bar.left-widgets{
+  margin: 0 0 0 0.5em;
+}
+.main-bar.right-widgets{
+  margin: 0 0.5em 0 0;
+}

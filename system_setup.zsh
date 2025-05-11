@@ -34,6 +34,10 @@ arch_packages=(
     less
     git
     bc
+    jq
+
+    docker
+    docker-buildx
 
     # Fonts
     ttf-cascadia-code-nerd
@@ -49,9 +53,14 @@ arch_packages=(
     zsh
     zsh-syntax-highlighting
     zsh-autosuggestions
+    tmux
+    man-db
+    man-pages
 
     # Desktop
+    libreoffice-fresh
     gnome-disk-utility
+    gnome-system-monitor
     hyprpolkitagent
     hyprsunset
     hyprpaper
@@ -63,6 +72,10 @@ arch_packages=(
     wofi
     ly
 
+    swayidle
+    swaybg
+    sway
+
     # Gaming
     steam
 
@@ -73,11 +86,13 @@ arch_packages=(
     lib32-mesa
     vulkan-radeon
     lib32-vulkan-radeon
+    glfw
 )
 aur_packages=(
     librewolf-bin
     aylurs-gtk-shell-git
     xdg-terminal-exec-mkhl
+    swaylock-effects
     #ros2-jazzy
 )
 flathub_packages=(

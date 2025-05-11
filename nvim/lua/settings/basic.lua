@@ -57,3 +57,4 @@ vim.opt.foldlevel = 999
 
 vim.g.localmapleader = '\\'
 vim.g.mapleader = ' '
+vim.g.c_syntax_for_h = true

@@ -62,6 +62,7 @@ arch_packages=(
     gnome-disk-utility
     gnome-system-monitor
     hyprpolkitagent
+    thunderbird
     hyprsunset
     hyprpaper
     hypridle

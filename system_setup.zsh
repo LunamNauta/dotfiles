@@ -35,6 +35,8 @@ arch_packages=(
     git
     bc
     jq
+    btop
+    gdu
 
     docker
     docker-buildx
@@ -60,7 +62,6 @@ arch_packages=(
     # Desktop
     libreoffice-fresh
     gnome-disk-utility
-    gnome-system-monitor
     hyprpolkitagent
     thunderbird
     hyprsunset
@@ -68,7 +69,6 @@ arch_packages=(
     hypridle
     hyprlock
     hyprland
-    baobab
     nemo
     wofi
     ly

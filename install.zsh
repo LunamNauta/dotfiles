@@ -31,6 +31,7 @@ set-config-link "$SCRIPTPATH/.zsh" "$HOME/.zsh"
 # Basic Config Files
 set-config-link "$SCRIPTPATH/.tmux.conf" "$HOME/.tmux.conf"
 set-config-link "$SCRIPTPATH/.zshrc" "$HOME/.zshrc"
+set-config-link "$SCRIPTPATH/.gdu.yaml" "$HOME/.gdu.yaml"
 
 # GTK Bull
 mkdir "$HOME/.local"

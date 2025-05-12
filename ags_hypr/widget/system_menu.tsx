@@ -104,6 +104,15 @@ const toggle_bluelight = () => {
     bluelight_icon.set(bluelight_enabled.get() ? '' : '')
 }
 
+let hypridle_enabled = Variable(false)
+let hypridle_icon = Variable('')
+const toggle_hypridle = () => {
+    if (!hypridle_enabled.get()) execAsync('pkill -SIGTERM hypridle');
+    else execAsync(['bash', '-c', 'hypridle & disown']);
+    hypridle_enabled.set(!hypridle_enabled.get());
+    hypridle_icon.set(hypridle_enabled.get() ? '' : '');
+}
+
 let toggles = {
     wifi: wifi ? wifi.get_enabled() : false,
     bluetooth: bluetooth.get_is_powered(),
@@ -119,6 +128,9 @@ const Toggle_Widgets = () =>
     </button>
     <button className={bluelight_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} onClick={toggle_bluelight}>
         <label label={bluelight_icon()} />
+    </button>
+    <button className={hypridle_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} onClick={toggle_hypridle}>
+        <label label={hypridle_icon()} />
     </button>    
 </box>
 

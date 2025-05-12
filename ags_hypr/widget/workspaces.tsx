@@ -5,6 +5,25 @@ import Hyprland from "gi://AstalHyprland"
 const hypr = Hyprland.get_default()
 const dispatch = (ws: string) => hypr.message(`dispatch workspace ${ws}`)
 
+hypr.connect("monitor-added", (_, monitor) => {
+    var id = 0
+    for (var mt of hyprland.monitors) {
+        if (mt.name == monitor)
+            id = mt.id
+            break;
+    }
+    
+    var flag = true
+    for (var wd of App.windows) {
+        if (wd.name == `bar-${id}`)
+            flag = false
+            break;
+    }
+
+    if (flag)
+        App.addWindow(Bar(id))
+})
+
 const workspace_names = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 function get_grouped_workspaces(occupied_workspaces){
     let out: {is_occupied: boolean, workspaces: string[]}[] = []

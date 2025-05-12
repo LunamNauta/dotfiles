@@ -23,6 +23,7 @@ arch_packages=(
     dhcp
 
     # Utilities
+    wl-clipboard
     dosfstools
     moreutils
     flatpak

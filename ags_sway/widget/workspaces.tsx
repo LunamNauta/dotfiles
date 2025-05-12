@@ -41,19 +41,21 @@ function set_active_workspace(data){
     workspaces.set(get_workspaces());
 }
 async function update_active_workspace(){
-    const str = await execAsync("swaymsg -t subscribe '[ \"workspace\" ]'");
-    const data = JSON.parse(str);
-    set_active_workspace(data);
-    update_occupied_workspace();
-    update_active_workspace();
+    while (true){
+        const str = await execAsync("swaymsg -t subscribe '[ \"workspace\" ]'");
+        const data = JSON.parse(str);
+        set_active_workspace(data);
+        update_occupied_workspace();
+    }
 }
 update_active_workspace();
 
 async function update_occupied_workspace2(){
-    const str = await execAsync("swaymsg -t subscribe '[ \"window\" ]'");
-    const json = JSON.parse(str);
-    if (json['change'] == 'new') update_active_workspace();
-    update_occupied_workspace2();
+    while (true){
+        const str = await execAsync("swaymsg -t subscribe '[ \"window\" ]'");
+        const json = JSON.parse(str);
+        //if (json['change'] == 'new') update_active_workspace();
+    }
 }
 async function update_occupied_workspace(){
     const str = await execAsync("swaymsg -t get_workspaces");
@@ -66,7 +68,7 @@ async function update_occupied_workspace(){
     }
     occupied_workspaces.set({foc: focused, occ: occupied_workspaces_arr});
 }
-update_occupied_workspace2();
+//update_occupied_workspace2();
 
 const workspaces = Variable(get_workspaces());
 
@@ -98,32 +100,6 @@ const Workspaces = () => {
         })}
     </box>
 }
-
-/*
-const Workspaces = () => {
-    return <box className={'workspaces'}>
-        {bind(workspaces).as((workspaces_data) => {
-            return <box>
-                {workspaces_data.map(workspace => {
-                    const workspace_class = `workspace ${workspace.is_occupied ? 'occupied' : 'empty'}`
-                    const workspace_name = workspace.is_occupied ? '•' : workspace.name.toString();
-                    return <eventbox className={workspace_class} onScroll={(_, event) => {
-                            if (event.delta_y > 0) shift_workspace(1)
-                            if (event.delta_y < 0) shift_workspace(-1)
-                        }}>
-                        <button 
-                            className={workspace.is_occupied ? 'workspace active' : 'workspace button'}
-                            onClick={() => set_workspace(workspace.name)}
-                        >
-                            <label label={workspace_name}> </label>
-                        </button>
-                    </eventbox>
-                })}
-            </box>
-        })}
-    </box>
-}
-*/
 
 export{
     Workspaces

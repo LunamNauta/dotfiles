@@ -18,3 +18,10 @@ vim.api.nvim_create_autocmd({"FileType"}, {
 })
 vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {command="set foldmethod=expr"})
 
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderCmdLine", { fg = "#b4befe" })
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = "#b4befe" })
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = "#b4befe" })
+
+vim.api.nvim_set_hl(0, "BlinkCmpDocCursorLine", { fg = "#b4befe" })
+vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = "#b4befe" })
+vim.api.nvim_set_hl(0, "BlinkCmpDoc", { fg = "#b4befe" })

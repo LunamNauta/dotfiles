@@ -136,6 +136,12 @@ yay -S --needed ${aur_packages[@]}
 log_message "Installing flathub packages"
 flatpak install flathub ${flathub_packages[@]}
 
+log_message "Instsalling yazi extensions"
+ya pack -a yazi-rs/plugins:full-border
+ya pack -a yazi-rs/plugins:mount
+ya pack -a imsi32/yatline
+ya pack -a yazi-rs/plugins:smart-enter
+
 log_message "Removing orphaned packages..."
 sudo pacman -Qdtq | ifne sudo pacman -Rns -
 sudo pacman -Qqd | ifne sudo pacman -Rsu

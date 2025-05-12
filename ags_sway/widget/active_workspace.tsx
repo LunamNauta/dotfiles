@@ -14,16 +14,18 @@ function get_active_workspace(window_data_str: string){
 const window_data = Variable('');
 const disable_name = Variable(false);
 async function update_window_data(){
-    const str = await execAsync("swaymsg -t subscribe '[ \"window\" ]'");
-    window_data.set(get_active_workspace(str));
-    disable_name.set(false);
-    update_window_data();
+    while (true){
+        const str = await execAsync("swaymsg -t subscribe '[ \"window\" ]'");
+        window_data.set(get_active_workspace(str));
+        disable_name.set(false);
+    }
 }
 async function update_window_data_workspace(){
-    disable_name.set(true);
-    const str = await execAsync("swaymsg -t subscribe '[ \"workspace\" ]'");
-    if (disable_name.get()) window_data.set('');
-    update_window_data_workspace();
+    while (true){
+        disable_name.set(true);
+        const str = await execAsync("swaymsg -t subscribe '[ \"workspace\" ]'");
+        if (disable_name.get()) window_data.set('');
+    }
 }
 update_window_data_workspace();
 update_window_data();

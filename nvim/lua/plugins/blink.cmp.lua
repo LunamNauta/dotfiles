@@ -9,7 +9,10 @@ return{{
             ['<DOWN>'] = {'select_next', 'fallback'},
         },
         completion = {
-            menu = {border = 'rounded'},
+            menu = {
+                border = 'rounded',
+                winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+            },
             documentation = {
                 auto_show = true,
                 auto_show_delay_ms = 250,

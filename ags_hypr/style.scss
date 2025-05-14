@@ -7,9 +7,19 @@
 .clock,
 .system-monitor{
   font-family: "CaskaydiaCove NFM";
-  background-color: $base;
-  border-radius: 1em;
-  padding: 0.2em;
+}
+
+.clock.time{
+  font-size: 85%;
+}
+
+.active-workspace{
+  font-family: "CaskaydiaCove NFM";
+  font-size: 100%;
+}
+.active-workspace.title{
+  font-family: "CaskaydiaCove NFM";
+  font-size: 85%;
 }
 
 .workspaces{
@@ -17,7 +27,7 @@
   color: $text;
   font-family: "CaskaydiaCove NFM";
   font-weight: bold;
-  margin: 0em 0.5em;
+  margin: 0em 1em;
   border-radius: 20px;
 }
 .workspace.occupied,
@@ -36,12 +46,13 @@
 }
 .workspace.button,
 .workspace.focused{
-  padding: 0.4em 0.7em 0.4em 0.7em;
+  padding: 0.35em 0.7em 0.35em 0.7em;
 }
 .workspace.focused{
   background-color: $lavender;
   color: $surface0;
   border-radius: 20px;
+  padding: 0.4em 0.7em 0.4em 0.7em;
 }
 
 .cpumon,

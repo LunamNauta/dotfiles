@@ -6,6 +6,7 @@
 
 .clock,
 .system-monitor{
+  font-family: "CaskaydiaCove NFM";
   background-color: $base;
   border-radius: 1em;
   padding: 0.2em;
@@ -14,17 +15,16 @@
 .workspaces{
   background-color: $base;
   color: $text;
-  font-family: "CaskaydiaCove NF";
+  font-family: "CaskaydiaCove NFM";
   font-weight: bold;
-  padding: 0.2em;
-  margin: 0.2em;
+  margin: 0em 0.5em;
   border-radius: 20px;
 }
 .workspace.occupied,
 .workspace.empty,
 .workspace.button,
 .workspace.active{
-  font-family: "CaskaydiaCove NF";
+  font-family: "CaskaydiaCove NFM";
   font-weight: bold;
   font-size: 110%;
   background-color: transparent;
@@ -35,29 +35,27 @@
   border-radius: 20px;
 }
 .workspace.button,
-.workspace.active{
-  padding: 0.2em 0.6em 0.2em 0.6em;
-  margin: 0.066em 0.2em 0.066em 0.2em;
+.workspace.focused{
+  padding: 0.4em 0.7em 0.4em 0.7em;
 }
-.workspace.active{
+.workspace.focused{
   background-color: $lavender;
   color: $surface0;
   border-radius: 20px;
 }
 
-.cpumon.pct,
-.memmon.pct{
+.cpumon,
+.memmon{
+  font-family: "CaskaydiaCove NFM";
+}
+.cpumon.icon,
+.memmon.icon{
+  font-family: "CaskaydiaCove NFM";
+  font-size: 200%;
+}
+.cpumon.percent,
+.memmon.percent{
   margin: 0 0 0 0.5em;
-}
-.cpumon.circ,
-.memmon.circ{
-  font-size: 20%;
-  background-color: $surface1;
-}
-.cpumon.circ-icon,
-.memmon.circ-icon{
-  font-size: 500%;
-  padding: 0.5em 0.5em 0.5em 0.55em;
 }
 .memmon{
   margin: 0 0 0 0.75em;
@@ -126,6 +124,49 @@
 .system-tray.untoggled{
   background-color: $surface0;
   color: $text;
+}
+
+.notifications{
+  background-color: $mantle;
+  margin: 0.25em;
+  padding: 0.5em;
+  font-size: 100%;
+  border-radius: 1em;
+}
+.notifications.exit{
+  background-color: $surface0;
+  margin: 0em 0em 0em 0.5em;
+  padding: 0.3em 0.6em;
+  font-size: 75%;
+  border-radius: 1em;
+}
+.notifications.exit:hover{
+  background-color: $lavender;
+  color: $crust;
+}
+.notifications.entry{
+  background-color: $base;
+  /*
+  margin: 0.5em;
+  padding: 1em;
+  */
+  font-size: 100%;
+}
+.notifications.entry.summary{
+  background-color: $base;
+  /*
+  margin: 0.5em;
+  padding: 1em;
+  */
+  font-size: 100%;
+}
+.notifications.entry.body{
+  background-color: $base;
+  /*
+  margin: 0.5em;
+  padding: 1em;
+  */
+  font-size: 100%;
 }
 
 

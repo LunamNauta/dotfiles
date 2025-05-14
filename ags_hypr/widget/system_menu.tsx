@@ -4,6 +4,7 @@ import GLib from "gi://GLib?version=2.0";
 import Gtk from "gi://Gtk"
 import AstalNetwork from "gi://AstalNetwork";
 import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
+import Notifd from "gi://AstalNotifd"
 
 type SystemMenu = {
     menu: Gtk.Window | undefined;
@@ -16,7 +17,7 @@ let system_menu: SystemMenu = {
 
 let start_time = GLib.DateTime.new_now_local().to_unix()
 let current_time_flt = Variable(start_time).poll(1000, () => GLib.DateTime.new_now_local().to_unix() - start_time)
-let current_time_fmt = () => current_time_flt(uptime => Math.floor(uptime/3600).toString() + 'h, ' + Math.floor(uptime/60).toString() + 'm')
+let current_time_fmt = () => current_time_flt(uptime => Math.floor(uptime/3600).toString() + 'h, ' + (Math.floor(uptime/60)%60).toString() + 'm')
 const Uptime_Widget = () =>
 <box className={'system-tray uptime'} halign={Gtk.Align.START}>
     <label label={current_time_fmt()} />
@@ -134,6 +135,51 @@ const Toggle_Widgets = () =>
     </button>    
 </box>
 
+const notifd = Notifd.get_default();
+const active_notifications = Variable([]);
+notifd.connect("notified", (_, id) => {
+    let n = notifd.get_notification(id);
+    const active_notifications_tmp = active_notifications.get();
+    active_notifications_tmp[id] = {
+        id: id,
+        summary: n.summary,
+        body: n.body,
+        time: GLib.DateTime.new_now_local().format('%H:%M:%S')
+    };
+    active_notifications.set(active_notifications_tmp);
+});
+const Notification_Widgets = () =>
+<box 
+    className={'notifications'} 
+    halign={Gtk.Align.LEFT}
+    orientation={Gtk.Orientation.VERTICAL}
+>
+    <label label={'Notifications'}> </label>
+    {bind(active_notifications).as(active_notifications => active_notifications.map(n => {
+        return <box className={'notifications entry'} orientation={Gtk.Orientation.VERTICAL}>
+            <centerbox className={'notificiations entry summary'} orientation={Gtk.Orientation.HORIZONTAL}>
+                <label label={n.summary} halign={Gtk.Align.START}> </label>
+                <label halign={Gtk.Align.CENTER}> </label>
+                <box halign={Gtk.Align.END}>
+                    <label label={n.time}> </label>
+                    <button 
+                        className={'notifications exit'}
+                        label={''}
+                        halign={Gtk.Align.END}
+                        onClick={() => delete active_notifications[n.id]}
+                    >
+                    </button>
+                </box>
+            </centerbox>
+            <box className={'notificiations entry body'}>
+                <label label={n.body}></label>
+            </box>
+        </box>
+    }))}
+</box>
+/*
+*/
+
 function hide_system_menu(){
     system_menu.touched = false
     setTimeout(() => {if (!system_menu.touched) close_system_menu()}, 500)
@@ -157,6 +203,7 @@ function spawn_system_menu() {
             <box className={'system-tray menu'} orientation={Gtk.Orientation.VERTICAL}>
                 <Basic_Widgets />
                 <Toggle_Widgets />
+                <Notification_Widgets />
             </box>
         </eventbox>
     </window>

@@ -1,21 +1,19 @@
-import { Variable, GLib  } from "astal"
-
-const fmted_time = Variable('').poll(1000, () => GLib.DateTime.new_now_local().format('%H:%M:%S')!)
-const fmted_date = Variable('').poll(1000, () => GLib.DateTime.new_now_local().format('%A, %d/%m')!)
+import { bind  } from "astal"
+import { datetime_ctx } from "./types"
 
 const Clock_Widget = () =>
 <box className={'clock'}>
     <label
         className="clock time"
-        label={fmted_time()}
+        label={bind(datetime_ctx).as(datetime => datetime.format('%H:%M:%S')!)}
     />
     <label label={'•'}/>
     <label
         className="clock date"
-        label={fmted_date()}
+        label={bind(datetime_ctx).as(datetime => datetime.format('%A, %d/%m')!)}
     />
 </box>
 
 export{
     Clock_Widget
-}
+};

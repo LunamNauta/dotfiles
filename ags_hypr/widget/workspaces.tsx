@@ -1,81 +1,24 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { Variable, bind } from "astal"
-import Hyprland from "gi://AstalHyprland"
+import { Gtk } from "astal/gtk3"
+import { hypr_ctx } from "./types";
 
-const hypr = Hyprland.get_default()
-const dispatch = (ws: string) => hypr.message(`dispatch workspace ${ws}`)
-
-hypr.connect("monitor-added", (_, monitor) => {
-    var id = 0
-    for (var mt of hyprland.monitors) {
-        if (mt.name == monitor)
-            id = mt.id
-            break;
-    }
-    
-    var flag = true
-    for (var wd of App.windows) {
-        if (wd.name == `bar-${id}`)
-            flag = false
-            break;
-    }
-
-    if (flag)
-        App.addWindow(Bar(id))
-})
-
-const workspace_names = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-function get_grouped_workspaces(occupied_workspaces){
-    let out: {is_occupied: boolean, workspaces: string[]}[] = []
-    for (const workspace of workspace_names){
-        const is_occupied = occupied_workspaces.some(occ_workspace => occ_workspace.name == workspace)
-        if (out.length != 0 && out.at(-1).is_occupied == is_occupied){
-            out.at(-1).workspaces.push(workspace)
-            continue
-        }
-        out.push({is_occupied: is_occupied, workspaces: [workspace]})
-    }
-
-    return out
-}
-
-const focused_workspace = bind(hypr, 'focused_workspace')
-const Workspaces = () => {
-    return <box className={'workspaces'}>
-        {bind(hypr, 'workspaces').as((workspaces) => {
-            return <box>
-                {get_grouped_workspaces(workspaces).map(workspace_group => {
-                    const workspace_class = `workspace ${workspace_group.is_occupied ? 'occupied' : 'empty'}`
-                    return <eventbox className={workspace_class} onScroll={(_, event) => {
-                            if (hypr.get_focused_workspace().id < 9 && event.delta_y > 0) dispatch('+1')
-                            if (hypr.get_focused_workspace().id > 0 && event.delta_y < 0) dispatch('-1')
-                        }}>
-                        <box>
-                            {workspace_group.workspaces.map(workspace => {
-                                if (!workspace_group.is_occupied){
-                                    return <button
-                                                className={'workspace button'} valign={Gtk.Align.CENTER}
-                                                onClick={() => dispatch(workspace)}
-                                            >
-                                        {workspace}
-                                    </button>
-                                }
-                                return <button
-                                            className={focused_workspace.as(focused => focused.name == workspace ? 'workspace active' : 'workspace button')}
-                                            valign={Gtk.Align.CENTER}
-                                            onClick={() => dispatch(workspace)}
-                                        >
-                                    {focused_workspace.as(focused => focused.name == workspace ? '•' : workspace)}
-                                </button>
-                            })}
-                        </box>
-                    </eventbox>
-                })}
-            </box>
-        })}
-    </box>
-}
+const Workspaces_Widget = () => <box className={'workspaces'}>
+    {hypr_ctx.curr_workspaces.as(workspace_groups => {
+        return workspace_groups.map(workspace_group => {
+            const workspace_class1 = `workspace ${workspace_group.is_occupied ? 'occupied' : 'empty'}`;
+            return <eventbox className={workspace_class1} onScroll={(_, event) => hypr_ctx.scroll_workspace(event.delta_y)}>
+                <box>
+                    {workspace_group.workspaces.map(workspace => {
+                        const workspace_class2 = hypr_ctx.curr_workspace.as(focused => `workspace ${focused.id == workspace.id ? 'focused' : 'button'}`)
+                        return <button className={workspace_class2} valign={Gtk.Align.CENTER} onClick={() => hypr_ctx.set_workspace(workspace.id)}>
+                            {hypr_ctx.curr_workspace.as(focused => focused.id == workspace.id ? '•' : workspace.id.toString())}
+                        </button>
+                    })}
+                </box>
+            </eventbox>
+        });
+    })}
+</box>
 
 export{
-    Workspaces
-}
+    Workspaces_Widget
+};

@@ -93,6 +93,7 @@ arch_packages=(
 aur_packages=(
     librewolf-bin
     aylurs-gtk-shell-git
+    libastal-meta
     xdg-terminal-exec-mkhl
     swaylock-effects
     #ros2-jazzy

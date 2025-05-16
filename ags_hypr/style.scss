@@ -7,10 +7,7 @@
 .clock,
 .system-monitor{
   font-family: "CaskaydiaCove NFM";
-}
-
-.clock.time{
-  font-size: 85%;
+  font-size: 95%;
 }
 
 .active-workspace{
@@ -23,60 +20,76 @@
 }
 
 .workspaces{
-  background-color: $base;
+  background-color: $crust;
   color: $text;
   font-family: "CaskaydiaCove NFM";
   font-weight: bold;
-  margin: 0em 1em;
-  border-radius: 20px;
+  border-radius: 1em;
+  font-size: 150%;
 }
 .workspace.occupied,
 .workspace.empty,
 .workspace.button,
-.workspace.active{
+.workspace.active,
+.workspace.focused{
   font-family: "CaskaydiaCove NFM";
   font-weight: bold;
-  font-size: 110%;
   background-color: transparent;
-  color: $text;
+  color: $surface2;
+  margin: 0.2em;
 }
 .workspace.occupied{
-  background-color: $surface0;
-  border-radius: 20px;
+  color: $surface2;
+  border-radius: 1em;
 }
 .workspace.button,
-.workspace.focused{
-  padding: 0.35em 0.7em 0.35em 0.7em;
+.workspace.focused,
+.workspace.occupied{
+}
+.workspace.button{
+  /*background-color: $surface0;*/
+  border-radius: 1em;
 }
 .workspace.focused{
+  /*
   background-color: $lavender;
   color: $surface0;
-  border-radius: 20px;
-  padding: 0.4em 0.7em 0.4em 0.7em;
+  */
+  color: $lavender;
+  border-radius: 1em;
 }
 
 .cpumon,
-.memmon{
+.memmon,
+.gpumon.temp,
+.cpumon.temp{
   font-family: "CaskaydiaCove NFM";
 }
 .cpumon.icon,
-.memmon.icon{
+.memmon.icon,
+.gpumon.icon{
   font-family: "CaskaydiaCove NFM";
   font-size: 200%;
 }
 .cpumon.percent,
-.memmon.percent{
+.memmon.percent,
+.gpumon.temp.percent,
+.cpumon.temp.percent{
   margin: 0 0 0 0.5em;
 }
-.memmon{
-  margin: 0 0 0 0.75em;
+.memmon,
+.gpumon{
+  margin: 0 0.5em 0 0.75em;
+}
+.cpumon{
+  margin: 0 0 0 1em;
 }
 
 .system-tray{
   font-family: "CaskaydiaCove NF";
   font-weight: bold;
-  font-size: 120%;
-  background-color: $base;
+  font-size: 110%;
+  /*background-color: $base;*/
   color: $text;
   padding: 0 0.7em;
   border-radius: 1em;

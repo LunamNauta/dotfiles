@@ -18,6 +18,7 @@ set-config-link(){
 mkdir "$HOME/.config"
 set-config-link "$SCRIPTPATH/alacritty" "$HOME/.config/alacritty"
 set-config-link "$SCRIPTPATH/qt6ct" "$HOME/.config/qt6ct"
+set-config-link "$SCRIPTPATH/starship.toml" "$HOME/.config/starship.toml"
 set-config-link "$SCRIPTPATH/swaylock" "$HOME/.config/swaylock"
 set-config-link "$SCRIPTPATH/sway" "$HOME/.config/sway"
 set-config-link "$SCRIPTPATH/btop" "$HOME/.config/btop"

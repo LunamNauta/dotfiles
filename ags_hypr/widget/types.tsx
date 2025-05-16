@@ -9,8 +9,8 @@ class utilities_ctx_t{
             return data[key];
         });
     }
-    format_percent(number: number, digits: number){
-        let str = (parseFloat(number.toFixed(digits)) * 100).toString()
+    format_percent(number: number, digits: number, scale: number = 100){
+        let str = (parseFloat(number.toFixed(digits)) * scale).toString()
         if (str.length < digits) str += '.' + ('0'.repeat(digits - str.length))
         else if (str.length == digits) str += '0'
         else str = str.substring(0, Math.min(str.length, digits+1))

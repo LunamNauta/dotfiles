@@ -5,26 +5,30 @@ import { System_Monitor_Widget } from "./sysmon"
 import { Active_Workspace_Widget } from "./active_workspace"
 import { Workspaces_Widget } from "./workspaces"
 import { System_Menu_Widget } from "./system_menu"
+import { Audio_Widget } from "./audio"
 
 const Left_Widgets = () =>
 <centerbox className={'main-bar left-widgets'}>
-    <box halign={Gtk.Align.START}><Active_Workspace_Widget/></box>
+    <box halign={Gtk.Align.START}><Workspaces_Widget/></box>
     <box halign={Gtk.Align.CENTER}></box>
-    <box halign={Gtk.Align.END}><Clock_Widget/></box>
+    <box halign={Gtk.Align.END}></box>
 </centerbox>
 
 const Center_Widgets = () =>
 <box className={'main-bar center-widgets'}>
     <box halign={Gtk.Align.START}></box>
-    <box halign={Gtk.Align.CENTER}><Workspaces_Widget/></box>
+    <box halign={Gtk.Align.CENTER}><Clock_Widget/></box>
     <box halign={Gtk.Align.END}></box>
 </box>
 
 const Right_Widgets = () =>
 <centerbox className={'main-bar right-widgets'}>
-    <box halign={Gtk.Align.START}><System_Monitor_Widget/></box>
+    <box halign={Gtk.Align.START}></box>
     <box halign={Gtk.Align.CENTER}></box>
-    <box halign={Gtk.Align.END}><System_Menu_Widget/></box>
+    <box halign={Gtk.Align.END}>
+        <System_Monitor_Widget/>
+        <System_Menu_Widget/>
+    </box>
 </centerbox>
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {

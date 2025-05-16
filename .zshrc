@@ -83,4 +83,8 @@ fi
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
 
+export EDITOR=nvim
+ssh-start(){ eval "$(ssh-agent -s)"; }
+ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }
+
 eval "$(starship init zsh)"

@@ -60,7 +60,7 @@ class hypr_ctx_t{
 
     get_grouped_workspaces(occupied_workspaces: AstalHyprland.Workspace[]){
         let workspace_groups: workspace_group_t[] = [];
-        for (let workspace_id = 1; workspace_id <= 9; workspace_id++){
+        for (let workspace_id = 1; workspace_id <= 10; workspace_id++){
             const is_focused = workspace_id == this.curr_workspace.get().id;
             const workspace_data = {is_focused: is_focused, id: workspace_id};
             const is_occupied = occupied_workspaces.some(occ_workspace => occ_workspace.id == workspace_id);

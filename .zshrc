@@ -87,4 +87,19 @@ export EDITOR=nvim
 ssh-start(){ eval "$(ssh-agent -s)"; }
 ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }
 
-eval "$(starship init zsh)"
+current_tty=$(tty)
+if [[ $current_tty = "/dev/tty1" ]]; then
+    Hyprland
+fi
+if [[ $current_tty = /dev/pts* ]]; then
+    eval "$(starship init zsh)"
+else
+    source ~/.zsh/zsh_no_gui.zsh
+fi
+
+# bun completions
+[ -s "/home/loki/.bun/_bun" ] && source "/home/loki/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

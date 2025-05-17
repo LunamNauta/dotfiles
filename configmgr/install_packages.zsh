@@ -1,108 +1,4 @@
-# Make sure to enable the multilib repository
-
-arch_packages=(
-    # System requirements
-    base
-    base-devel
-    linux
-    linux-firmware
-    grub
-    efibootmgr
-
-    # Build tools
-    cmake
-    make
-    gcc
-    npm
-
-    # Networking / Bluetooth
-    networkmanager
-    pipewire-pulse
-    pipewire
-    blueman
-    dhcp
-
-    # Utilities
-    wl-clipboard
-    dosfstools
-    moreutils
-    flatpak
-    docker
-    unzip
-    qt6ct
-    lact
-    wget
-    less
-    git
-    bc
-    jq
-    btop
-    gdu
-
-    docker
-    docker-buildx
-
-    # Fonts
-    ttf-cascadia-code-nerd
-    ttf-cascadia-mono-nerd
-
-    # Icons
-    papirus-icon-theme
-
-    # Terminal Life
-    alacritty
-    neovim
-    yazi
-    zsh
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    tmux
-    man-db
-    man-pages
-
-    # Desktop
-    libreoffice-fresh
-    gnome-disk-utility
-    hyprpolkitagent
-    thunderbird
-    hyprsunset
-    hyprpaper
-    hypridle
-    hyprlock
-    hyprland
-    nemo
-    wofi
-    ly
-
-    swayidle
-    swaybg
-    sway
-
-    # Gaming
-    steam
-
-    # Libraries
-    python-dbus
-    libgtop
-    mesa
-    lib32-mesa
-    vulkan-radeon
-    lib32-vulkan-radeon
-    glfw
-)
-aur_packages=(
-    librewolf-bin
-    aylurs-gtk-shell-git
-    libastal-meta
-    xdg-terminal-exec-mkhl
-    swaylock-effects
-    #ros2-jazzy
-)
-flathub_packages=(
-    com.modrinth.ModrinthApp
-)
-
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+source ./packages.zsh
 
 log_message(){
     print -P "%B%F{blue}$1%f%b"
@@ -114,6 +10,21 @@ if command -v yay &> /dev/null; then
 else
     sudo pacman -Syu
 fi
+
+log_message "Removing unused packages..."
+actual_packages=($(pacman -Qeq))
+for actual_package in "${actual_packages[@]}"; do
+    if [[ " ${arch_packages[@]} " =~ " ${actual_package} " ]]; then
+        continue
+    elif [[ " ${aur_packages[@]} " =~ " ${actual_package} " ]]; then
+        continue
+    elif [[ " ${ignored_packages[@]} " =~ " ${actual_package} " ]]; then
+        continue
+    else
+        log_message "${actual_package} not found in package list..."
+        sudo pacman -Rs $actual_package
+    fi
+done
 
 log_message "Installing native packages..."
 sudo pacman -S --needed ${arch_packages[@]}
@@ -154,10 +65,6 @@ systemctl --user start pipewire-pulse
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now docker
 sudo systemctl enable --now lactd
-sudo systemctl enable ly
-
-log_message "Creating dotfile symlinks..."
-zsh $SCRIPTPATH/install.zsh
 
 log_message "Setting up GTK..."
 gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"

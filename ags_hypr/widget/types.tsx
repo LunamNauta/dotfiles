@@ -76,7 +76,7 @@ class hypr_ctx_t{
     scroll_workspace(delta: number){
         if (delta == 0) return;
         const delta_str = delta > 0 ? '+1' : '-1';
-        if (delta > 0 && this.curr_workspace.get().id == 9) return;
+        if (delta > 0 && this.curr_workspace.get().id == 10) return;
         if (delta < 0 && this.curr_workspace.get().id == 0) return;
         this.hypr.message(`dispatch workspace ${delta_str}`);
     }

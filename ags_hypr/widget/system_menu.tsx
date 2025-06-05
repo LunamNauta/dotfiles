@@ -105,10 +105,10 @@ const toggle_bluelight = () => {
     bluelight_icon.set(bluelight_enabled.get() ? '' : '')
 }
 
-let hypridle_enabled = Variable(false)
+let hypridle_enabled = Variable(true)
 let hypridle_icon = Variable('')
 const toggle_hypridle = () => {
-    if (!hypridle_enabled.get()) execAsync('pkill -SIGTERM hypridle');
+    if (hypridle_enabled.get()) execAsync('pkill -SIGTERM hypridle');
     else execAsync(['bash', '-c', 'hypridle & disown']);
     hypridle_enabled.set(!hypridle_enabled.get());
     hypridle_icon.set(hypridle_enabled.get() ? '' : '');
@@ -155,7 +155,7 @@ const Toggle_Widgets = () =>
             <box width_request={200} className={hypridle_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} halign={Gtk.Align.START}>    
                 <label className={hypridle_enabled(enabled => enabled ? 'system-tray icon toggled' : 'system-tray icon untoggled')} label={hypridle_icon()} />
                 <box className={hypridle_enabled(enabled => enabled ? 'system-tray text toggled' : 'system-tray text untoggled')} orientation={Gtk.Orientation.VERTICAL}>
-                    <label halign={Gtk.Align.START} label={"Do not disturb"} />
+                    <label halign={Gtk.Align.START} label={"Autolock"} />
                     <label halign={Gtk.Align.START} label={hypridle_enabled(enabled => enabled ? "On" : "Off")} />
                 </box>
             </box>

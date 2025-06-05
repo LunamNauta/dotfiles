@@ -99,8 +99,8 @@ if (wifi){
 let bluelight_enabled = Variable(false)
 let bluelight_icon = Variable('')
 const toggle_bluelight = () => {
-    if (bluelight_enabled.get()) execAsync('pkill -SIGTERM hyprsunset');
-    else execAsync('hyprsunset --temperature 4000')
+    if (bluelight_enabled.get()) execAsync('hyprctl hyprsunset temperature 6000');
+    else execAsync('hyprctl hyprsunset temperature 4000')
     bluelight_enabled.set(!bluelight_enabled.get())
     bluelight_icon.set(bluelight_enabled.get() ? '' : '')
 }

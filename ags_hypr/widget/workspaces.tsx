@@ -1,6 +1,8 @@
 import { Gtk } from "astal/gtk3"
 import { hypr_ctx } from "./types";
 import { bind } from "astal";
+import { App } from "astal/gtk3";
+import Bar from "./Bar";
 
 const Workspaces_Widget = () => <box className={'workspaces'}>
     {hypr_ctx.curr_workspaces.as(workspace_groups => {

@@ -65,6 +65,7 @@ arch_packages=(
     hyprlock
     hyprland
     gwenview
+    blender
     steam
     nemo
     lact

@@ -91,11 +91,13 @@ current_tty=$(tty)
 if [[ $current_tty = "/dev/tty1" ]]; then
     Hyprland
 fi
-if [[ $current_tty = /dev/pts* ]]; then
-    eval "$(starship init zsh)"
-else
-    source ~/.zsh/zsh_no_gui.zsh
-fi
+
+#if [[ $current_tty = /dev/pts* ]]; then
+#    eval "$(starship init zsh)"
+#else
+#    source ~/.zsh/zsh_no_gui.zsh
+#fi
+source ~/.zsh/zsh_no_gui.zsh
 
 # bun completions
 [ -s "/home/loki/.bun/_bun" ] && source "/home/loki/.bun/_bun"

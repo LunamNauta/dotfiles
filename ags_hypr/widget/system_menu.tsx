@@ -120,20 +120,48 @@ let toggles = {
     bluelight: false,
 }
 const Toggle_Widgets = () =>
-<box className={'system-tray toggles'} halign={Gtk.Align.CENTER}>
-    <button className={wifi_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} onClick={toggle_wifi}>
-        <label label={network_icon()} />
-    </button>
-    <button className={bluetooth_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} onClick={toggle_bluetooth}>
-        <label label={bluetooth_icon()} />
-    </button>
-    <button className={bluelight_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} onClick={toggle_bluelight}>
-        <label label={bluelight_icon()} />
-    </button>
-    <button className={hypridle_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} onClick={toggle_hypridle}>
-        <label label={hypridle_icon()} />
-    </button>    
-</box>
+<centerbox className={'system-tray toggles'}>
+    <box halign={Gtk.Align.START} orientation={Gtk.Orientation.VERTICAL}>
+        <eventbox onClick={toggle_wifi}>
+            <box width_request={200} className={wifi_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} halign={Gtk.Align.START}>    
+                <label className={wifi_enabled(enabled => enabled ? 'system-tray icon toggled' : 'system-tray icon untoggled')} label={network_icon()} />
+                <box className={wifi_enabled(enabled => enabled ? 'system-tray text toggled' : 'system-tray text untoggled')} orientation={Gtk.Orientation.VERTICAL}>
+                    <label halign={Gtk.Align.START} label={"Wifi"} />
+                    <label halign={Gtk.Align.START} label={wifi_enabled(enabled => enabled ? "On" : "Off")} />
+                </box>
+            </box>
+        </eventbox>
+        <eventbox onClick={toggle_bluelight}>
+            <box width_request={200} className={bluelight_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} halign={Gtk.Align.START}>    
+                <label className={bluelight_enabled(enabled => enabled ? 'system-tray icon toggled' : 'system-tray icon untoggled')} label={bluelight_icon()} />
+                <box className={bluelight_enabled(enabled => enabled ? 'system-tray text toggled' : 'system-tray text untoggled')} orientation={Gtk.Orientation.VERTICAL}>
+                    <label halign={Gtk.Align.START} label={"Bluelight"} />
+                    <label halign={Gtk.Align.START} label={bluelight_enabled(enabled => enabled ? "On" : "Off")} />
+                </box>
+            </box>
+        </eventbox>
+    </box>
+    <box halign={Gtk.Align.END} orientation={Gtk.Orientation.VERTICAL}>
+        <eventbox onClick={toggle_bluetooth}>
+            <box width_request={200} className={bluetooth_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} halign={Gtk.Align.START}>
+                <label className={bluetooth_enabled(enabled => enabled ? 'system-tray icon toggled' : 'system-tray icon untoggled')} label={bluetooth_icon()} />
+                <box className={bluetooth_enabled(enabled => enabled ? 'system-tray text toggled' : 'system-tray text untoggled')} orientation={Gtk.Orientation.VERTICAL}>
+                    <label halign={Gtk.Align.START} label={"Bluetooth"} />
+                    <label halign={Gtk.Align.START} label={bluetooth_enabled(enabled => enabled ? "On" : "Off")} />
+                </box>
+            </box>
+        </eventbox>
+        <eventbox onClick={toggle_hypridle}>
+            <box width_request={200} className={hypridle_enabled(enabled => enabled ? 'system-tray toggled' : 'system-tray untoggled')} halign={Gtk.Align.START}>    
+                <label className={hypridle_enabled(enabled => enabled ? 'system-tray icon toggled' : 'system-tray icon untoggled')} label={hypridle_icon()} />
+                <box className={hypridle_enabled(enabled => enabled ? 'system-tray text toggled' : 'system-tray text untoggled')} orientation={Gtk.Orientation.VERTICAL}>
+                    <label halign={Gtk.Align.START} label={"Do not disturb"} />
+                    <label halign={Gtk.Align.START} label={hypridle_enabled(enabled => enabled ? "On" : "Off")} />
+                </box>
+            </box>
+        </eventbox>   
+    </box> 
+</centerbox>
 
 const notifd = Notifd.get_default();
 const active_notifications = Variable([]);
@@ -200,11 +228,16 @@ function spawn_system_menu() {
         layer={Astal.Layer.OVERLAY}
         width_request={450}>
         <eventbox onHover={() => system_menu.touched = true} onHoverLost={hide_system_menu}>
-            <box className={'system-tray menu'} orientation={Gtk.Orientation.VERTICAL}>
-                <Basic_Widgets />
-                <Toggle_Widgets />
-                <Notification_Widgets />
-            </box>
+            <centerbox className={'system-tray menu'} orientation={Gtk.Orientation.VERTICAL}>
+                <box orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.START}>
+                    <Basic_Widgets />
+                    <Notification_Widgets />
+                </box>
+                <box orientation={Gtk.Orientable.VERTICAL} valign={Gtk.Align.CENTER} />
+                <box orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.END}>
+                    <Toggle_Widgets />
+                </box>
+            </centerbox>
         </eventbox>
     </window>
 }

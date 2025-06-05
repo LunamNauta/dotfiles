@@ -112,7 +112,7 @@
 .system-tray.menu{
   background-color: $crust;
   margin: 0.5em;
-  padding: 1em;
+  padding: 0.5em;
   font-size: 100%;
 }
 .system-tray.uptime{
@@ -131,13 +131,14 @@
   color: $crust;
 }
 .system-tray.toggles{
-  background-color: $base;
-  margin: 0.5em 0
+  //background-color: $base;
+  //margin: 0.5em 0
+  font-size: 100%;
 }
 .system-tray.toggled,
 .system-tray.untoggled{
-  padding: 0.3em 0.6em;
-  font-size: 120%;
+  //padding: 0.3em 0.6em;
+  font-size: 100%;
   border-radius: 1em;
   margin: 0.2em;
 }
@@ -146,6 +147,26 @@
   color: $crust;
 }
 .system-tray.untoggled{
+  background-color: $surface0;
+  color: $text;
+}
+
+.system-tray.icon.toggled,
+.system-tray.icon.untoggled,
+.system-tray.text.toggled,
+.system-tray.text.untoggled{
+  //padding: 0.3em 0.6em;
+  border-radius: 1em;
+  font-size: 85%;
+  //margin: 0.2em;
+}
+.system-tray.icon.toggled,
+.system-tray.text.toggled{
+  background-color: $lavender;
+  color: $crust;
+}
+.system-tray.icon.untoggled,
+.system-tray.text.untoggled{
   background-color: $surface0;
   color: $text;
 }

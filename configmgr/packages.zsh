@@ -24,10 +24,13 @@ arch_packages=(
     pipewire
     blueman
     dhcp
+    uwsm
+    libnewt
 
     wl-clipboard
     dosfstools
     moreutils
+    plymouth
     flatpak
     unzip
     wget
@@ -40,7 +43,9 @@ arch_packages=(
 
     ttf-cascadia-code-nerd
     ttf-cascadia-mono-nerd
+    qt5-graphicaleffects
     papirus-icon-theme
+    qt5-quickcontrols2
     breeze
     qt6ct
 
@@ -70,6 +75,7 @@ arch_packages=(
     nemo
     lact
     wofi
+    sddm
 
     lib32-vulkan-radeon
     vulkan-radeon

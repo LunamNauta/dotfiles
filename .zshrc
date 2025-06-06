@@ -88,8 +88,11 @@ ssh-start(){ eval "$(ssh-agent -s)"; }
 ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }
 
 current_tty=$(tty)
-if [[ $current_tty = "/dev/tty1" ]]; then
-    Hyprland
+#if [[ $current_tty = "/dev/tty1" ]]; then
+    #Hyprland
+#fi
+if uwsm check may-start; then
+	exec uwsm start hyprland.desktop
 fi
 
 #if [[ $current_tty = /dev/pts* ]]; then

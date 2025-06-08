@@ -65,6 +65,7 @@ systemctl --user start pipewire-pulse
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now docker
 sudo systemctl enable --now lactd
+sudo systemctl enable sddm
 
 log_message "Setting up GTK..."
 gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"

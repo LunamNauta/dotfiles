@@ -4,6 +4,60 @@
 
 @import "mocha";
 
+.gamma-slider{
+  font-family: "CaskaydiaCove NFM";
+  padding: 0.1em 0.6em;
+  trough {
+      border-radius: 1em;
+      background: $surface0;
+
+      highlight,
+      progress {
+          background: $lavender;
+          border-radius: 1em;
+      }
+
+      slider {
+        box-shadow: none;
+        background-color: transparent;
+        min-height: 1rem;
+        min-width: 0.6rem;
+        border: 0rem solid transparent;
+        border-radius: 1em;
+    }
+  }
+}
+.gamma-slider.text{
+  font-size: 85%;
+}
+
+.temp-slider{
+  font-family: "CaskaydiaCove NFM";
+  padding: 0.1em 0.6em;
+  trough {
+      border-radius: 1em;
+      background: $surface0;
+
+      highlight,
+      progress {
+          background: $lavender;
+          border-radius: 1em;
+      }
+
+      slider {
+        box-shadow: none;
+        background-color: transparent;
+        min-height: 1rem;
+        min-width: 0.6rem;
+        border: 0rem solid transparent;
+        border-radius: 1em;
+    }
+  }
+}
+.temp-slider.text{
+  font-size: 85%;
+}
+
 .clock,
 .system-monitor{
   font-family: "CaskaydiaCove NFM";
@@ -36,7 +90,7 @@
   font-weight: bold;
   background-color: transparent;
   color: $surface2;
-  margin: 0.2em;
+  margin: 0.15em;
 }
 .workspace.occupied{
   color: $surface2;
@@ -71,6 +125,10 @@
   font-family: "CaskaydiaCove NFM";
   font-size: 200%;
 }
+.gpumon.icon{
+  margin: 0 0.2em 0 0;
+}
+
 .cpumon.percent,
 .memmon.percent,
 .gpumon.temp.percent,
@@ -91,14 +149,14 @@
   font-size: 110%;
   /*background-color: $base;*/
   color: $text;
-  padding: 0 0.7em;
+  padding: 0 0.4em;
   border-radius: 1em;
 }
 .system-tray.network-icon,
 .system-tray.bluetooth-icon{
   background-color: transparent;
 }
-.system-tray:hover{
+.system-tray.bar:hover{
   background-color: $lavender;
   color: $crust;
   .network-icon,
@@ -173,7 +231,7 @@
 
 .notifications{
   background-color: $mantle;
-  margin: 0.25em;
+  //margin: 0.25em;
   padding: 0.5em;
   font-size: 100%;
   border-radius: 1em;
@@ -197,7 +255,7 @@
   */
   font-size: 100%;
 }
-.notifications.entry.summary{
+.notifications.entry-summary{
   background-color: $base;
   /*
   margin: 0.5em;
@@ -205,13 +263,13 @@
   */
   font-size: 100%;
 }
-.notifications.entry.body{
+.notifications.entry-body{
   background-color: $base;
   /*
   margin: 0.5em;
   padding: 1em;
   */
-  font-size: 100%;
+  font-size: 85%;
 }
 
 

@@ -6,6 +6,7 @@ import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 import Notifd from "gi://AstalNotifd"
 import { App, Astal, Widget } from "astal/gtk4";
 import { globals } from "./Globals";
+import Wp from "gi://AstalWp";
 
 type SystemMenu = {
     menu: Gtk.Window | undefined;
@@ -120,14 +121,70 @@ const toggle_hypridle = () => {
     if (hypridle_enabled.get()) execAsync('pkill -SIGTERM hypridle');
     else execAsync(['bash', '-c', 'hypridle & disown']);
     hypridle_enabled.set(!hypridle_enabled.get());
-    hypridle_icon.set(hypridle_enabled.get() ? '' : '');
+    hypridle_icon.set(hypridle_enabled.get() ? '' : '');
 }
 
-let toggles = {
-    wifi: wifi ? wifi.get_enabled() : false,
-    bluetooth: bluetooth.get_is_powered(),
-    bluelight: false,
+const wp = Wp.get_default()!;
+const prev_master_output_vol = Variable(0.5);
+const prev_master_input_vol = Variable(0.5);
+const master_output_vol = Variable(0.5);
+const master_input_vol = Variable(0.5);
+let audio_enabled = Variable(true);
+let microphone_enabled = Variable(false);
+
+type audio_data_t = {
+    node: Wp.Node;
+    vol: Variable<number>;
+};
+let input_audio_devices: audio_data_t[] = [];
+let output_audio_devices: audio_data_t[] = [];
+
+wp.connect("ready", () => {
+
+});
+wp.connect('node-added', (src: Wp.Wp, obj: Wp.Node) => {
+    if (obj.media_class == Wp.MediaClass.AUDIO_SOURCE){
+        input_audio_devices.push({node: obj, vol: Variable(1)});
+        obj.set_volume(master_input_vol.get());
+        obj.set_mute(!microphone_enabled.get());
+    }
+    else if (obj.media_class == Wp.MediaClass.AUDIO_SINK){
+        output_audio_devices.push({node: obj, vol: Variable(1)});
+        obj.set_volume(master_output_vol.get());
+        obj.set_mute(!audio_enabled.get());
+    }
+});
+wp.connect('node-removed', (src: Wp.Wp, obj: Wp.Node) => {
+    if (obj.media_class == Wp.MediaClass.AUDIO_SOURCE){
+        for (let a = 0; a < input_audio_devices.length; a++){
+            if (input_audio_devices[a].node.id == obj.id){
+                input_audio_devices.slice(a, 1);
+            }
+        }
+    }
+    else if (obj.media_class == Wp.MediaClass.AUDIO_SINK){
+        for (let a = 0; a < output_audio_devices.length; a++){
+            if (output_audio_devices[a].node.id == obj.id){
+                output_audio_devices.slice(a, 1);
+            }
+        }
+    }
+});
+
+let audio_icon = Variable('');
+const toggle_audio = () => {
+    for (let output of output_audio_devices) output.node.set_mute(audio_enabled.get());
+    audio_enabled.set(!audio_enabled.get());
+    audio_icon.set(audio_enabled.get() ? '' : '');
 }
+
+let microphone_icon = Variable('');
+const toggle_microphone = () => {
+    for (let input of input_audio_devices) input.node.set_mute(microphone_enabled.get());
+    microphone_enabled.set(!microphone_enabled.get());
+    microphone_icon.set(microphone_enabled.get() ? '' : '');
+}
+
 function Toggle_Widgets(){
     return Widget.CenterBox(
         { cssClasses: ['system-tray', 'toggles'] },
@@ -154,6 +211,18 @@ function Toggle_Widgets(){
                         { cssClasses: bluelight_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
                         Widget.Label({ halign: Gtk.Align.START, label: 'Bluelight' }),
                         Widget.Label({ halign: Gtk.Align.START, label: bluelight_enabled(enabled => enabled ? "On" : "Off") })
+                    )
+                )
+            ),
+            Widget.Button(
+                { onClicked: toggle_audio },
+                Widget.Box(
+                    { width_request: 200, cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    Widget.Label({ cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: audio_icon() }),
+                    Widget.Box(
+                        { cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
+                        Widget.Label({ halign: Gtk.Align.START, label: 'Audio' }),
+                        Widget.Label({ halign: Gtk.Align.START, label: audio_enabled(enabled => enabled ? "On" : "Off") })
                     )
                 )
             )
@@ -184,7 +253,66 @@ function Toggle_Widgets(){
                         Widget.Label({ halign: Gtk.Align.START, label: hypridle_enabled(enabled => enabled ? "On" : "Off") })
                     )
                 )
+            ),
+            Widget.Button(
+                { onClicked: toggle_microphone },
+                Widget.Box(
+                    { width_request: 200, cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    Widget.Label({ cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: microphone_icon() }),
+                    Widget.Box(
+                        { cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
+                        Widget.Label({ halign: Gtk.Align.START, label: 'Microphone' }),
+                        Widget.Label({ halign: Gtk.Align.START, label: microphone_enabled(enabled => enabled ? "On" : "Off") })
+                    )
+                )
             )
+        )
+    );
+}
+
+function Audio_Slider(){
+    return Widget.Box(
+        { orientation: Gtk.Orientation.VERTICAL },
+        Widget.Label({ cssClasses: ['basic-slider', 'text'], halign: Gtk.Align.START, label: 'Master Output Volume' }),
+        Widget.Slider(
+            {
+                cssClasses: ['basic-slider', 'slider'],
+                visible: true,
+                value: bind(master_output_vol),
+                hexpand: true,
+                onChangeValue: self => {
+                    if (Math.abs(prev_master_output_vol.get() - self.value) >= 1/100){
+                        prev_master_output_vol.set(master_output_vol.get());
+                        master_output_vol.set(self.value);
+                        for (let output of output_audio_devices){
+                            output.node.set_volume(output.vol.get() * master_output_vol.get());
+                        }
+                    }
+                }
+            }
+        )
+    );
+}
+function Microphone_Slider(){
+    return Widget.Box(
+        { orientation: Gtk.Orientation.VERTICAL },
+        Widget.Label({ cssClasses: ['basic-slider', 'text'], halign: Gtk.Align.START, label: 'Master Input Volume' }),
+        Widget.Slider(
+            {
+                cssClasses: ['basic-slider', 'slider'],
+                visible: true,
+                value: bind(master_input_vol),
+                hexpand: true,
+                onChangeValue: self => {
+                    if (Math.abs(prev_master_input_vol.get() - self.value) >= 1/100){
+                        prev_master_input_vol.set(master_input_vol.get());
+                        master_input_vol.set(self.value);
+                        for (let input of input_audio_devices){
+                            input.node.set_volume(input.vol.get() * master_input_vol.get());
+                        }
+                    }
+                }
+            }
         )
     );
 }
@@ -249,10 +377,10 @@ const gamma = Variable(1);
 function Gamma_Slider_Widget(){
     return Widget.Box(
         { orientation: Gtk.Orientation.VERTICAL },
-        Widget.Label({ cssClasses: ['gamma-slider', 'text'], halign: Gtk.Align.START, label: 'Screen Brightness' }),
+        Widget.Label({ cssClasses: ['basic-slider', 'text'], halign: Gtk.Align.START, label: 'Screen Brightness' }),
         Widget.Slider(
             {
-                cssClasses: ['gamma-slider', 'slider'],
+                cssClasses: ['basic-slider', 'slider'],
                 visible: true,
                 value: gamma(),
                 min: 0.1,
@@ -272,10 +400,10 @@ function Gamma_Slider_Widget(){
 function Temp_Slider_Widget(){
     return Widget.Box(
         { orientation: Gtk.Orientation.VERTICAL },
-        Widget.Label({ cssClasses: ['temp-slider', 'text'], halign: Gtk.Align.START, label: 'Screen Temperature' }),
+        Widget.Label({ cssClasses: ['basic-slider', 'text'], halign: Gtk.Align.START, label: 'Screen Temperature' }),
         Widget.Slider(
             {
-                cssClasses: ['temp-slider', 'slider'],
+                cssClasses: ['basic-slider', 'slider'],
                 visible: true,
                 value: temp(),
                 min: 0.05,
@@ -327,6 +455,8 @@ function spawn_sysmenu(){
                     Toggle_Widgets(),
                     Gamma_Slider_Widget(),
                     Temp_Slider_Widget(),
+                    Audio_Slider(),
+                    Microphone_Slider(),
                     Notification_Widget()
                 ),
                 Widget.Box(),

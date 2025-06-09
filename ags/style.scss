@@ -4,7 +4,7 @@
 
 @import "mocha";
 
-.gamma-slider{
+.basic-slider{
   font-family: "CaskaydiaCove NFM";
   padding: 0.1em 0.6em;
   trough {
@@ -27,34 +27,7 @@
     }
   }
 }
-.gamma-slider.text{
-  font-size: 85%;
-}
-
-.temp-slider{
-  font-family: "CaskaydiaCove NFM";
-  padding: 0.1em 0.6em;
-  trough {
-      border-radius: 1em;
-      background: $surface0;
-
-      highlight,
-      progress {
-          background: $lavender;
-          border-radius: 1em;
-      }
-
-      slider {
-        box-shadow: none;
-        background-color: transparent;
-        min-height: 1rem;
-        min-width: 0.6rem;
-        border: 0rem solid transparent;
-        border-radius: 1em;
-    }
-  }
-}
-.temp-slider.text{
+.basic-slider.text{
   font-size: 85%;
 }
 

@@ -1,15 +1,28 @@
+import { bind } from "astal";
 import { App, Astal, Gtk, Gdk, Widget } from "astal/gtk4"
 import { Clock_Widget } from "./Clock_Widget";
 import { Sysmon_Widget } from "./Sysmon_Widget";
 import { Workspaces_Widget } from "./Workspaces_Widget";
 import { Sysmenu_Widget } from "./Sysmenu_Widget";
+import { globals } from "./Globals";
+
+function BatMon_Widget(){
+    return Widget.Box(
+        { cssClasses: ['batmon'] },
+        Widget.Label({ cssClasses: ['batmon', 'icon'], label: globals.sysmon.battery_icon() }),
+        Widget.Label({ cssClasses: ['batmon', 'percent'], label: bind(globals.sysmon.battery_usage).as(usage => globals.utilities.format_percent(usage, 3, 100) + "%") }),
+        Widget.Label({ cssClasses: ['batmon', 'percent'], label: '•'}),
+        Widget.Label({ cssClasses: ['batmon', 'percent'], label: bind(globals.sysmon.battery_time).as(time => globals.utilities.format_percent(time, 3, 1) + "h") })
+    );
+}
 
 function Left_Widgets(){
     return Widget.CenterBox(
-        { cssClasses: ['main-bar', 'left-widgets'] },
+        { cssClasses: ['main-bar', 'left-widgets'], halign: Gtk.Align.START, hexpand: false},
         Widget.Box(
             { halign: Gtk.Align.START },
-            Workspaces_Widget()
+            Workspaces_Widget(),
+            BatMon_Widget()
         ),
         Widget.Box({ halign: Gtk.Align.CENTER }),
         Widget.Box({ halign: Gtk.Align.END }),
@@ -17,7 +30,7 @@ function Left_Widgets(){
 }
 function Center_Widgets(){
     return Widget.CenterBox(
-        { cssClasses: ['main-bar', 'center-widgets'] },
+        { cssClasses: ['main-bar', 'center-widgets'], halign: Gtk.Align.START, vexpand: false },
         Widget.Box({ halign: Gtk.Align.START }),
         Widget.Box(
             { halign: Gtk.Align.CENTER },
@@ -28,11 +41,11 @@ function Center_Widgets(){
 }
 function Right_Widgets(){
     return Widget.CenterBox(
-        { cssClasses: ['main-bar', 'right-widgets'] },
-        Widget.Box({ halign: Gtk.Align.START }),
-        Widget.Box({ halign: Gtk.Align.CENTER }),
+        { cssClasses: ['main-bar', 'right-widgets'], halign: Gtk.Align.END, hexpand: true },
+        Widget.Box({ }),
+        Widget.Box({ }),
         Widget.Box(
-            { halign: Gtk.Align.END },
+            { },
             Sysmon_Widget(),
             Sysmenu_Widget()
         ),
@@ -50,7 +63,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor){
             visible: true
         },
         Widget.CenterBox(
-            { cssClasses: ['main-bar', 'center-box'] },
+            { cssClasses: ['main-bar', 'center-box'], shrink_center_last: true },
             Left_Widgets(),
             Center_Widgets(),
             Right_Widgets()

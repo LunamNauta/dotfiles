@@ -94,4 +94,9 @@ ssh-add-key(){ ssh-add "$HOME/.ssh/$1" }
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-source ~/.zsh/zsh_no_gui.zsh
+current_tty=$(tty)
+if [[ $current_tty = /dev/tty1 ]]; then
+    exec uwsm start hyprland.desktop
+else
+    source ~/.zsh/zsh_no_gui.zsh
+fi

@@ -1,6 +1,7 @@
 import { bind } from "astal";
 import { Widget } from "astal/gtk4";
 import { globals } from "./Globals";
+import Battery from "gi://AstalBattery"
 
 function CPUMon_Usage_Widget(){
     return Widget.Box(
@@ -37,7 +38,7 @@ function Sysmon_Widget(){
         CPUMon_Usage_Widget(),
         MemMon_Usage_Widget(),
         CPUMon_Temp_Widget(),
-        GPUMon_Temp_Widget()
+        GPUMon_Temp_Widget(),
     );
 }
 

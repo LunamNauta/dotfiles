@@ -23,6 +23,20 @@ fi
 
 echo ""
 
+read -q "REPLY?Setup TLP (y/n): "
+if [[ $REPLY = "y" ]]; then
+    if [ -f /etc/tlp.conf ]; then
+        echo "Removing TLP config"
+        sudo rm -rf /etc/tlp.conf
+    fi
+    echo "Adding TLP config"
+    sudo cp "$SCRIPTPATH/tlp/tlp.conf" /etc/tlp.conf
+    sudo systemctl restart tlp
+fi
+
+echo ""
+
+: '
 read -q "REPLY?Setup SDDM (y/n): "
 if [[ $REPLY = "y" ]]; then
     if ! [ -d /usr/share/sddm/themes ]; then
@@ -43,6 +57,7 @@ if [[ $REPLY = "y" ]]; then
     echo "Adding SDDM config"
     sudo cp "$SCRIPTPATH/sddm/sddm.conf" /etc
 fi
+'
 
 echo ""
 

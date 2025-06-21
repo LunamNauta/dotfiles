@@ -36,6 +36,9 @@
   font-family: "CaskaydiaCove NFM";
   font-size: 95%;
 }
+.clock{
+  margin: 0 19em 0 0
+}
 
 .active-workspace{
   font-family: "CaskaydiaCove NFM";
@@ -88,8 +91,8 @@
 
 .cpumon,
 .memmon,
-.gpumon.temp,
-.cpumon.temp{
+.gpumon,
+.batmon{
   font-family: "CaskaydiaCove NFM";
 }
 .cpumon.icon,
@@ -98,18 +101,20 @@
   font-family: "CaskaydiaCove NFM";
   font-size: 200%;
 }
-.gpumon.icon{
+.gpumon.icon,
+.batmon.icon{
   margin: 0 0.2em 0 0;
 }
-
 .cpumon.percent,
 .memmon.percent,
 .gpumon.temp.percent,
-.cpumon.temp.percent{
+.cpumon.temp.percent,
+.batmon.percent{
   margin: 0 0 0 0.5em;
 }
 .memmon,
-.gpumon{
+.gpumon,
+.batmon{
   margin: 0 0.5em 0 0.75em;
 }
 .cpumon{

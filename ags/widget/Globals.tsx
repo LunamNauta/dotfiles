@@ -32,6 +32,10 @@ class sysmon_t{
     gpu_interface_file: string
     cpu_temp: Variable<number>
     gpu_temp: Variable<number>
+    batteries: string[]
+    battery_icon: Variable<string>
+    battery_usage: Variable<number>
+    battery_time: Variable<number>
     decoder: TextDecoder;
 
     constructor(){
@@ -62,7 +66,7 @@ class sysmon_t{
             }
             return -1.0;
         });
-        this.gpu_interface_file = this.find_amdgpu_hwmon() ?? '';
+        this.gpu_interface_file = this.find_intelgpu_hwmon() ?? '';
         this.gpu_temp = Variable(0).poll(1000, () => {
             let [success, contents] = GLib.file_get_contents(this.gpu_interface_file + '/temp1_input');
             if (success){
@@ -70,6 +74,53 @@ class sysmon_t{
                 return parseFloat(text) / 1000;
             }
             return -1.0;
+        });
+        this.batteries = this.find_batteries() ?? '';
+        this.battery_icon = Variable('󰂎');
+        this.battery_usage = Variable(0).poll(1000, () => {
+            let total_energy = 0;
+            let current_energy = 0;
+            for (let a = 0; a < this.batteries.length; a++){
+                let [success, contents] = GLib.file_get_contents(this.batteries[a] + '/energy_full');
+                if (success){
+                    let text = this.decoder.decode(contents);
+                    total_energy += parseFloat(text) / 1000;
+                }
+                [success, contents] = GLib.file_get_contents(this.batteries[a] + '/energy_now');
+                if (success){
+                    let text = this.decoder.decode(contents);
+                    current_energy += parseFloat(text) / 1000;
+                }            
+            }
+            const pct = current_energy / total_energy;
+            if (pct >= 0.9) this.battery_icon.set('󰁹');
+            else if (pct >= 0.8) this.battery_icon.set('󰂂');
+            else if (pct >= 0.7) this.battery_icon.set('󰂁');
+            else if (pct >= 0.6) this.battery_icon.set('󰂀');
+            else if (pct >= 0.5) this.battery_icon.set('󰁿');
+            else if (pct >= 0.4) this.battery_icon.set('󰁾');
+            else if (pct >= 0.3) this.battery_icon.set('󰁽');
+            else if (pct >= 0.2) this.battery_icon.set('󰁼');
+            else if (pct >= 0.1) this.battery_icon.set('󰁻');
+            else this.battery_icon.set('󰁺');
+            return pct;
+        });
+        this.battery_time = Variable(0).poll(1000, () => {
+            let total_energy = 0;
+            let current_power = 0;
+            for (let a = 0; a < this.batteries.length; a++){
+                let [success, contents] = GLib.file_get_contents(this.batteries[a] + '/energy_now');
+                if (success){
+                    let text = this.decoder.decode(contents);
+                    total_energy += parseFloat(text) / 1000;
+                }
+                [success, contents] = GLib.file_get_contents(this.batteries[a] + '/power_now');
+                if (success){
+                    let text = this.decoder.decode(contents);
+                    current_power += parseFloat(text) / 1000;
+                }            
+            }
+            return total_energy / current_power;
         });
     };
 
@@ -85,7 +136,7 @@ class sysmon_t{
             let [success, contents] = name.load_contents(null);
             if (success){
                 const text = this.decoder.decode(contents).toString();
-                const cpustr = "k10temp";
+                const cpustr = "acpitz";
                 if (text.length-1 != cpustr.length) continue;
                 for (let a = 0; a < cpustr.length; a++) if (text[a] != cpustr[a]) continue;
                 return child.get_path();
@@ -93,7 +144,7 @@ class sysmon_t{
         }
         return null
     }
-    find_amdgpu_hwmon(){
+    find_intelgpu_hwmon(){
         const hwmonRoot = '/sys/class/hwmon';
 
         const decoder = new TextDecoder();
@@ -107,13 +158,34 @@ class sysmon_t{
             let [success, contents] = name.load_contents(null);
             if (success){
                 const text = decoder.decode(contents).toString();
-                const amdstr = "amdgpu";
-                if (text.length-1 != amdstr.length) continue;
-                for (let a = 0; a < amdstr.length; a++) if (text[a] != amdstr[a]) continue;
+                const gpustr = "pch_skylake";
+                if (text.length-1 != gpustr.length) continue;
+                for (let a = 0; a < gpustr.length; a++) if (text[a] != gpustr[a]) continue;
                 return child.get_path();
             }
         }
         return null
+    }
+
+    find_batteries(){
+        const batteryRoot = "/sys/class/power_supply";
+    
+        const decoder = new TextDecoder();
+        const directory = Gio.File.new_for_path(batteryRoot);
+        let enumerator = directory.enumerate_children('standard::*', Gio.FileQueryInfoFlags.NONE, null);
+
+        let batteries = [];
+
+        let fileInfo;
+        while ((fileInfo = enumerator.next_file(null)) !== null) {
+            let child = enumerator.get_child(fileInfo);
+            let name = child.get_basename();
+            const gpustr = "bat";
+            if (name.length-1 != gpustr.length) continue;
+            for (let a = 0; a < gpustr.length; a++) if (name[a] != gpustr[a]) continue;
+            batteries.push(child.get_path());
+        }
+        return batteries;
     }
 };
 

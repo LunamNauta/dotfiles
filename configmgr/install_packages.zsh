@@ -62,10 +62,12 @@ sudo pacman -Qqd | ifne sudo pacman -Rsu
 
 log_message "Enabling services..."
 systemctl --user start pipewire-pulse
+sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
-sudo systemctl enable --now docker
 sudo systemctl enable --now lactd
-sudo systemctl enable sddm
+sudo systemctl enable --now tlp
+sudo systemctl enable --now python3-validity
+# sudo systemctl enable sddm
 
 log_message "Setting up GTK..."
 gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"

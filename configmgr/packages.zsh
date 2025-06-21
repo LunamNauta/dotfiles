@@ -5,14 +5,13 @@ arch_packages=(
     base
     grub
     efibootmgr
-    amd-ucode
+    intel-ucode
     btrfs-progs
     linuxconsole
     lvm2
     zram-generator
-
-    docker
-    docker-buildx
+    tlp
+    fwupd
 
     cmake
     make
@@ -26,6 +25,8 @@ arch_packages=(
     dhcp
     uwsm
     libnewt
+    lm_sensors
+    acpi
 
     wl-clipboard
     dosfstools
@@ -70,19 +71,18 @@ arch_packages=(
     hyprlock
     hyprland
     gwenview
-    blender
-    steam
+    #blender
+    #steam
     nemo
     lact
     wofi
-    sddm
 
-    lib32-vulkan-radeon
-    vulkan-radeon
-    python-dbus
-    lib32-mesa
+    #lib32-vulkan-radeon
+    #vulkan-radeon
+    #python-dbus
+    #lib32-mesa
     libgtop
-    mesa
+    #mesa
     glfw
 )
 
@@ -91,10 +91,11 @@ aur_packages=(
     aylurs-gtk-shell-git
     libastal-meta
     xdg-terminal-exec-mkhl
+    python-validity
 )
 
 flathub_packages=(
-    com.modrinth.ModrinthApp
+    #com.modrinth.ModrinthApp
 )
 
 ignored_packages=(

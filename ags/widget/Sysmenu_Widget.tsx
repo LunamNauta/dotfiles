@@ -32,11 +32,12 @@ const power_options = [
     {icon: '󰜉', func: 'reboot'},
     {icon: '󰍃', func: 'hyprctl dispatch exit'},
     {icon: '', func: 'hyprlock'},
-    {icon: '󰒲', func: 'systemctl suspend'}
+    {icon: '󰒲', func: 'zsh -c "pidof hyprlock || hyprlock & disown && sleep 0.5 && systemctl suspend"'},
+    {icon: '󰤁', func: 'zsh -c "pidof hyprlock || hyprlock & disown && sleep 0.5 && systemctl hibernate"'}
 ]
 function Power_Widget(){
     return Widget.Box(
-        { halign: Gtk.Align.END },
+        { halign: Gtk.Align.END, hexpand: false },
         power_options.map(option => {
             return Widget.Button({
                 cssClasses: ['system-tray', 'power-button'],
@@ -48,10 +49,12 @@ function Power_Widget(){
 }
 
 function Basic_Widgets(){
-    return Widget.CenterBox({
-        start_widget: Uptime_Widget(),
-        end_widget: Power_Widget()
-    });
+    return Widget.CenterBox(
+        { },
+        Uptime_Widget(),
+        Widget.Box({}),
+        Power_Widget()
+    );
 }
 
 const network = AstalNetwork.get_default()
@@ -193,7 +196,7 @@ function Toggle_Widgets(){
             Widget.Button(
                 { onClicked: toggle_wifi },
                 Widget.Box(
-                    { width_request: 200, cssClasses: wifi_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    { width_request: 230, cssClasses: wifi_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
                     Widget.Label({ cssClasses: wifi_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: network_icon() }),
                     Widget.Box(
                         { cssClasses: wifi_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
@@ -205,7 +208,7 @@ function Toggle_Widgets(){
             Widget.Button(
                 { onClicked: toggle_bluelight },
                 Widget.Box(
-                    { width_request: 200, cssClasses: bluelight_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    { width_request: 230, cssClasses: bluelight_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
                     Widget.Label({ cssClasses: bluelight_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: bluelight_icon() }),
                     Widget.Box(
                         { cssClasses: bluelight_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
@@ -217,7 +220,7 @@ function Toggle_Widgets(){
             Widget.Button(
                 { onClicked: toggle_audio },
                 Widget.Box(
-                    { width_request: 200, cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    { width_request: 230, cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
                     Widget.Label({ cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: audio_icon() }),
                     Widget.Box(
                         { cssClasses: audio_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
@@ -233,7 +236,7 @@ function Toggle_Widgets(){
             Widget.Button(
                 { onClicked: toggle_bluetooth },
                 Widget.Box(
-                    { width_request: 200, cssClasses: bluetooth_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    { width_request: 230, cssClasses: bluetooth_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
                     Widget.Label({ cssClasses: bluetooth_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: bluetooth_icon() }),
                     Widget.Box(
                         { cssClasses: bluetooth_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
@@ -245,7 +248,7 @@ function Toggle_Widgets(){
             Widget.Button(
                 { onClicked: toggle_hypridle },
                 Widget.Box(
-                    { width_request: 200, cssClasses: hypridle_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    { width_request: 230, cssClasses: hypridle_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
                     Widget.Label({ cssClasses: hypridle_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: hypridle_icon() }),
                     Widget.Box(
                         { cssClasses: hypridle_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},
@@ -257,7 +260,7 @@ function Toggle_Widgets(){
             Widget.Button(
                 { onClicked: toggle_microphone },
                 Widget.Box(
-                    { width_request: 200, cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
+                    { width_request: 230, cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'toggled'] : ['system-tray', 'untoggled']), halign: Gtk.Align.START},
                     Widget.Label({ cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'icon', 'toggled'] : ['system-tray', 'icon', 'untoggled']), label: microphone_icon() }),
                     Widget.Box(
                         { cssClasses: microphone_enabled(enabled => enabled ? ['system-tray', 'text', 'toggled'] : ['system-tray', 'text', 'untoggled']), orientation: Gtk.Orientation.VERTICAL},

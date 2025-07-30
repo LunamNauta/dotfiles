@@ -95,6 +95,7 @@ aur_packages=(
     aylurs-gtk-shell
     libastal-meta
     xdg-terminal-exec-mkhl
+    quickshell
 )
 
 flathub_packages=(

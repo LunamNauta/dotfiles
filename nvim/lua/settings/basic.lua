@@ -40,6 +40,9 @@ Wvim.languages = {
     },
     ['jdtls'] = {
         langs = {'java'}
+    },
+    ['qmlls'] = {
+        langs = {'qmljs'}
     }
 }
 

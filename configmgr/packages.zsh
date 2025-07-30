@@ -77,6 +77,10 @@ arch_packages=(
     wofi
     sddm
 
+    sway
+    swaybg
+    waybar
+
     lib32-vulkan-radeon
     vulkan-radeon
     python-dbus
@@ -88,7 +92,7 @@ arch_packages=(
 
 aur_packages=(
     librewolf-bin
-    aylurs-gtk-shell-git
+    aylurs-gtk-shell
     libastal-meta
     xdg-terminal-exec-mkhl
 )

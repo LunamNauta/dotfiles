@@ -21,5 +21,5 @@ style = "Italic"
 family = "CaskaydiaMono NFM"
 style = "Regular"
 
-[window]
-opacity = 0.95
+#[window]
+#opacity = 0.95

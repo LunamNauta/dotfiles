@@ -1,20 +1,23 @@
-import QtQuick
-import Quickshell
-import Quickshell.Io
 import Quickshell.Hyprland
-import "./Workspace.qml"
+import Quickshell.Io
+import Quickshell
+import QtQuick
 
-Rectangle {
-	id: root
+import qs.services
+
+Item {
+    id: root
+
 	property color backgroundColor: "#e60c0c0c"
 	property color buttonColor: "#1e1e1e"
 	property color buttonHoverColor: "#3700b3"
     default property list<Workspace> workspaces
 
+    implicitWidth: workspaces_row.implicitWidth
+
  	readonly property var next_workspace_proc: Process {
 		command: ["bash", "-c"]
     }
-
     property bool isFunctionLocked: false
     Timer {
         id: throttleTimer
@@ -42,9 +45,7 @@ Rectangle {
         id: workspaces_row
 
         anchors {
-            left: parent.left
             verticalCenter: parent.verticalCenter
-            leftMargin: 16
         }
         spacing: 3
 
@@ -72,7 +73,7 @@ Rectangle {
                     text: modelData.is_occupied() ? '' : ''
                     anchors.centerIn: parent
                     //color: Hyprland.workspaces.values[modelData.name].active ? "#ffffff" : "#cccccc"
-                    color: modelData.is_active() ? "#b4befe" : "#6c7086"
+                    color: modelData.is_active() ? Colors.palette.m3primary : Colors.palette.m3outlineVariant
                     font.pixelSize: 20
                     font.family: "CaskaydiaCove NFM"
                 }

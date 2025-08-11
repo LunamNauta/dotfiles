@@ -1,9 +1,3 @@
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/../"
-
-if ! [ -d "$HOME/.config" ]; then
-    mkdir "$HOME/.config"
-fi
-
 set-config-link(){
     if ! [ -d "$2" ] && ! [ -f "$2" ]; then
         ln -s $1 $2
@@ -12,13 +6,18 @@ set-config-link(){
     fi
 }
 
+# Get the path of this script
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/../"
+
+# Make sure the config directory exists
+if ! [ -d "$HOME/.config" ]; then
+    mkdir "$HOME/.config"
+fi
+
 # Basic Config Folders
 mkdir "$HOME/.config"
 set-config-link "$SCRIPTPATH/alacritty" "$HOME/.config/alacritty"
 set-config-link "$SCRIPTPATH/qt6ct" "$HOME/.config/qt6ct"
-set-config-link "$SCRIPTPATH/starship.toml" "$HOME/.config/starship.toml"
-set-config-link "$SCRIPTPATH/swaylock" "$HOME/.config/swaylock"
-set-config-link "$SCRIPTPATH/sway" "$HOME/.config/sway"
 set-config-link "$SCRIPTPATH/btop" "$HOME/.config/btop"
 set-config-link "$SCRIPTPATH/hypr" "$HOME/.config/hypr"
 set-config-link "$SCRIPTPATH/wofi" "$HOME/.config/wofi"
@@ -32,12 +31,10 @@ set-config-link "$SCRIPTPATH/.tmux.conf" "$HOME/.tmux.conf"
 set-config-link "$SCRIPTPATH/.zshrc" "$HOME/.zshrc"
 set-config-link "$SCRIPTPATH/.gdu.yaml" "$HOME/.gdu.yaml"
 
-# GTK Bull
-mkdir "$HOME/.local"
-mkdir "$HOME/.local/share"
-mkdir "$HOME/.local/share/themes"
+# GTK Bullsh*t
+if ! [ -d "$HOME/.local/share/themes/" ]; then
+    mkdir -p "$HOME/.local/share/themes/"
+fi
 set-config-link "$SCRIPTPATH/gtk/themes/catppuccin-mocha-lavender-standard+default" "$HOME/.local/share/themes/catppuccin-mocha-lavender-standard+default"
 set-config-link "$SCRIPTPATH/gtk/themes/catppuccin-mocha-lavender-standard+default-hdpi" "$HOME/.local/share/themes/catppuccin-mocha-lavender-standard+default-hdpi"
 set-config-link "$SCRIPTPATH/gtk/themes/catppuccin-mocha-lavender-standard+default-xhdpi" "$HOME/.local/share/themes/catppuccin-mocha-lavender-standard+default-xhdpi"
-
-unset -f set-config-link

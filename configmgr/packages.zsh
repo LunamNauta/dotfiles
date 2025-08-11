@@ -1,103 +1,128 @@
+current_tags="laptop"
+
 arch_packages=(
-    linux-firmware
-    base-devel
-    linux
-    base
-    grub
-    efibootmgr
-    intel-ucode
-    btrfs-progs
-    linuxconsole
-    lvm2
-    zram-generator
-    tlp
-    fwupd
+    # Base
+    "linux-firmware"
+    "zram-generator"
+    "linuxconsole"
+    "btrfs-progs"
+    "base-devel"
+    "efibootmgr"
+    "linux"
+    "base"
+    "grub"
+    "lvm2"
+    "intel-ucode ? laptop"
+    "amd-ucode ? desktop"
 
-    cmake
-    make
-    gcc
-    npm
+    # Build / Package Management
+    "cmake"
+    "make"
+    "gcc"
+    "npm"
 
-    networkmanager
-    pipewire-pulse
-    pipewire
-    blueman
-    dhcp
-    uwsm
-    libnewt
-    lm_sensors
-    acpi
+    # Music
+    "rhythmbox"
+    "gst-libav"
 
-    wl-clipboard
-    dosfstools
-    moreutils
-    plymouth
-    flatpak
-    unzip
-    wget
-    less
-    btop
-    gdu
-    git
-    bc
-    jq
+    # Networking
+    "networkmanager"
+    "pipewire-pulse"
+    "bluez-utils"
+    "pipewire"
+    "blueman"
+    "dhcp"
 
-    ttf-cascadia-code-nerd
-    ttf-cascadia-mono-nerd
-    qt5-graphicaleffects
-    papirus-icon-theme
-    qt5-quickcontrols2
-    breeze
-    qt6ct
+    # Misc
+    "brightnessctl"
+    "inotify-tools"
+    "wl-clipboard"
+    "dosfstools"
+    "moreutils"
+    "plymouth"
+    "flatpak"
+    "uwsm"
+    "acpi"
+    "fwupd ? laptop"
+    "tlp ? laptop"
 
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    alacritty
-    man-pages
-    starship
-    neovim
-    man-db
-    yazi
-    tmux
-    zsh
+    # Terminal Utilities
+    "lm_sensors"
+    "unzip"
+    "wget"
+    "less"
+    "bc"
+    "jq"
 
-    libreoffice-fresh
-    gnome-disk-utility
-    hyprpolkitagent
-    thunderbird
-    hyprsunset
-    hyprpaper
-    hypridle
-    hyprlock
-    hyprland
-    gwenview
-    #blender
-    #steam
-    nemo
-    lact
-    wofi
+    # Theming
+    "zsh-syntax-highlighting"
+    "ttf-cascadia-code-nerd"
+    "ttf-cascadia-mono-nerd"
+    "qt5-graphicaleffects"
+    "zsh-autosuggestions"
+    "papirus-icon-theme"
+    "qt5-quickcontrols2"
+    "breeze"
+    "qt6ct"
 
-    #lib32-vulkan-radeon
-    #vulkan-radeon
-    #python-dbus
-    #lib32-mesa
-    libgtop
-    #mesa
-    glfw
+
+    # Terminal Life
+    "alacritty"
+    "man-pages"
+    "neovim"
+    "man-db"
+    "yazi"
+    "btop"
+    "tmux"
+    "gdu"
+    "git"
+    "zsh"
+
+    # Desktop Utilities
+    "gnome-disk-utility"
+    "libreoffice-fresh"
+    "hyprpolkitagent"
+    "thunderbird"
+    "hyprsunset"
+    "hyprpaper"
+    "hypridle"
+    "hyprlock"
+    "hyprland"
+    "gwenview"
+    "nemo"
+    "wofi"
+    "blender ? desktop"
+    "steam ? desktop"
+    "lact ? desktop"
+
+    # Libraries
+    "libgtop"
+    "libnewt"
+    "glfw"
+    "lib32-vulkan-radeon ? desktop"
+    "vulkan-radeon ? desktop"
+    "python-dbus ? desktop"
+    "lib32-mesa ? desktop"
+    "mesa ? desktop"
 )
 
 aur_packages=(
-    librewolf-bin
-    aylurs-gtk-shell-git
-    libastal-meta
-    xdg-terminal-exec-mkhl
-    python-validity
+    # Misc
+    "ttf-material-symbols-variable-git"
+    "xdg-terminal-exec-mkhl"
+    "aylurs-gtk-shell-git"
+    "libastal-meta"
+    "librewolf-bin"
+    "quickshell"
+    "python-validity ? laptop"
 )
 
 flathub_packages=(
-    #com.modrinth.ModrinthApp
+    # Misc
+    "com.modrinth.ModrinthApp ? desktop"
 )
 
 ignored_packages=(
-    yay
+    # Misc
+    "yay"
 )

@@ -1,5 +1,9 @@
+source ./packages.zsh
+
+# Get the path of this script
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/../"
 
+# Set up plymouth config
 read -q "REPLY?Setup Plymouth (y/n): "
 if [[ $REPLY = "y" ]]; then
     if ! [ -d /usr/share/plymouth/themes ]; then
@@ -23,44 +27,23 @@ fi
 
 echo ""
 
-read -q "REPLY?Setup TLP (y/n): "
-if [[ $REPLY = "y" ]]; then
-    if [ -f /etc/tlp.conf ]; then
-        echo "Removing TLP config"
-        sudo rm -rf /etc/tlp.conf
+if [[ $current_tags == "laptop" ]]; then
+    # Set up TLP config
+    read -q "REPLY?Setup TLP (y/n): "
+    if [[ $REPLY = "y" ]]; then
+        if [ -f /etc/tlp.conf ]; then
+            echo "Removing TLP config"
+            sudo rm -rf /etc/tlp.conf
+        fi
+        echo "Adding TLP config"
+        sudo cp "$SCRIPTPATH/tlp/tlp.conf" /etc/tlp.conf
+        sudo systemctl restart tlp
     fi
-    echo "Adding TLP config"
-    sudo cp "$SCRIPTPATH/tlp/tlp.conf" /etc/tlp.conf
-    sudo systemctl restart tlp
+
+    echo ""
 fi
 
-echo ""
-
-: '
-read -q "REPLY?Setup SDDM (y/n): "
-if [[ $REPLY = "y" ]]; then
-    if ! [ -d /usr/share/sddm/themes ]; then
-        sudo mkdir -p /usr/share/sddm/themes
-    elif [ -d /usr/share/sddm/themes/sugar-candy ]; then
-        echo "Removing SDDM sugar-candy theme"
-        sudo rm -rf /usr/share/sddm/themes/sugar-candy
-    fi
-    echo "Adding SDDM sugar-candy theme"
-    sudo cp -r "$SCRIPTPATH/sddm/sugar-candy" /usr/share/sddm/themes
-    echo "Adding SDDM sugar-candy theme background"
-    sudo cp "$SCRIPTPATH/backgrounds/Black_Hole_1.png" /usr/share/sddm/themes/sugar-candy/Backgrounds
-
-    if [ -f /etc/sddm.conf ]; then
-        echo "Removing SDDM config"
-        sudo rm -f /etc/sddm.conf
-    fi
-    echo "Adding SDDM config"
-    sudo cp "$SCRIPTPATH/sddm/sddm.conf" /etc
-fi
-'
-
-echo ""
-
+# Update initcpio
 read -q "REPLY?mkinitcpio? (y/n): "
 if [[ $REPLY = "y" ]]; then
     sudo mkinitcpio -P

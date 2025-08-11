@@ -4,6 +4,25 @@ log_message(){
     print -P "%B%F{blue}$1%f%b"
 }
 
+compress_package_list(){
+    local in_array=("${(@P)2}")
+    local tag=$1
+    out_array=()
+    for package in "${in_array[@]}"; do
+        if [[ "$package" == *"?"*"${tag}"* || "$package" != *"?"* ]]; then
+            out_array+=("${package%%\?*}")
+        fi
+    done
+    echo $out_array
+}
+
+# Compress all packages based on current tags
+arch_packages=$(compress_package_list $current_tags arch_packages)
+aur_packages=$(compress_package_list $current_tags aur_packages)
+flathub_packages=$(compress_package_list $current_tags flathub_packages)
+ignored_packages=$(compress_package_list $current_tags ignored_packages)
+
+# Update all packages
 log_message "Updating system..."
 if command -v yay &> /dev/null; then
     yay -Syu
@@ -11,6 +30,7 @@ else
     sudo pacman -Syu
 fi
 
+# Remove packages that were installed by anything other than this script (excluding dependencies)
 log_message "Removing unused packages..."
 actual_packages=($(pacman -Qeq))
 for actual_package in "${actual_packages[@]}"; do
@@ -26,9 +46,11 @@ for actual_package in "${actual_packages[@]}"; do
     fi
 done
 
+# Install packages using pacman
 log_message "Installing native packages..."
 sudo pacman -S --needed ${arch_packages[@]}
 
+# Install yay if it is not installed
 log_message "Checking for yay..."
 if ! command -v yay &> /dev/null; then
     log_message "Installing yay..."
@@ -39,43 +61,55 @@ if ! command -v yay &> /dev/null; then
     sudo rm -rf yay
 fi
 
+# Install rust. Needed for packages in the AUR (also a good thing to just have)
 if ! command -v rustup &> /dev/null; then
     log_message "Installing rustup..." # Needed for xdg-terminal-exec-mkhl. Choose rustup during installation
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
+# Install packages using yay
 log_message "Installing aur packages..."
 yay -S --needed ${aur_packages[@]}
 
+# Install packages (from flathub) using flatpak
 log_message "Installing flathub packages"
 flatpak install flathub ${flathub_packages[@]}
 
+# Add extensions to make yazi more useful
 log_message "Instsalling yazi extensions"
 ya pack -a yazi-rs/plugins:full-border
 ya pack -a yazi-rs/plugins:mount
 ya pack -a imsi32/yatline
 ya pack -a yazi-rs/plugins:smart-enter
 
+# Remove any packages that were orphaned in any previous step
 log_message "Removing orphaned packages..."
 sudo pacman -Qdtq | ifne sudo pacman -Rns -
 sudo pacman -Qqd | ifne sudo pacman -Rsu
 
+# Enable necessary services
 log_message "Enabling services..."
 systemctl --user start pipewire-pulse
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
-sudo systemctl enable --now lactd
-sudo systemctl enable --now tlp
-sudo systemctl enable --now python3-validity
-# sudo systemctl enable sddm
+if [[ $current_tags == "desktop" ]]; then
+    sudo systemctl enable --now lactd
+elif [[ $current_tags == "laptop" ]]; then
+    sudo systemctl enable --now tlp
+    sudo systemctl enable --now python3-validity
+fi
 
+# Set up GTK theme stuff
 log_message "Setting up GTK..."
 gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"
 gsettings set org.cinnamon.desktop.default-applications.terminal exec alacritty
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
+# Set up default app stuff
 log_message "Setting up default apps..."
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
+# Make sure the user shell is ZSH
 log_message "Setting user shell..."
 sudo chsh -s /usr/bin/zsh loki
+

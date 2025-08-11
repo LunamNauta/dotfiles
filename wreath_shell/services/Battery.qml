@@ -28,14 +28,14 @@ Singleton {
         root.total_change = batteries.reduce((acc, dev) => {
             return acc + dev.changeRate;
         }, 0);
-        let time_to_empty = batteries.reduce((acc, dev) => {
-            return acc + dev.timeToEmpty;
+        let time_to_full = batteries.reduce((acc, dev) => {
+            return acc + dev.timeToFull;
         }, 0);
-        root.charging = time_to_empty == 0;
+        root.charging = time_to_full != 0;
         if (root.total_change != 0){
             if (root.charging) root.time_left = (root.total_capacity - root.total_energy) / root.total_change;
             else root.time_left = root.total_energy / root.total_change;
-        }
+        } else root.time_left = 0;
     }
 
     Timer {

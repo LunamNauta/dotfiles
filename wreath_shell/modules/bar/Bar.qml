@@ -61,6 +61,7 @@ StyledWindow {
             id: bat_icon
             anchors.verticalCenter: parent.verticalCenter
             text: {
+                if (Battery.time_left == 0) return "power"
                 if (Battery.battery_perc >= 0.91) return Battery.charging ? "battery_charging_90" : "battery_full";
                 if (Battery.battery_perc >= 0.78) return Battery.charging ? "battery_charging_80" : "battery_6_bar";
                 if (Battery.battery_perc >= 0.65) return Battery.charging ? "battery_charging_60" : "battery_5_bar";
@@ -80,6 +81,7 @@ StyledWindow {
                 if (Battery.battery_perc == 1) perc = "100%";
                 else if (Battery.battery_perc >= 0.1) perc = (Battery.battery_perc*100).toFixed(1) + "%";
                 else perc = (Battery.battery_perc*100).toFixed(2) + "%";
+                if (Battery.time_left == 0) return perc;
                 return perc + " • " + Battery.time_left.toFixed(2) + "h";
             }
         }

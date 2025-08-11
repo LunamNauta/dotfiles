@@ -253,38 +253,5 @@ StyledWindow {
                 }
             }
         }
-
-        /*
-        Row {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: parent.inner_spacing
-            MaterialIcon {
-                text: {
-                    const batteries = Quickshell.Services.UPower.devices.values.filter(dev => {
-                        return dev.isLaptopBattery;
-                    });
-                    console.log(batteries.length);
-                    return "test"
-                }    
-                color: Colors.palette.m3onBackground
-                anchors.verticalCenter: parent.verticalCenter
-
-                StateLayer {
-                    anchors.fill: undefined
-                    anchors.centerIn: parent
-                    anchors.horizontalCenterOffset: 1
-
-                    implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
-                    implicitHeight: implicitWidth
-
-                    radius: Config.appearance.rounding.full
-
-                    function onClicked(): void {
-                        //open_bluetooth_manager.running = true
-                    }
-                }
-            }
-        }
-        */
     }
 }

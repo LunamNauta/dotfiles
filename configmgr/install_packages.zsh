@@ -13,14 +13,14 @@ compress_package_list(){
             out_array+=("${package%%\?*}")
         fi
     done
-    echo $out_array
+    echo ${out_array[@]}
 }
 
 # Compress all packages based on current tags
-arch_packages=$(compress_package_list $current_tags arch_packages)
-aur_packages=$(compress_package_list $current_tags aur_packages)
-flathub_packages=$(compress_package_list $current_tags flathub_packages)
-ignored_packages=$(compress_package_list $current_tags ignored_packages)
+arch_packages=($(compress_package_list $current_tags arch_packages))
+aur_packages=($(compress_package_list $current_tags aur_packages))
+flathub_packages=($(compress_package_list $current_tags flathub_packages))
+ignored_packages=($(compress_package_list $current_tags ignored_packages))
 
 # Update all packages
 log_message "Updating system..."

@@ -12,6 +12,7 @@ arch_packages=(
     "base"
     "grub"
     "lvm2"
+    "sudo"
     "intel-ucode ? laptop"
     "amd-ucode ? desktop"
 

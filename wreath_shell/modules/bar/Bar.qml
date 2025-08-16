@@ -46,6 +46,45 @@ StyledWindow {
             Workspace { workspace_id: 9 }
             Workspace { workspace_id: 10 }
         }
+
+        Loader {
+            anchors.left: workspaces.right
+            anchors.verticalCenter: parent.verticalCenter
+            
+            active: Battery.batteries.length != 0
+            sourceComponent: BatteryInfoData {}
+        }
+    }
+
+    component BatteryInfoData: Item {
+        MaterialIcon {
+            id: bat_icon
+            anchors.verticalCenter: parent.verticalCenter
+            text: {
+                if (Battery.time_left == 0) return "power"
+                if (Battery.battery_perc >= 0.91) return Battery.charging ? "battery_charging_90" : "battery_full";
+                if (Battery.battery_perc >= 0.78) return Battery.charging ? "battery_charging_80" : "battery_6_bar";
+                if (Battery.battery_perc >= 0.65) return Battery.charging ? "battery_charging_60" : "battery_5_bar";
+                if (Battery.battery_perc >= 0.52) return Battery.charging ? "battery_charging_50" : "battery_4_bar";
+                if (Battery.battery_perc >= 0.39) return Battery.charging ? "battery_charging_30" : "battery_3_bar";
+                if (Battery.battery_perc >= 0.26) return Battery.charging ? "battery_charging_20" : "battery_2_bar";
+                if (Battery.battery_perc >= 0.13) return Battery.charging ? "battery_charging_full" : "battery_1_bar";
+                if (Battery.battery_perc >= 0) return Battery.charging ? "battery_charging_full" : "battery_0_bar";
+            }
+            color: Colors.palette.m3onBackground
+        }
+        StyledText {
+            anchors.left: bat_icon.right
+            anchors.verticalCenter: parent.verticalCenter
+            text: {
+                let perc = "";
+                if (Battery.battery_perc == 1) perc = "100%";
+                else if (Battery.battery_perc >= 0.1) perc = (Battery.battery_perc*100).toFixed(1) + "%";
+                else perc = (Battery.battery_perc*100).toFixed(2) + "%";
+                if (Battery.time_left == 0) return perc;
+                return perc + " • " + Battery.time_left.toFixed(2) + "h";
+            }
+        }
     }
 
     Row {
@@ -144,19 +183,24 @@ StyledWindow {
                     anchors.verticalCenter: parent.verticalCenter
                 }
             }
-            Row {
-                MaterialIcon {
-                    text: "videogame_asset"
-                    color: Colors.palette.m3onBackground
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                StyledText {
-                    text: (SystemUsage.gpu_temp >= 100 ? SystemUsage.gpu_temp.toFixed(0) : (SystemUsage.gpu_temp >= 10 ? SystemUsage.gpu_temp.toFixed(1) : SystemUsage.gpu_temp.toFixed(2))) + "°"
-                    color: Colors.palette.m3onBackground
-                    font.pointSize: Config.appearance.font.size.small
-                    font.bold: true
-                    anchors.verticalCenter: parent.verticalCenter
-                }
+            Loader {
+                active: SystemUsage.gpu_type != "NONE"
+                sourceComponent: GpuTempData {}
+            }
+        }
+
+        component GpuTempData: Row {
+            MaterialIcon {
+                text: "videogame_asset"
+                color: Colors.palette.m3onBackground
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            StyledText {
+                text: (SystemUsage.gpu_temp >= 100 ? SystemUsage.gpu_temp.toFixed(0) : (SystemUsage.gpu_temp >= 10 ? SystemUsage.gpu_temp.toFixed(1) : SystemUsage.gpu_temp.toFixed(2))) + "°"
+                color: Colors.palette.m3onBackground
+                font.pointSize: Config.appearance.font.size.small
+                font.bold: true
+                anchors.verticalCenter: parent.verticalCenter
             }
         }
     
@@ -221,38 +265,5 @@ StyledWindow {
                 }
             }
         }
-
-        /*
-        Row {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: parent.inner_spacing
-            MaterialIcon {
-                text: {
-                    const batteries = Quickshell.Services.UPower.devices.values.filter(dev => {
-                        return dev.isLaptopBattery;
-                    });
-                    console.log(batteries.length);
-                    return "test"
-                }    
-                color: Colors.palette.m3onBackground
-                anchors.verticalCenter: parent.verticalCenter
-
-                StateLayer {
-                    anchors.fill: undefined
-                    anchors.centerIn: parent
-                    anchors.horizontalCenterOffset: 1
-
-                    implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
-                    implicitHeight: implicitWidth
-
-                    radius: Config.appearance.rounding.full
-
-                    function onClicked(): void {
-                        //open_bluetooth_manager.running = true
-                    }
-                }
-            }
-        }
-        */
     }
 }

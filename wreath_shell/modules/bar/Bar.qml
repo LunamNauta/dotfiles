@@ -3,6 +3,7 @@ import Quickshell.Bluetooth
 import Quickshell.Io
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 
 import qs.components.containers
 import qs.components
@@ -22,10 +23,10 @@ StyledWindow {
 
     color: Colors.palette.m3background
 
-    Row {
+    RowLayout {
         id: left_widgets
 
-        leftPadding: Config.appearance.spacing.normal
+        //leftPadding: Config.appearance.spacing.normal
 
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
@@ -87,7 +88,7 @@ StyledWindow {
         }
     }
 
-    Row {
+    Item {
         id: center_widgets
 
         anchors.centerIn: parent

@@ -6,6 +6,7 @@ import qs.config
 import qs.utils
 
 import QtQuick
+import QtQuick.Layouts
 
 Item {
     id: root
@@ -26,7 +27,7 @@ Item {
         //clip: true
         //implicitWidth: icon.implicitWidth
         implicitWidth: Math.max(icon.implicitWidth, current.implicitWidth, current.anchors.rightMargin)
-        
+
         MaterialIcon {
             id: icon
 

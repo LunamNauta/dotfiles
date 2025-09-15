@@ -1,4 +1,4 @@
-current_tags="desktop"
+current_tags="laptop"
 
 arch_packages=(
     # Base
@@ -8,6 +8,7 @@ arch_packages=(
     "btrfs-progs"
     "base-devel"
     "efibootmgr"
+    "f2fs-tools"
     "linux"
     "base"
     "grub"
@@ -135,6 +136,7 @@ arch_packages=(
     "libretro-shaders-slang"
     "libretro-snes9x"
     "libretro-yabause"
+    "libretro-retrodream"
     "dolphin-emu"
     "retroarch"
     "retroarch-assets-glui"
@@ -164,6 +166,7 @@ arch_packages=(
     "xdg-desktop-portal-wlr"
     "pavucontrol-qt"
     "slurp"
+    "7zip"
     "gdb"
     "dex"
     "zip"

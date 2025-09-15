@@ -152,6 +152,8 @@ arch_packages=(
     "libnewt"
     "boost"
     "fuse2"
+    "sdl2_ttf"
+    "sdl2"
     "glfw"
     "lib32-vulkan-radeon ? desktop"
     "vulkan-radeon ? desktop"

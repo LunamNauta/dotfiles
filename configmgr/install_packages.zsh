@@ -22,6 +22,11 @@ aur_packages=($(compress_package_list $current_tags aur_packages))
 flathub_packages=($(compress_package_list $current_tags flathub_packages))
 ignored_packages=($(compress_package_list $current_tags ignored_packages))
 
+# Enable multilib repository (needed for some packages)
+log_message "Enabling multilib repository..."
+#"sudo sed -i -e '/^\[multilib\]/{s/^/#/;n;s/^/#/}' /etc/pacman.conf" # Disable multilib
+sudo sed -i -e '/#\[multilib\]/,+1s/^#//' /etc/pacman.conf # Enable multilib
+
 # Update all packages
 log_message "Updating system..."
 if command -v yay &> /dev/null; then
@@ -72,15 +77,15 @@ log_message "Installing aur packages..."
 yay -S --needed ${aur_packages[@]}
 
 # Install packages (from flathub) using flatpak
-log_message "Installing flathub packages"
+log_message "Installing flathub packages..."
 flatpak install flathub ${flathub_packages[@]}
 
 # Add extensions to make yazi more useful
-log_message "Instsalling yazi extensions"
-ya pack -a yazi-rs/plugins:full-border
-ya pack -a yazi-rs/plugins:mount
-ya pack -a imsi32/yatline
-ya pack -a yazi-rs/plugins:smart-enter
+log_message "Instsalling yazi extensions..."
+ya pkg add yazi-rs/plugins:full-border
+ya pkg add yazi-rs/plugins:mount
+ya pkg add imsi32/yatline
+ya pkg add yazi-rs/plugins:smart-enter
 
 # Remove any packages that were orphaned in any previous step
 log_message "Removing orphaned packages..."
@@ -92,11 +97,12 @@ log_message "Enabling services..."
 systemctl --user start pipewire-pulse
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
+sudo systemctl enable --now libvirtd
 if [[ $current_tags == "desktop" ]]; then
     sudo systemctl enable --now lactd
 elif [[ $current_tags == "laptop" ]]; then
-    sudo systemctl enable --now tlp
     sudo systemctl enable --now python3-validity
+    sudo systemctl enable --now tlp
 fi
 
 # Set up GTK theme stuff
@@ -112,4 +118,3 @@ xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 # Make sure the user shell is ZSH
 log_message "Setting user shell..."
 sudo chsh -s /usr/bin/zsh loki
-

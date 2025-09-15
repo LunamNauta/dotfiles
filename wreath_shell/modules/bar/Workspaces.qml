@@ -2,10 +2,13 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 
+import qs.components.containers
+import qs.components
 import qs.services
 
-Item {
+RowLayout {
     id: root
 
 	property color backgroundColor: "#e60c0c0c"
@@ -41,7 +44,7 @@ Item {
         next_workspace_proc.exec({command: ["bash", "-c", cmd]})
     }
 
-    Row {
+    RowLayout {
         id: workspaces_row
 
         anchors {

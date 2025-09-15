@@ -164,6 +164,7 @@ arch_packages=(
     # Misc
     "xdg-desktop-portal-wlr"
     "pavucontrol-qt"
+    "xdg-user-dirs"
     "slurp"
     "7zip"
     "gdb"

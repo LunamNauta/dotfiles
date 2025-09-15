@@ -1,0 +1,5 @@
+. "$HOME/.cargo/env"
+export ZDOTDIR="$HOME/.config/zsh"
+export XDG_CONFIG_HOME="$HOME/.config"
+export ZSH_COMPDUMP="$HOME/.cache/zsh/.zcompdump"
+export HISTFILE="$HOME/.cache/zsh/.zsh_history"

@@ -11,5 +11,5 @@ sed -i '/^monitor =/d' "$SCRIPTPATH/hypr/hyprland.conf"
 if [[ $current_tags = "desktop" ]]; then
     sed -i '1i monitor = , 1920x1080@120, auto, 1' "$SCRIPTPATH/hypr/hyprland.conf"
 elif [[ $current_tags = "laptop" ]]; then
-    sed -i '1i monitor = , 1920x1080@60, auto, 1' "$SCRIPTPATH/hypr/hyprland.conf"
+    sed -i '1i monitor = , 1920x1080@60, auto, 1.25' "$SCRIPTPATH/hypr/hyprland.conf"
 fi

@@ -1,4 +1,4 @@
-current_tags="laptop"
+current_tags="desktop"
 
 arch_packages=(
     # Base
@@ -136,7 +136,6 @@ arch_packages=(
     "libretro-shaders-slang"
     "libretro-snes9x"
     "libretro-yabause"
-    "libretro-retrodream"
     "dolphin-emu"
     "retroarch"
     "retroarch-assets-glui"
@@ -190,6 +189,7 @@ aur_packages=(
     
     # Emulation
     "libretro-bluemsx-git"
+    "libretro-retrodream"
     "torzu"
 
     # Virtual Machines

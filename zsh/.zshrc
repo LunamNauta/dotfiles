@@ -16,7 +16,7 @@ bindkey '^[[F' end-of-line                        # end
 # Enable completion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
+compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete

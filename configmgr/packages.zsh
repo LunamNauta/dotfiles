@@ -1,4 +1,4 @@
-current_tags="desktop"
+current_tags="laptop"
 
 arch_packages=(
     # Base

@@ -66,7 +66,7 @@ if [ "$color_prompt" = yes ]; then
  
     # enable syntax-highlighting
     if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-        source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+        source ~/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
 else

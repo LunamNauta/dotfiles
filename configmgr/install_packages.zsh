@@ -1,5 +1,7 @@
 source ./packages.zsh
 
+current_tags=$1
+
 log_message(){
     print -P "%B%F{blue}$1%f%b"
 }

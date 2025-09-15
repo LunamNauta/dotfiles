@@ -1,5 +1,3 @@
-current_tags="laptop"
-
 arch_packages=(
     # Base
     "linux-firmware"

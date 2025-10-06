@@ -1,37 +1,45 @@
+pragma ComponentBehavior: Bound
+
+import qs.components
+import qs.services
+import qs.config
+
+import QtQuick.Effects
 import QtQuick
 
 Item{
     id: root
 
-    property real desiredSize: 10
-    property string desiredColor: "#11111b"
+    required property Item bar
 
-    LeftBorder{
-        desiredSize: root.desiredSize
-        desiredColor: root.desiredColor
+    anchors.fill: parent
+
+    StyledRect {
+        anchors.fill: parent
+        color: Colors.palette.m3background
+
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            maskSource: mask
+            maskEnabled: true
+            maskInverted: true
+            maskThresholdMin: 0.5
+            maskSpreadAtMin: 1
+        }
     }
-    RightBorder{
-        desiredSize: root.desiredSize
-        desiredColor: root.desiredColor
-    }
-    BottomBorder{
-        desiredSize: root.desiredSize
-        desiredColor: root.desiredColor
-    }
-    BottomLeft{
-        desiredRadius: root.desiredSize*1.5
-        desiredColor: root.desiredColor
-    }
-    BottomRight{
-        desiredRadius: root.desiredSize*1.5
-        desiredColor: root.desiredColor
-    }
-    TopLeft{
-        desiredRadius: root.desiredSize*1.5
-        desiredColor: root.desiredColor
-    }
-    TopRight{
-        desiredRadius: root.desiredSize*1.5
-        desiredColor: root.desiredColor
+
+    Item {
+        id: mask
+
+        anchors.fill: parent
+        layer.enabled: true
+        visible: false
+
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: Config.border.thickness
+            anchors.topMargin: root.bar.implicitHeight
+            radius: Config.border.rounding
+        }
     }
 }

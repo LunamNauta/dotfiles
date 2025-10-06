@@ -1,4 +1,5 @@
 import Quickshell.Services.UPower
+import Quickshell.Wayland
 import Quickshell.Bluetooth
 import Quickshell.Io
 import Quickshell
@@ -20,6 +21,8 @@ StyledWindow {
     anchors.top: true
 
     implicitHeight: Math.max(left_widgets.height, center_widgets.height, right_widgets.height) + Config.appearance.spacing.normal
+
+    WlrLayershell.layer: WlrLayer.Overlay
 
     color: Colors.palette.m3background
 

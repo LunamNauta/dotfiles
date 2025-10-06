@@ -1,10 +1,12 @@
+import "modules/background"
+import "modules/border"
+import "modules/bar"
+
 import Quickshell
 import QtQuick
 
-import "./modules/background/"
-import "./modules/bar/"
-
-ShellRoot {
-    Background {}
-    Bar {}
+ShellRoot{
+    Background{}
+    Border{}
+    Bar{}
 }

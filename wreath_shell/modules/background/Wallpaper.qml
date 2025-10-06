@@ -6,7 +6,8 @@ import QtQuick
 Item {
     id: root
 
-    property string source: "/home/loki/personal/dotfiles/backgrounds/Black_Hole_1.png"
+    property string source: "/home/loki/personal/dotfiles/backgrounds/Sakura_Trees.jpg"
+
     Image {
         source: root.source
         anchors.fill: parent

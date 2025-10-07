@@ -70,7 +70,6 @@ arch_packages=(
     # Terminal Life
     "alacritty"
     "man-pages"
-    "starship"
     "neovim"
     "man-db"
     "yazi"

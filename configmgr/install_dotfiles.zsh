@@ -21,10 +21,10 @@ fi
 
 # Basic Config Folders
 set-config-link "$SCRIPTPATH/alacritty" "$HOME/.config/alacritty"
+set-config-link "$SCRIPTPATH/fuzzel" "$HOME/.config/fuzzel"
 set-config-link "$SCRIPTPATH/qt6ct" "$HOME/.config/qt6ct"
 set-config-link "$SCRIPTPATH/btop" "$HOME/.config/btop"
 set-config-link "$SCRIPTPATH/hypr" "$HOME/.config/hypr"
-set-config-link "$SCRIPTPATH/wofi" "$HOME/.config/wofi"
 set-config-link "$SCRIPTPATH/nvim" "$HOME/.config/nvim"
 set-config-link "$SCRIPTPATH/tmux" "$HOME/.config/tmux"
 set-config-link "$SCRIPTPATH/yazi" "$HOME/.config/yazi"

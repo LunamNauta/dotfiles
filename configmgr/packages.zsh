@@ -92,8 +92,8 @@ arch_packages=(
     "hyprland"
     "gwenview"
     "discord"
+    "fuzzel"
     "nemo"
-    "wofi"
     "sddm"
     "obs-studio ? desktop"
     "blender ? desktop"
@@ -149,6 +149,8 @@ arch_packages=(
     "dnsmasq"
 
     # Libraries
+    "vlc-plugin-ffmpeg"
+    "libmpeg2"
     "tinyxml2"
     "libgtop"
     "libnewt"

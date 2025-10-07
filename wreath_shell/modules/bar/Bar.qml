@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Services.UPower
 import Quickshell.Wayland
 import Quickshell.Bluetooth
@@ -12,24 +14,23 @@ import qs.services
 import qs.config
 import qs.utils
 
-StyledWindow {
+RowLayout {
     id: root
-    name: "bar"
+    //name: "bar"
 
+    /*
     anchors.right: true
     anchors.left: true
     anchors.top: true
-
+    */
     implicitHeight: Math.max(left_widgets.height, center_widgets.height, right_widgets.height) + Config.appearance.spacing.normal
 
     //WlrLayershell.layer: WlrLayer.Overlay
 
-    color: Colors.palette.m3background
+    //color: Colors.palette.m3background
 
     RowLayout {
         id: left_widgets
-
-        //leftPadding: Config.appearance.spacing.normal
 
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
@@ -91,7 +92,7 @@ StyledWindow {
         }
     }
 
-    Item {
+    RowLayout {
         id: center_widgets
 
         anchors.centerIn: parent
@@ -102,10 +103,8 @@ StyledWindow {
         }
     }
 
-    Row {
+    RowLayout {
         id: right_widgets
-
-        rightPadding: Config.appearance.spacing.normal
 
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter

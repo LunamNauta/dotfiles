@@ -27,8 +27,8 @@ ShellRoot{
         mask: Region {
             x: 0 //Config.border.thickness
             y: 0 //Config.border.thickness
-            width: 0 //win.width - Config.border.thickness * 2
-            height: 0 //win.height - Config.border.thickness * 2
+            width: win.width //win.width - Config.border.thickness * 2
+            height: bar.height //win.height - Config.border.thickness * 2
             //intersection: Intersection.Xor
         }
         Item{
@@ -44,13 +44,24 @@ ShellRoot{
                 bar: bar
             }
         }
+        Background{}
         Item{
             id: bar
             implicitHeight: bar2.implicitHeight
+
+            anchors{
+                left: parent.left
+                right: parent.right
+            }
+
             Bar{
                 id: bar2
+
+                anchors{
+                    left: parent.left
+                    right: parent.right
+                }
             }
         }
     }
-    Background{}
 }

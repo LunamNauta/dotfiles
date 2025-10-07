@@ -4,5 +4,5 @@ import QtQuick
 
 JsonObject {
     property int thickness: Config.appearance.padding.normal
-    property int rounding: Config.appearance.rounding.large
+    property int rounding: Config.appearance.rounding.normal
 }

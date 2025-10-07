@@ -22,7 +22,7 @@ StyledWindow {
 
     implicitHeight: Math.max(left_widgets.height, center_widgets.height, right_widgets.height) + Config.appearance.spacing.normal
 
-    WlrLayershell.layer: WlrLayer.Overlay
+    //WlrLayershell.layer: WlrLayer.Overlay
 
     color: Colors.palette.m3background
 

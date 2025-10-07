@@ -100,6 +100,7 @@ systemctl --user start pipewire-pulse
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now libvirtd
+sudo systemctl enable sddm
 if [[ $current_tags == "desktop" ]]; then
     sudo systemctl enable --now lactd
 elif [[ $current_tags == "laptop" ]]; then

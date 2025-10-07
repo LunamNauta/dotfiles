@@ -94,8 +94,10 @@ arch_packages=(
     "discord"
     "nemo"
     "wofi"
+    "sddm"
     "obs-studio ? desktop"
     "blender ? desktop"
+    "krita ? desktop"
     "steam ? desktop"
     "lact ? desktop"
 
@@ -184,8 +186,7 @@ aur_packages=(
     # Theming
     "ttf-material-symbols-variable-git"
     "xdg-terminal-exec-mkhl"
-    "aylurs-gtk-shell-git"
-    "libastal-meta"
+    "sddm-silent-theme"
     "quickshell"
     
     # Emulation

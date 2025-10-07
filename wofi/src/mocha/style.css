@@ -62,7 +62,7 @@ window {
   padding: 10px;
   border: 0.16em solid @surface2;
   background-color: @crust;
-  border-radius: 0em;
+  border-radius: 1em;
 }
 
 /* Inner Box */

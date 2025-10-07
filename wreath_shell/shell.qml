@@ -12,7 +12,6 @@ import Quickshell
 import QtQuick
 
 ShellRoot{
-    Background{}
     StyledWindow{
         id: win
         anchors{
@@ -53,4 +52,5 @@ ShellRoot{
             }
         }
     }
+    Background{}
 }

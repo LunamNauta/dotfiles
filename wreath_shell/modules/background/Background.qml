@@ -6,7 +6,7 @@ import qs.components.containers
 import qs.config
 
 Loader {
-    asynchronous: true
+    asynchronous: false
     active: Config.background.enabled
 
     sourceComponent: Variants {

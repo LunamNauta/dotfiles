@@ -25,3 +25,10 @@ xdg-user-dirs-update --set DESKTOP "$HOME/xdg_dirs/desktop"
 xdg-user-dirs-update --set PUBLICSHARE "$HOME/xdg_dirs/public"
 xdg-user-dirs-update --set VIDEOS "$HOME/xdg_dirs/videos"
 xdg-user-dirs-update --set MUSIC "$HOME/xdg_dirs/music"
+
+if [[ -f "$HOME/.face.icon" ]]; then
+    rm -rf "$HOME/.face.icon"
+fi
+cp "$SCRIPTPATH/face.png" "$HOME/.face.icon"
+setfacl -m u:sddm:x ~/
+setfacl -m u:sddm:r ~/.face.icon

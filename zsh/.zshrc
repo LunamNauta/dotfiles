@@ -15,8 +15,6 @@ bindkey '^[[F' end-of-line                        # end
 
 # Enable completion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-autoload -Uz compinit
-compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete
@@ -34,14 +32,15 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Enable syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+
 # Enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
  
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
  
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -61,6 +60,7 @@ if [ -x /usr/bin/dircolors ]; then
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
     zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 fi
+
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
@@ -89,16 +89,7 @@ setopt hist_expire_dups_first # delete duplicates first when HISTFILE size excee
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
-#setopt share_history         # share command history data
+setopt share_history         # share command history data
 alias history="history 0"
 
-current_tty=$(tty)
-if [[ $current_tty = /dev/tty1 ]]; then
-    exec uwsm start hyprland.desktop
-else
-    if [[ $current_tty = /dev/tty* ]]; then
-        source ~/.config/zsh/zsh_no_gui.zsh
-    else 
-        eval "$(starship init zsh)"
-    fi
-fi
+source ~/.config/zsh/zsh_no_gui.zsh

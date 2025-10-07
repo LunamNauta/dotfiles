@@ -114,8 +114,6 @@ alias clear='_NEW_LINE_BEFORE_PROMPT=1 && clear'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
-compinit
-
 #alias cdfzf='cd $(find . -type d | fzf)'
 
 clear

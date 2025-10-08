@@ -37,10 +37,10 @@ Variants{
             WlrLayershell.keyboardFocus: visibilities.session ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
             mask: Region{
-                x: Config.border.thickness
-                y: bar.implicitHeight
-                width: win.width - Config.border.thickness * 2
-                height: win.height - bar.implicitHeight - Config.border.thickness
+                x: bar.implicitWidth
+                y: Config.border.thickness
+                width: win.width - Config.border.thickness - bar.implicitWidth
+                height: win.height - Config.border.thickness * 2
                 intersection: Intersection.Xor
 
                 regions: regions.instances
@@ -70,9 +70,10 @@ Variants{
             HyprlandFocusGrab{
                 id: focus_grab
 
-                active: visibilities.session
+                active: visibilities.dashboard || visibilities.session
                 windows: [win]
                 onCleared: {
+                    visibilities.dashboard = false;
                     visibilities.session = false;
                 }
             }
@@ -100,6 +101,7 @@ Variants{
                 id: visibilities
 
                 property bool session
+                property bool dashboard
 
                 Component.onCompleted: Visibilities.load(scope.modelData, this)
             }
@@ -108,6 +110,7 @@ Variants{
                 screen: scope.modelData
                 visibilities: visibilities
                 panels: panels
+                bar: bar
 
                 Panels{
                     id: panels
@@ -121,10 +124,12 @@ Variants{
                     id: bar
 
                     screen: scope.modelData
+                    visibilities: visibilities
 
                     anchors.left: parent.left
-                    anchors.right: parent.right
+                    //anchors.right: parent.right
                     anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                 }
             }
         }

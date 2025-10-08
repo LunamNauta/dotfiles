@@ -1,3 +1,4 @@
+import qs.modules.dashboard as Dashboard
 import qs.modules.session as Session
 import qs.services
 import qs.config
@@ -13,6 +14,13 @@ Shape{
     anchors.fill: parent
     anchors.margins: Config.border.thickness
     preferredRendererType: Shape.CurveRenderer
+
+    Dashboard.Background {
+        wrapper: root.panels.dashboard
+
+        startX: (root.width - wrapper.width) / 2 - rounding
+        startY: 0
+    }
 
     Session.Background{
         wrapper: root.panels.session

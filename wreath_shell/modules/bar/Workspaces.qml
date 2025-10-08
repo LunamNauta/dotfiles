@@ -8,7 +8,7 @@ import qs.components.containers
 import qs.components
 import qs.services
 
-RowLayout {
+ColumnLayout {
     id: root
 
 	property color backgroundColor: "#e60c0c0c"
@@ -44,7 +44,7 @@ RowLayout {
         next_workspace_proc.exec({command: ["bash", "-c", cmd]})
     }
 
-    RowLayout {
+    ColumnLayout {
         id: workspaces_row
 
         anchors {

@@ -14,36 +14,36 @@ import qs.services
 import qs.config
 import qs.utils
 
-RowLayout {
+ColumnLayout {
     id: root
     //name: "bar"
 
     required property ShellScreen screen
+    required property PersistentProperties visibilities
 
     /*
     anchors.right: true
     anchors.left: true
     anchors.top: true
     */
-    implicitHeight: Math.max(left_widgets.height, center_widgets.height, right_widgets.height) + Config.appearance.spacing.normal
-    Layout.bottomMargin: 40
-    Layout.fillHeight: true
+    implicitWidth: Math.max(left_widgets.width, center_widgets.width, right_widgets.width) + Config.border.thickness
 
     //WlrLayershell.layer: WlrLayer.Overlay
 
     //color: Colors.palette.m3background
 
-    RowLayout {
+    ColumnLayout {
         id: left_widgets
 
-        Layout.alignment: Qt.AlignLeft
+        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+        Layout.topMargin: Config.appearance.padding.small
 
         /*
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         */
 
-        spacing: Config.appearance.spacing.large
+       spacing: Config.appearance.spacing.large
 
         Workspaces {
             id: workspaces
@@ -74,7 +74,7 @@ RowLayout {
     component BatteryInfoData: Item {
         MaterialIcon {
             id: bat_icon
-            anchors.verticalCenter: parent.verticalCenter
+            //anchors.verticalCenter: parent.verticalCenter
             text: {
                 if (Battery.time_left == 0) return "power"
                 if (Battery.battery_perc >= 0.91) return Battery.charging ? "battery_charging_90" : "battery_full";
@@ -89,8 +89,8 @@ RowLayout {
             color: Colors.palette.m3onBackground
         }
         StyledText {
-            anchors.left: bat_icon.right
-            anchors.verticalCenter: parent.verticalCenter
+            //anchors.left: bat_icon.right
+            //anchors.verticalCenter: parent.verticalCenter
             text: {
                 let perc = "";
                 if (Battery.battery_perc == 1) perc = "100%";
@@ -102,41 +102,44 @@ RowLayout {
         }
     }
 
-    RowLayout {
+    ColumnLayout {
         id: center_widgets
 
         /*
         anchors.centerIn: parent
         anchors.verticalCenter: parent.verticalCenter
         */
-        Layout.alignment: Qt.AlignCenter
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
     }
 
-    Row {
+    ColumnLayout {
         id: right_widgets
 
         /*
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         */
-        Layout.alignment: Qt.AlignRight
+        Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+        Layout.bottomMargin: Config.appearance.padding.small
 
         spacing: Config.appearance.spacing.larger
         readonly property real inner_spacing: Config.appearance.spacing.small
 
 
-        Column {
-            anchors.verticalCenter: parent.verticalCenter
+        ColumnLayout {
+            //anchors.verticalCenter: parent.verticalCenter
+            Layout.alignment: Qt.AlignHCenter
             StyledText {
                 //anchors.verticalCenter: parent.verticalCenter
                 //anchors.left: workspaces.right
-                anchors.right: parent.right
+                //anchors.bottom: parent.bottom
 
-                text: DateTime.format("hh:mm:ss")
+                text: DateTime.format("hh\nmm")
                 color: Colors.palette.m3onBackground
-                font.pointSize: Config.appearance.font.size.small * 0.9
+                font.pointSize: Config.appearance.font.size.large
                 font.bold: true
             }
+            /*
             StyledText {
                 //anchors.verticalCenter: parent.verticalCenter
                 //anchors.left: workspaces.right
@@ -146,98 +149,30 @@ RowLayout {
                 color: Colors.palette.m3onBackground
                 font.pointSize: Config.appearance.font.size.small * 0.9
             }
-        }
+            */
+       }
 
-        Row {
+       ColumnLayout {
+            //anchors.verticalCenter: parent.verticalCenter
             spacing: parent.inner_spacing
-            anchors.verticalCenter: parent.verticalCenter
-            Row {
-                MaterialIcon {
-                    text: "memory"
-                    color: Colors.palette.m3onBackground
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                StyledText {
-                    text: (SystemUsage.cpu_perc >= 0.1 ? (SystemUsage.cpu_perc*100).toFixed(1) : (SystemUsage.cpu_perc*100).toFixed(2)) + "%"
-                    color: Colors.palette.m3onBackground
-                    font.pointSize: Config.appearance.font.size.small
-                    font.bold: true
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-            Row {
-                MaterialIcon {
-                    text: "memory_alt"
-                    color: Colors.palette.m3onBackground
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                StyledText {
-                    text: (SystemUsage.mem_perc >= 0.1 ? (SystemUsage.mem_perc*100).toFixed(1) : (SystemUsage.mem_perc*100).toFixed(2)) + "%"
-                    color: Colors.palette.m3onBackground
-                    font.pointSize: Config.appearance.font.size.small
-                    font.bold: true
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-        }
-
-        Row {
-            spacing: parent.inner_spacing
-            anchors.verticalCenter: parent.verticalCenter
-            Row {
-                MaterialIcon {
-                    text: "memory"
-                    color: Colors.palette.m3onBackground
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                StyledText {
-                    text: (SystemUsage.cpu_temp >= 100 ? SystemUsage.cpu_temp.toFixed(0) : (SystemUsage.cpu_temp >= 10 ? SystemUsage.cpu_temp.toFixed(1) : SystemUsage.cpu_temp.toFixed(2))) + "°"
-                    color: Colors.palette.m3onBackground
-                    font.pointSize: Config.appearance.font.size.small
-                    font.bold: true
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-            Loader {
-                active: SystemUsage.gpu_type != "NONE"
-                sourceComponent: GpuTempData {}
-            }
-        }
-
-        component GpuTempData: Row {
-            MaterialIcon {
-                text: "videogame_asset"
-                color: Colors.palette.m3onBackground
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            StyledText {
-                text: (SystemUsage.gpu_temp >= 100 ? SystemUsage.gpu_temp.toFixed(0) : (SystemUsage.gpu_temp >= 10 ? SystemUsage.gpu_temp.toFixed(1) : SystemUsage.gpu_temp.toFixed(2))) + "°"
-                color: Colors.palette.m3onBackground
-                font.pointSize: Config.appearance.font.size.small
-                font.bold: true
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
-    
-        Row {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: parent.inner_spacing
+            Layout.alignment: Qt.AlignHCenter
             MaterialIcon {
                 text: Network.active != null ? Icons.getNetworkIcon(Network.active.strength) : "signal_wifi_off"
                 color: Colors.palette.m3onBackground
-                anchors.verticalCenter: parent.verticalCenter
+                font.pointSize: Config.appearance.font.size.large
+                //anchors.verticalCenter: parent.verticalCenter
 
                 Process {
                     id: open_network_manager
                     command: ["bash", "-c", "alacritty -e /usr/bin/zsh -c nmtui"]
                 }
                 StateLayer {
-                    anchors.fill: undefined
-                    anchors.centerIn: parent
-                    anchors.horizontalCenterOffset: 1
+                    //anchors.fill: undefined
+                    //anchors.centerIn: parent
+                    //anchors.horizontalCenterOffset: 1
 
-                    implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
-                    implicitHeight: implicitWidth
+                    //implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
+                    //implicitHeight: implicitWidth
 
                     radius: Config.appearance.rounding.full
 
@@ -256,26 +191,50 @@ RowLayout {
                     })
                     if (connected) return "bluetooth_connected"
                     return "bluetooth"
-                }    
+                }
+                font.pointSize: Config.appearance.font.size.large
                 color: Colors.palette.m3onBackground
-                anchors.verticalCenter: parent.verticalCenter
+                //anchors.verticalCenter: parent.verticalCenter
 
                 Process {
                     id: open_bluetooth_manager
                     command: ["bash", "-c", "blueman-manager"]
                 }
                 StateLayer {
-                    anchors.fill: undefined
-                    anchors.centerIn: parent
-                    anchors.horizontalCenterOffset: 1
+                    //anchors.fill: undefined
+                    //anchors.centerIn: parent
+                    //anchors.horizontalCenterOffset: 1
 
-                    implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
-                    implicitHeight: implicitWidth
+                    //implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
+                    //implicitHeight: implicitWidth
 
                     radius: Config.appearance.rounding.full
 
                     function onClicked(): void {
                         open_bluetooth_manager.running = true
+                    }
+                }
+            }
+
+            MaterialIcon {
+                text: "power_settings_new"   
+                color: Colors.palette.m3onBackground
+                font.pointSize: Config.appearance.font.size.large
+                font.bold: true
+                //anchors.verticalCenter: parent.verticalCenter
+
+                StateLayer {
+                    //anchors.fill: undefined
+                    //anchors.centerIn: parent
+                    //anchors.horizontalCenterOffset: 1
+
+                    //implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
+                    //implicitHeight: implicitWidth
+
+                    radius: Config.appearance.rounding.full
+
+                    function onClicked(): void {
+                        root.visibilities.session = !root.visibilities.session;
                     }
                 }
             }

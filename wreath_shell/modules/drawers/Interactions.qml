@@ -10,33 +10,38 @@ CustomMouseArea{
     required property ShellScreen screen
     required property PersistentProperties visibilities
     required property Panels panels
+    required property Item bar
 
     function withinPanelHeight(panel: Item, x: real, y: real): bool {
-        const panelY = panel.y;
+        const panelY = Config.border.thickness + panel.y;
         return y >= panelY - Config.border.rounding && y <= panelY + panel.height + Config.border.rounding;
     }
 
     function withinPanelWidth(panel: Item, x: real, y: real): bool {
-        const panelX = Config.border.thickness + panel.x;
-        return x >= panelX - Config.border.rounding && x <= panelX + panel.width + Config.border.rounding;
+        const panelX = panel.x + Config.border.thickness;
+        return x >= panelX && x <= panelX + panel.width;
     }
 
     function inLeftPanel(panel: Item, x: real, y: real): bool {
-        return x < Config.border.thickness + panel.x + panel.width && withinPanelHeight(panel, x, y);
+        return x < bar.implicitWidth + panel.x + panel.width && withinPanelHeight(panel, x, y);
     }
 
     function inRightPanel(panel: Item, x: real, y: real): bool {
-        return x > panel.x && withinPanelHeight(panel, x, y);
+        return x > panel.x + Config.border.thickness && withinPanelHeight(panel, x, y);
     }
 
-    //TODO: Fix this
     function inTopPanel(panel: Item, x: real, y: real): bool {
-        return y < Config.border.thickness && panel.y + panel.height && withinPanelWidth(panel, x, y);
+        return y < Config.border.thickness + panel.y + panel.height && withinPanelWidth(panel, x, y);
     }
 
-    // TODO: Fix this
     function inBottomPanel(panel: Item, x: real, y: real): bool {
         return y > root.height - Config.border.thickness - panel.height - Config.border.rounding && withinPanelWidth(panel, x, y);
+    }
+
+    function onWheel(event: WheelEvent): void {
+        if (event.x < bar.implicitWidth) {
+            bar.handleWheel(event.y, event.angleDelta);
+        }
     }
 
     anchors.fill: parent
@@ -46,7 +51,8 @@ CustomMouseArea{
         const x = event.x;
         const y = event.y;
 
-        visibilities.session = inRightPanel(panels.session, x, y);
+        //visibilities.session = inRightPanel(panels.session, x, y);
+        visibilities.dashboard = inTopPanel(panels.dashboard, x, y);
     }
 
 }

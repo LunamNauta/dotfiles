@@ -24,7 +24,7 @@ Singleton{
     property real storage_total
     property real storage_used
 
-    property int refCount
+    property int ref_count
 
     function formatKib(kib: real): var{
         const mib = 1024;
@@ -50,7 +50,7 @@ Singleton{
     }
 
     Timer{
-        running: true //root.refCount > 0
+        running: root.ref_count > 0
         interval: 3000
         repeat: true
         triggeredOnStart: true

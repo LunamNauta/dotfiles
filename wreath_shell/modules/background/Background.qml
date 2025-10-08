@@ -1,18 +1,23 @@
-import Quickshell.Wayland
+pragma ComponentBehavior: Bound
+
+import qs.components
+import qs.components.containers
+import qs.services
+import qs.config
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 
-import qs.components.containers
-import qs.config
+Loader{
+    id: root
 
-Loader {
-    asynchronous: false
+    asynchronous: false //true
     active: Config.background.enabled
 
-    sourceComponent: Variants {
+    sourceComponent: Variants{
         model: Quickshell.screens
 
-        StyledWindow {
+        StyledWindow{
             id: win
 
             required property ShellScreen modelData
@@ -23,14 +28,16 @@ Loader {
             WlrLayershell.layer: WlrLayer.Background
             color: "black"
 
-            anchors.bottom: true
-            anchors.right: true
-            anchors.left: true
             anchors.top: true
+            anchors.bottom: true
+            anchors.left: true
+            anchors.right: true
 
-            Wallpaper {}
+            Wallpaper{
+                id: wallpaper
+            }
 
-            Loader {
+            Loader{
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: Config.appearance.padding.large

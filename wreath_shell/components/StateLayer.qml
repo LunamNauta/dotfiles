@@ -1,16 +1,17 @@
 import qs.services
 import qs.config
+
 import QtQuick
 
-MouseArea {
+MouseArea{
     id: root
 
     property bool disabled
     property color color: Colors.palette.m3onSurface
     property real radius: parent?.radius ?? 0
+    property alias rect: hover_layer
 
-    function onClicked(): void {
-    }
+    function onClicked(): void{}
 
     anchors.fill: parent
 
@@ -19,69 +20,64 @@ MouseArea {
     hoverEnabled: true
 
     onPressed: event => {
-        if (disabled)
-            return;
+        if (disabled) return;
 
-        rippleAnim.x = event.x;
-        rippleAnim.y = event.y;
+        ripple_anim.x = event.x;
+        ripple_anim.y = event.y;
 
         const dist = (ox, oy) => ox * ox + oy * oy;
-        rippleAnim.radius = Math.sqrt(Math.max(dist(event.x, event.y), dist(event.x, height - event.y), dist(width - event.x, event.y), dist(width - event.x, height - event.y)));
+        ripple_anim.radius = Math.sqrt(Math.max(dist(event.x, event.y), dist(event.x, height - event.y), dist(width - event.x, event.y), dist(width - event.x, height - event.y)));
 
-        rippleAnim.restart();
+        ripple_anim.restart();
     }
 
     onClicked: event => !disabled && onClicked(event)
 
-    SequentialAnimation {
-        id: rippleAnim
+    SequentialAnimation{
+        id: ripple_anim
 
         property real x
         property real y
         property real radius
 
-        PropertyAction {
+        PropertyAction{
             target: ripple
             property: "x"
-            value: rippleAnim.x
+            value: ripple_anim.x
         }
-        PropertyAction {
+        PropertyAction{
             target: ripple
             property: "y"
-            value: rippleAnim.y
+            value: ripple_anim.y
         }
-        PropertyAction {
+        PropertyAction{
             target: ripple
             property: "opacity"
             value: 0.08
         }
-        Anim {
+        Anim{
             target: ripple
             properties: "implicitWidth,implicitHeight"
             from: 0
-            to: rippleAnim.radius * 2
-            duration: Config.appearance.anim.durations.normal
-            easing.bezierCurve: Config.appearance.anim.curves.standardDecel
+            to: ripple_anim.radius * 2
+            easing.bezierCurve: Config.appearance.anim.curves.standard_decel
         }
-        Anim {
+        Anim{
             target: ripple
             property: "opacity"
             to: 0
-            duration: Config.appearance.anim.durations.normal
-            easing.type: Easing.BezierSpline
-            easing.bezierCurve: Config.appearance.anim.curves.standard
         }
     }
 
-    StyledClippingRect {
-        id: hoverLayer
+    StyledClippingRect{
+        id: hover_layer
 
         anchors.fill: parent
 
         color: Qt.alpha(root.color, root.disabled ? 0 : root.pressed ? 0.1 : root.containsMouse ? 0.08 : 0)
         radius: root.radius
 
-        StyledRect {
+        StyledRect{
             id: ripple
 
             radius: Config.appearance.rounding.full
@@ -93,11 +89,5 @@ MouseArea {
                 y: -ripple.height / 2
             }
         }
-    }
-
-    component Anim: NumberAnimation {
-        duration: Config.appearance.anim.durations.normal
-        easing.type: Easing.BezierSpline
-        easing.bezierCurve: Config.appearance.anim.curves.standard
     }
 }

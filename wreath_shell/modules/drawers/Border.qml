@@ -14,12 +14,12 @@ Item{
 
     anchors.fill: parent
 
-    StyledRect {
+    StyledRect{
         anchors.fill: parent
-        color: Colors.palette.m3background
+        color: Colors.palette.m3surface
 
         layer.enabled: true
-        layer.effect: MultiEffect {
+        layer.effect: MultiEffect{
             maskSource: mask
             maskEnabled: true
             maskInverted: true
@@ -28,14 +28,14 @@ Item{
         }
     }
 
-    Item {
+    Item{
         id: mask
 
         anchors.fill: parent
         layer.enabled: true
         visible: false
 
-        Rectangle {
+        Rectangle{
             anchors.fill: parent
             anchors.margins: Config.border.thickness
             anchors.topMargin: root.bar.implicitHeight

@@ -18,12 +18,16 @@ RowLayout {
     id: root
     //name: "bar"
 
+    required property ShellScreen screen
+
     /*
     anchors.right: true
     anchors.left: true
     anchors.top: true
     */
     implicitHeight: Math.max(left_widgets.height, center_widgets.height, right_widgets.height) + Config.appearance.spacing.normal
+    Layout.bottomMargin: 40
+    Layout.fillHeight: true
 
     //WlrLayershell.layer: WlrLayer.Overlay
 
@@ -32,8 +36,12 @@ RowLayout {
     RowLayout {
         id: left_widgets
 
+        Layout.alignment: Qt.AlignLeft
+
+        /*
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
+        */
 
         spacing: Config.appearance.spacing.large
 
@@ -53,9 +61,11 @@ RowLayout {
         }
 
         Loader {
+            /*
             anchors.left: workspaces.right
             anchors.verticalCenter: parent.verticalCenter
-            
+            */
+
             active: Battery.batteries.length != 0
             sourceComponent: BatteryInfoData {}
         }
@@ -95,19 +105,21 @@ RowLayout {
     RowLayout {
         id: center_widgets
 
+        /*
         anchors.centerIn: parent
         anchors.verticalCenter: parent.verticalCenter
-
-        ActiveWindow { 
-            anchors.centerIn: center_widgets
-        }
+        */
+        Layout.alignment: Qt.AlignCenter
     }
 
-    RowLayout {
+    Row {
         id: right_widgets
 
+        /*
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
+        */
+        Layout.alignment: Qt.AlignRight
 
         spacing: Config.appearance.spacing.larger
         readonly property real inner_spacing: Config.appearance.spacing.small

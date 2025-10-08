@@ -1,7 +1,7 @@
 import Quickshell.Wayland
 import Quickshell
 
-PanelWindow {
+PanelWindow{
     required property string name
 
     WlrLayershell.namespace: `wreath-${name}`

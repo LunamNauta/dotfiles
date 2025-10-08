@@ -1,11 +1,10 @@
-pragma ComponentBehavior: Bound
 pragma Singleton
 
 import Quickshell.Io
 import Quickshell
 import QtQuick
 
-Singleton {
+Singleton{
     id: root
 
     property real last_cpu_total
@@ -50,7 +49,7 @@ Singleton {
         };
     }
 
-    Timer {
+    Timer{
         running: true //root.refCount > 0
         interval: 3000
         repeat: true
@@ -64,13 +63,13 @@ Singleton {
         }
     }
 
-    FileView {
+    FileView{
         id: stat
 
         path: "/proc/stat"
         onLoaded: {
             const data = text().match(/^cpu\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/);
-            if (data) {
+            if (data){
                 const stats = data.slice(1).map(n => parseInt(n, 10));
                 const total = stats.reduce((a, b) => a + b, 0);
                 const idle = stats[3] + (stats[4] ?? 0);
@@ -85,7 +84,7 @@ Singleton {
         }
     }
 
-    FileView {
+    FileView{
         id: mem_info
 
         path: "/proc/meminfo"
@@ -96,11 +95,11 @@ Singleton {
         }
     }
 
-    Process {
+    Process{
         id: storage
 
         command: ["sh", "-c", "df | grep '^/dev/' | awk '{print $1, $3, $4}'"]
-        stdout: StdioCollector {
+        stdout: StdioCollector{
             onStreamFinished: {
                 const device_map = new Map();
 
@@ -137,7 +136,7 @@ Singleton {
         }
     }
 
-    Process {
+    Process{
         id: gpu_type_check
 
         running: true
@@ -147,7 +146,7 @@ Singleton {
         }
     }
 
-    Process {
+    Process{
         id: gpu_usage
 
         command: root.gpu_type === "GENERIC" ? ["sh", "-c", "cat /sys/class/drm/card*/device/gpu_busy_percent"] : root.gpu_type === "NVIDIA" ? ["nvidia-smi", "--query-gpu=utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits"] : ["echo"]
@@ -171,7 +170,7 @@ Singleton {
         }
     }
 
-    Process {
+    Process{
         id: sensors
 
         command: ["sensors"]
@@ -179,7 +178,7 @@ Singleton {
             LANG: "C",
             LC_ALL: "C"
         })
-        stdout: StdioCollector {
+        stdout: StdioCollector{
             onStreamFinished: {
                 let cpu_temp = text.match(/(?:Package id [0-9]+|Tdie):\s+((\+|-)[0-9.]+)(°| )C/);
                 if (!cpu_temp) cpu_temp = text.match(/Tctl:\s+((\+|-)[0-9.]+)(°| )C/); // If AMD Tdie pattern failed, try fallback on Tctl
@@ -192,7 +191,7 @@ Singleton {
                 let sum = 0;
                 let count = 0;
 
-                for (const line of text.trim().split("\n")) {
+                for (const line of text.trim().split("\n")){
                     if (line === "Adapter: PCI adapter") eligible = true;
                     else if (line === "") eligible = false;
                     else if (eligible) {

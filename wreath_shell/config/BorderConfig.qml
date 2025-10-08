@@ -1,8 +1,6 @@
 import Quickshell.Io
-import Quickshell
-import QtQuick
 
-JsonObject {
+JsonObject{
     property int thickness: Config.appearance.padding.normal
     property int rounding: Config.appearance.rounding.normal
 }

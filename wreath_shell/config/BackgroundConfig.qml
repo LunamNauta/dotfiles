@@ -1,12 +1,10 @@
 import Quickshell.Io
-import Quickshell
-import QtQuick
 
-JsonObject {
+JsonObject{
     property bool enabled: true
-    property DesktopClock desktop_clock: DesktopClock {}
+    property DesktopClock desktop_clock: DesktopClock{}
 
-    component DesktopClock: JsonObject {
+    component DesktopClock: JsonObject{
         property bool enabled: true
     }
 }

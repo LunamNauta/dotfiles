@@ -1,0 +1,132 @@
+pragma ComponentBehavior: Bound
+
+import qs.components.containers
+import qs.modules.bar
+import qs.components
+import qs.services
+import qs.config
+
+import Quickshell.Hyprland
+import Quickshell.Wayland
+import QtQuick.Effects
+import Quickshell
+import QtQuick
+
+Variants{
+    id: root
+
+    model: Quickshell.screens
+
+    Scope{
+        id: scope
+
+        required property ShellScreen modelData
+
+        StyledWindow{
+            id: win
+
+            readonly property bool has_fullscreen: Hypr.monitorFor(screen)?.active_workspace?.toplevels.values.some(t => t.lastIpcObject.fullscreen === 2) ?? false
+
+            onHas_fullscreenChanged: {
+                visibilities.session = false;
+            }
+
+            screen: scope.modelData
+            name: "drawers"
+            WlrLayershell.exclusionMode: ExclusionMode.Ignore
+            WlrLayershell.keyboardFocus: visibilities.session ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+
+            mask: Region{
+                x: Config.border.thickness
+                y: bar.implicitHeight
+                width: win.width - Config.border.thickness * 2
+                height: win.height - bar.implicitHeight - Config.border.thickness
+                intersection: Intersection.Xor
+
+                regions: regions.instances
+            }
+
+            anchors.top: true
+            anchors.bottom: true
+            anchors.left: true
+            anchors.right: true
+
+            Variants{
+                id: regions
+
+                model: panels.children
+
+                Region{
+                    required property Item modelData
+
+                    x: modelData.x + Config.border.thickness
+                    y: modelData.y
+                    width: modelData.width
+                    height: modelData.height
+                    intersection: Intersection.Subtract
+                }
+            }
+
+            HyprlandFocusGrab{
+                id: focus_grab
+
+                active: visibilities.session
+                windows: [win]
+                onCleared: {
+                    visibilities.session = false;
+                }
+            }
+
+            Item{
+                anchors.fill: parent
+                opacity: 1
+                layer.enabled: true
+                layer.effect: MultiEffect{
+                    shadowEnabled: true
+                    blurMax: 15
+                    shadowColor: Qt.alpha(Colors.palette.m3shadow, 0.7)
+                }
+
+                Border{
+                    bar: bar
+                }
+
+                Backgrounds{
+                    panels: panels
+                }
+            }
+
+            PersistentProperties{
+                id: visibilities
+
+                property bool session
+
+                Component.onCompleted: Visibilities.load(scope.modelData, this)
+            }
+
+            Interactions{
+                screen: scope.modelData
+                visibilities: visibilities
+                panels: panels
+
+                Panels{
+                    id: panels
+
+                    screen: scope.modelData
+                    visibilities: visibilities
+                    bar: bar
+                }
+
+                Bar{
+                    id: bar
+
+                    screen: scope.modelData
+
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                }
+            }
+        }
+    }
+}

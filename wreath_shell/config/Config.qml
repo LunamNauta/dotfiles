@@ -2,29 +2,36 @@ pragma Singleton
 
 import Quickshell.Io
 import Quickshell
-import QtQuick
 
-import qs.utils
-
-Singleton {
+Singleton{
     id: root
 
     property alias appearance: adapter.appearance
     property alias background: adapter.background
+    property alias services: adapter.services
+    property alias session: adapter.session
     property alias border: adapter.border
 
-    FileView {
-        path: `${Paths.stringify(Paths.config)}/shell.json`
-        watchChanges: true
-        onFileChanged: reload()
-        onAdapterUpdated: writeAdapter()
+    ElapsedTimer{
+        id: timer
+    }
 
-        JsonAdapter {
+    FileView {
+        path: ""
+        watchChanges: true
+        onFileChanged: {
+            timer.restart();
+            reload();
+        }
+ 
+        JsonAdapter{
             id: adapter
 
-            property AppearanceConfig appearance: AppearanceConfig {}
-            property BackgroundConfig background: BackgroundConfig {}
-            property BorderConfig border: BorderConfig {}
+            property AppearanceConfig appearance: AppearanceConfig{}
+            property BackgroundConfig background: BackgroundConfig{}
+            property ServiceConfig services: ServiceConfig{}
+            property SessionConfig session: SessionConfig{}
+            property BorderConfig border: BorderConfig{}
         }
     }
 }

@@ -6,7 +6,7 @@ import Quickshell.Io
 import Quickshell
 import QtQuick
 
-Singleton {
+Singleton{
     id: root
 
     reloadableId: "brightness"
@@ -15,20 +15,37 @@ Singleton {
     property bool apple_display_present: false
     property list<var> ddc_monitors: []
 
-    function getMonitorForScreen(screen: ShellScreen): var {
+    function getMonitorForScreen(screen: ShellScreen): var{
         return monitors.find(m => m.modelData === screen);
     }
 
+    function getMonitor(query: string): var{
+        if (query === "active") return monitors.find(m => Hypr.monitorFor(m.modelData)?.focused);
+        if (query.startsWith("model:")){
+            const model = query.slice(6);
+            return monitors.find(m => m.modelData.model === model);
+        }
+        if (query.startsWith("serial:")){
+            const serial = query.slice(7);
+            return monitors.find(m => m.modelData.serialNumber === serial);
+        }
+        if (query.startsWith("id:")){
+            const id = parseInt(query.slice(3), 10);
+            return monitors.find(m => Hypr.monitorFor(m.modelData)?.id === id);
+        }
+        return monitors.find(m => m.modelData.name === query);
+    }
+
     function increaseBrightness(): void {
-        const focused_name = Hyprland.focused_monitor.name;
-        const monitor = monitors.find(m => focused_name === m.modelData.name);
-        if (monitor) monitor.setBrightness(monitor.brightness + 0.1);
+        const monitor = getMonitor("active");
+        if (monitor)
+            monitor.setBrightness(monitor.brightness + 0.1);
     }
 
     function decreaseBrightness(): void {
-        const focused_name = Hyprland.focused_monitor.name;
-        const monitor = monitors.find(m => focused_name === m.modelData.name);
-        if (monitor) monitor.setBrightness(monitor.brightness - 0.1);
+        const monitor = getMonitor("active");
+        if (monitor)
+            monitor.setBrightness(monitor.brightness - 0.1);
     }
 
     onMonitorsChanged: {
@@ -41,7 +58,7 @@ Singleton {
 
         model: Quickshell.screens
 
-        Monitor {}
+        Monitor{}
     }
 
     Process {
@@ -64,7 +81,7 @@ Singleton {
         }
     }
 
-    component Monitor: QtObject {
+    component Monitor: QtObject{
         id: monitor
 
         required property ShellScreen modelData
@@ -74,7 +91,7 @@ Singleton {
         property real queued_brightness: NaN
         property real brightness
 
-        readonly property Process init_proc: Process {
+        readonly property Process init_proc: Process{
             stdout: StdioCollector {
                 onStreamFinished: {
                     if (monitor.is_apple_display){

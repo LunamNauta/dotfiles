@@ -5,7 +5,8 @@ return{{
         mason = {},
         mason_lspconfig = {
             ensure_installed = {},
-            highlight = {enable = true}
+            highlight = {enable = true},
+            automatic_enable = {}
         }
     },
     config = function(_, opts)

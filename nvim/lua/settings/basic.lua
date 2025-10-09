@@ -42,7 +42,8 @@ Wvim.languages = {
         langs = {'java'}
     },
     ['qmlls'] = {
-        langs = {'qmljs'}
+        langs = {'qmljs'},
+        opts = {cmd = {'qmlls6', '-E'}}
     }
 }
 

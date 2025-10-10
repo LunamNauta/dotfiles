@@ -23,7 +23,7 @@ CustomMouseArea{
     }
 
     function inLeftPanel(panel: Item, x: real, y: real): bool {
-        return x < bar.implicitWidth + panel.x + panel.width && withinPanelHeight(panel, x, y);
+        return x < bar.implicitWidth + Config.bar.padding * 2 + panel.x + panel.width && withinPanelHeight(panel, x, y);
     }
 
     function inRightPanel(panel: Item, x: real, y: real): bool {
@@ -39,7 +39,7 @@ CustomMouseArea{
     }
 
     function onWheel(event: WheelEvent): void {
-        if (event.x < bar.implicitWidth) {
+        if (event.x < bar.implicitWidth + Config.bar.padding * 2) {
             bar.handleWheel(event.y, event.angleDelta);
         }
     }

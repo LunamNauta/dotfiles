@@ -1,5 +1,5 @@
 return {{
-    'vimpostor/vim-tpipeline',
-    event = 'VeryLazy'
+    --'vimpostor/vim-tpipeline',
+    --event = 'VeryLazy'
 }}
 

@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.components.containers
+import qs.modules.settings as Settings
 import qs.modules.bar as Bar
 import qs.components
 import qs.services
@@ -11,7 +12,10 @@ import Quickshell.Wayland
 import QtQuick.Effects
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 
+Item{
+    id: root3
 Variants{
     id: root
 
@@ -37,7 +41,7 @@ Variants{
             WlrLayershell.keyboardFocus: visibilities.session ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
             mask: Region{
-                x: bar.implicitWidth
+                x: bar.implicitWidth + Config.bar.padding * 2
                 y: Config.border.thickness
                 width: win.width - Config.border.thickness - bar.implicitWidth
                 height: win.height - Config.border.thickness * 2
@@ -102,6 +106,7 @@ Variants{
 
                 property bool session
                 property bool dashboard
+                property bool settings
 
                 Component.onCompleted: Visibilities.load(scope.modelData, this)
             }
@@ -133,5 +138,12 @@ Variants{
                 }
             }
         }
+        LazyLoader{
+            loading: Config.read_config_file
+            Settings.Wrapper{
+                bar: bar
+            }
+        }
     }
+}
 }

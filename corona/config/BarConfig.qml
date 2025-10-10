@@ -1,6 +1,7 @@
 import Quickshell.Io
 
 JsonObject{
+    property int padding: Config.appearance.padding.normal
     property bool persistent: true
     property bool show_on_hover: true
     property Sizes sizes: Sizes {}

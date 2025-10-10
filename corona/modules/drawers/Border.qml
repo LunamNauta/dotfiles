@@ -39,7 +39,7 @@ Item{
             anchors.fill: parent
             anchors.margins: Config.border.thickness
             //anchors.topMargin: root.bar.implicitHeight
-            anchors.leftMargin: root.bar.implicitWidth
+            anchors.leftMargin: root.bar.implicitWidth + Config.bar.padding * 2
             radius: Config.border.rounding
         }
     }

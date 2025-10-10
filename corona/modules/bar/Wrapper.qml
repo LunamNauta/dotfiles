@@ -48,7 +48,10 @@ ColumnLayout {
     anchors.left: true
     anchors.top: true
     */
-    implicitWidth: Math.max(left_widgets.width, center_widgets.width, right_widgets.width) + Config.border.thickness
+    implicitWidth: Math.max(left_widgets.width, center_widgets.width, right_widgets.width)
+    anchors.leftMargin: Config.bar.padding
+    anchors.topMargin: Config.border.thickness
+    anchors.bottomMargin: Config.border.thickness
 
     //WlrLayershell.layer: WlrLayer.Overlay
 
@@ -237,6 +240,29 @@ ColumnLayout {
                     }
                 }
             }
+
+            MaterialIcon {
+                text: "settings"
+                font.pointSize: Config.appearance.font.size.large
+                color: Colors.palette.m3onBackground
+                //anchors.verticalCenter: parent.verticalCenter
+
+                StateLayer {
+                    //anchors.fill: undefined
+                    //anchors.centerIn: parent
+                    //anchors.horizontalCenterOffset: 1
+
+                    //implicitWidth: parent.implicitHeight + Config.appearance.padding.small * 2
+                    //implicitHeight: implicitWidth
+
+                    radius: Config.appearance.rounding.full
+
+                    function onClicked(): void {
+                        visibilities.settings = !visibilities.settings
+                    }
+                }
+            }
+
 
             MaterialIcon {
                 text: "power_settings_new"   

@@ -48,6 +48,11 @@ CustomMouseArea{
     anchors.fill: parent
     hoverEnabled: true
 
+    onExited: {
+        visibilities.dashboard = false
+        visibilities.osd = false
+    }
+
     onPositionChanged: event => {
         const x = event.x;
         const y = event.y;

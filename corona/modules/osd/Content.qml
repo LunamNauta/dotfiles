@@ -35,13 +35,14 @@ Item {
             implicitHeight: Config.osd.sizes.slider_height
 
             function onWheel(event: WheelEvent) {
-                if (event.angleDelta.y > 0)
-                    Audio.incrementVolume();
-                else if (event.angleDelta.y < 0)
-                    Audio.decrementVolume();
+                if (event.angleDelta.y > 0) Audio.incrementVolume();
+                else if (event.angleDelta.y < 0) Audio.decrementVolume();
+                audio_slider.value = Audio.volume;
+
             }
 
             FilledSlider {
+                id: audio_slider
                 anchors.fill: parent
 
                 icon: Icons.getVolumeIcon(value, root.muted)
@@ -59,13 +60,13 @@ Item {
                 implicitHeight: Config.osd.sizes.slider_height
 
                 function onWheel(event: WheelEvent) {
-                    if (event.angleDelta.y > 0)
-                        Audio.incrementSourceVolume();
-                    else if (event.angleDelta.y < 0)
-                        Audio.decrementSourceVolume();
+                    if (event.angleDelta.y > 0) Audio.incrementSourceVolume();
+                    else if (event.angleDelta.y < 0) Audio.decrementSourceVolume();
+                    microphone_slider.value = Audio.source_volume;
                 }
 
                 FilledSlider {
+                    id: microphone_slider
                     anchors.fill: parent
 
                     icon: Icons.getMicVolumeIcon(value, root.sourceMuted)
@@ -85,15 +86,14 @@ Item {
 
                 function onWheel(event: WheelEvent) {
                     const monitor = root.monitor;
-                    if (!monitor)
-                        return;
-                    if (event.angleDelta.y > 0)
-                        monitor.setBrightness(monitor.brightness + 0.1);
-                    else if (event.angleDelta.y < 0)
-                        monitor.setBrightness(monitor.brightness - 0.1);
+                    if (!monitor) return;
+                    if (event.angleDelta.y > 0) monitor.setBrightness(monitor.brightness + 0.1);
+                    else if (event.angleDelta.y < 0) monitor.setBrightness(monitor.brightness - 0.1);
+                    brightness_slider.value = monitor.brightness
                 }
 
                 FilledSlider {
+                    id: brightness_slider
                     anchors.fill: parent
 
                     icon: `brightness_${(Math.round(value * 6) + 1)}`

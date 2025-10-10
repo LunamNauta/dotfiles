@@ -14,7 +14,8 @@ CustomMouseArea{
 
     function withinPanelHeight(panel: Item, x: real, y: real): bool {
         const panelY = Config.border.thickness + panel.y;
-        return y >= panelY - Config.border.rounding && y <= panelY + panel.height + Config.border.rounding;
+        // TODO: Fix this bullshit. Why does that -1 have to be there? What?
+        return y >= panelY && y <= panelY + panel.height - 1;
     }
 
     function withinPanelWidth(panel: Item, x: real, y: real): bool {
@@ -53,8 +54,6 @@ CustomMouseArea{
 
         //visibilities.session = inRightPanel(panels.session, x, y);
         visibilities.dashboard = inTopPanel(panels.dashboard, x, y);
-        if (inRightPanel(panels.osd, x, y)){
-            panels.osd.show();
-        }
+        visibilities.osd = inRightPanel(panels.osd, x, y);
     }
 }

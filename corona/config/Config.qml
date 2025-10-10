@@ -16,6 +16,7 @@ Singleton {
     property alias osd: adapter.osd
     property alias session: adapter.session
     property alias services: adapter.services
+    property alias hypr: adapter.hypr
     property bool read_config_file: false
 
     ElapsedTimer{
@@ -63,6 +64,7 @@ Singleton {
             property OsdConfig osd: OsdConfig {}
             property SessionConfig session: SessionConfig{}
             property ServiceConfig services: ServiceConfig{}
+            property HyprConfig hypr: HyprConfig{}
         }
     }
 }

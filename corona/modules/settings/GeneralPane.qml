@@ -80,17 +80,13 @@ ColumnLayout{
             id: set_hyprland_border_thickness
             command: [
                 "zsh",
-                `${Quickshell.shellDir}/scripts/set_hyprland_gaps.zsh`,
-                Config.border.thickness,
-                Config.border.thickness,
-                Config.border.thickness,
-                root.bar.implicitWidth + Config.bar.padding * 2
+                `${Quickshell.shellDir}/scripts/set_hyprland_outer_gaps.zsh`,
+                Config.border.thickness + Config.hypr.outer_gaps,
+                Config.border.thickness + Config.hypr.outer_gaps,
+                Config.border.thickness + Config.hypr.outer_gaps,
+                root.bar.implicitWidth + Config.bar.padding * 2 + Config.hypr.outer_gaps
             ]
             running: true
-        }
-        readonly property int border_thickness: Config.border.thickness
-        onBorder_thicknessChanged: {
-            set_hyprland_border_thickness.running = true
         }
 
         StyledText{
@@ -113,9 +109,59 @@ ColumnLayout{
                 set_hyprland_border_thickness.running = true
             }
         }
-        readonly property int bar_padding: Config.bar.padding
-        onBar_paddingChanged: {
-            set_hyprland_border_thickness.running = true
+
+        StyledText{
+            id: bar_gaps_out_header
+            Layout.alignment: Qt.AlignVCenter
+            text: "Gaps Outer "
+        }
+        FilledSlider {
+            id: gapsOuterSlider
+            icon: "border_outer"
+            value: Config.hypr.outer_gaps / (Config.appearance.padding.large * 5)
+            stepSize: 0.01
+            Layout.alignment: Qt.AlignHCenter
+            orientation: Qt.Horizontal
+            implicitHeight: bar_gaps_out_header.implicitHeight * 1.5
+            implicitWidth: 250
+
+            onValueChanged: {
+                Config.hypr.outer_gaps = Config.appearance.padding.large * 5 * actual_value
+                set_hyprland_border_thickness.running = true
+            }
+        }
+
+        StyledText{
+            id: bar_gaps_in_header
+            Layout.alignment: Qt.AlignVCenter
+            text: "Gaps Inner "
+        }
+        FilledSlider {
+            id: gapsInnerSlider
+            icon: "border_outer"
+            value: Config.hypr.inner_gaps / (Config.appearance.padding.large * 5)
+            stepSize: 0.01
+            Layout.alignment: Qt.AlignHCenter
+            orientation: Qt.Horizontal
+            implicitHeight: bar_gaps_in_header.implicitHeight * 1.5
+            implicitWidth: 250
+
+            onValueChanged: {
+                Config.hypr.inner_gaps = Config.appearance.padding.large * 5 * actual_value
+                set_hyprland_inner_gaps.running = true
+            }
+        }
+        Process{
+            id: set_hyprland_inner_gaps
+            command: [
+                "zsh",
+                `${Quickshell.shellDir}/scripts/set_hyprland_inner_gaps.zsh`,
+                Config.hypr.inner_gaps,
+                Config.hypr.inner_gaps,
+                Config.hypr.inner_gaps,
+                Config.hypr.inner_gaps
+            ]
+            running: true
         }
     }
 }

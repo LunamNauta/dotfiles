@@ -168,6 +168,7 @@ arch_packages=(
     "xdg-desktop-portal-wlr"
     "pavucontrol-qt"
     "xdg-user-dirs"
+    "ddcutil"
     "slurp"
     "7zip"
     "gdb"

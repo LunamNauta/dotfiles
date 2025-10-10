@@ -75,22 +75,22 @@ Item {
         target: Audio
 
         function onMutedChanged(): void {
-            root.show();
+            if (!hovered) root.show();
             root.muted = Audio.muted;
         }
 
         function onVolumeChanged(): void {
-            root.show();
+            if (!hovered) root.show();
             root.volume = Audio.volume;
         }
 
         function onSource_mutedChanged(): void {
-            root.show();
+            if (!hovered) root.show();
             root.sourceMuted = Audio.sourceMuted;
         }
 
         function onSource_volumeChanged(): void {
-            root.show();
+            if (!hovered) root.show();
             root.sourceVolume = Audio.source_volume;
         }
     }
@@ -99,7 +99,7 @@ Item {
         target: root.monitor
 
         function onBrightnessChanged(): void {
-            root.show();
+            if (!hovered) root.show();
             root.brightness = root.monitor?.brightness ?? 0;
         }
     }
@@ -109,8 +109,7 @@ Item {
 
         interval: Config.osd.hide_delay
         onTriggered: {
-            if (!root.hovered)
-                root.visibilities.osd = false;
+            root.visibilities.osd = false;
         }
     }
 

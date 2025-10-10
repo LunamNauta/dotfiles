@@ -77,7 +77,7 @@ Variants{
                 active: visibilities.dashboard || visibilities.session
                 windows: [win]
                 onCleared: {
-                    visibilities.osd = false;
+                    //visibilities.osd = false;
                     visibilities.dashboard = false;
                     visibilities.session = false;
                 }

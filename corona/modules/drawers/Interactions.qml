@@ -49,8 +49,8 @@ CustomMouseArea{
     hoverEnabled: true
 
     onExited: {
-        visibilities.dashboard = false
-        visibilities.osd = false
+        //visibilities.dashboard = false
+        //visibilities.osd = false
     }
 
     onPositionChanged: event => {

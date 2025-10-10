@@ -2,7 +2,7 @@ import Quickshell.Io
 
 JsonObject {
     property bool enabled: true
-    property int hide_delay: 750
+    property int hide_delay: 2000
     property Sizes sizes: Sizes {}
 
     component Sizes: JsonObject {

@@ -1,4 +1,4 @@
-pragma ComponentBehavior: Bound
+//pragma ComponentBehavior: Bound
 
 import qs.components
 import qs.components.controls
@@ -52,10 +52,7 @@ Item {
         }
 
         // Microphone volume
-        WrappedLoader {
-            shouldBeActive: !root.visibilities.session
-
-            sourceComponent: CustomMouseArea {
+            CustomMouseArea {
                 implicitWidth: Config.osd.sizes.slider_width
                 implicitHeight: Config.osd.sizes.slider_height
 
@@ -74,13 +71,9 @@ Item {
                     onMoved: Audio.setSourceVolume(value)
                 }
             }
-        }
 
         // Brightness
-        WrappedLoader {
-            shouldBeActive: true //Config.osd.enableBrightness
-
-            sourceComponent: CustomMouseArea {
+            CustomMouseArea {
                 implicitWidth: Config.osd.sizes.slider_width
                 implicitHeight: Config.osd.sizes.slider_height
 
@@ -101,6 +94,35 @@ Item {
                     onMoved: root.monitor?.setBrightness(value)
                 }
             }
+        }
+
+    Connections {
+        target: Audio
+
+        function onMutedChanged(): void {
+            audio_slider.value = Audio.volume;
+        }
+
+        function onVolumeChanged(): void {
+            audio_slider.value = Audio.volume;
+        }
+
+        function onSource_mutedChanged(): void {
+            microphone_slider.value = Audio.source_volume;
+        }
+
+        function onSource_volumeChanged(): void {
+            microphone_slider.value = Audio.source_volume;
+        }
+    }
+
+    Connections {
+        target: root.monitor
+
+        function onBrightnessChanged(): void {
+            const monitor = root.monitor;
+            if (!monitor) return;
+            brightness_slider.value = monitor.brightness
         }
     }
 

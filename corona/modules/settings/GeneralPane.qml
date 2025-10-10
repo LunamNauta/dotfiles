@@ -6,6 +6,7 @@ import qs.config
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
 
 ColumnLayout{
@@ -48,7 +49,7 @@ ColumnLayout{
             id: set_hyprland_border_rounding
             command: [
                 "zsh",
-                "/home/loki/personal/projects/corona/scripts/set_hyprland_rounding.zsh",
+                `${Quickshell.shellDir}/scripts/set_hyprland_rounding.zsh`,
                 Math.max(Math.floor(Config.border.rounding * 0.98), 0)
             ]
             running: true
@@ -79,7 +80,7 @@ ColumnLayout{
             id: set_hyprland_border_thickness
             command: [
                 "zsh",
-                "/home/loki/personal/projects/corona/scripts/set_hyprland_gaps.zsh",
+                `${Quickshell.shellDir}/scripts/set_hyprland_gaps.zsh`,
                 Config.border.thickness,
                 Config.border.thickness,
                 Config.border.thickness,

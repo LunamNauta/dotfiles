@@ -83,6 +83,16 @@ Variants{
                 }
             }
 
+            StyledRect {
+                anchors.fill: parent
+                opacity: visibilities.session ? 0.5 : 0
+                color: Colors.palette.m3scrim
+
+                Behavior on opacity {
+                    Anim {}
+                }
+            }
+
             Item{
                 anchors.fill: parent
                 opacity: 1

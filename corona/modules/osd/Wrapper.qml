@@ -23,7 +23,7 @@ Item {
     property real brightness
 
     function show(): void {
-        visibilities.osd = true;
+        visibilities.osd = !visibilities.session;
         timer.restart();
     }
 

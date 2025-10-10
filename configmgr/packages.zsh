@@ -188,7 +188,7 @@ aur_packages=(
     "ttf-material-symbols-variable-git"
     "xdg-terminal-exec-mkhl"
     "sddm-silent-theme"
-    "quickshell"
+    "quickshell-git"
     
     # Emulation
     "libretro-bluemsx-git"

@@ -31,6 +31,8 @@ Variants{
 
             onHas_fullscreenChanged: {
                 visibilities.session = false;
+                visibilities.dashboard = false;
+                visibilities.osd = false;
             }
 
             screen: scope.modelData

@@ -64,7 +64,7 @@ ColumnLayout{
             icon: "border_outer"
             value: Config.border.thickness / (Config.appearance.padding.large * 5)
             stepSize: 0.01
-            from: 0.015
+            from: 0.035
             Layout.alignment: Qt.AlignHCenter
             orientation: Qt.Horizontal
             implicitHeight: border_thickness_header.implicitHeight * 1.5

@@ -1,0 +1,126 @@
+pragma ComponentBehavior: Bound
+
+import qs.components
+import qs.components.controls
+import qs.services
+import qs.config
+import qs.utils
+import QtQuick
+import QtQuick.Layouts
+
+Item {
+    id: root
+
+    required property Brightness.Monitor monitor
+    required property var visibilities
+
+    required property real volume
+    required property bool muted
+    required property real sourceVolume
+    required property bool sourceMuted
+    required property real brightness
+
+    implicitWidth: layout.implicitWidth + Config.appearance.padding.large * 2
+    implicitHeight: layout.implicitHeight + Config.appearance.padding.large * 2
+
+    ColumnLayout {
+        id: layout
+
+        anchors.centerIn: parent
+        spacing: Config.appearance.spacing.normal
+
+        // Speaker volume
+        CustomMouseArea {
+            implicitWidth: Config.osd.sizes.slider_width
+            implicitHeight: Config.osd.sizes.slider_height
+
+            function onWheel(event: WheelEvent) {
+                if (event.angleDelta.y > 0)
+                    Audio.incrementVolume();
+                else if (event.angleDelta.y < 0)
+                    Audio.decrementVolume();
+            }
+
+            FilledSlider {
+                anchors.fill: parent
+
+                icon: Icons.getVolumeIcon(value, root.muted)
+                value: root.volume
+                onMoved: Audio.setVolume(value)
+            }
+        }
+
+        // Microphone volume
+        WrappedLoader {
+            shouldBeActive: !root.visibilities.session
+
+            sourceComponent: CustomMouseArea {
+                implicitWidth: Config.osd.sizes.slider_width
+                implicitHeight: Config.osd.sizes.slider_height
+
+                function onWheel(event: WheelEvent) {
+                    if (event.angleDelta.y > 0)
+                        Audio.incrementSourceVolume();
+                    else if (event.angleDelta.y < 0)
+                        Audio.decrementSourceVolume();
+                }
+
+                FilledSlider {
+                    anchors.fill: parent
+
+                    icon: Icons.getMicVolumeIcon(value, root.sourceMuted)
+                    value: root.sourceVolume
+                    onMoved: Audio.setSourceVolume(value)
+                }
+            }
+        }
+
+        // Brightness
+        WrappedLoader {
+            shouldBeActive: true //Config.osd.enableBrightness
+
+            sourceComponent: CustomMouseArea {
+                implicitWidth: Config.osd.sizes.slider_width
+                implicitHeight: Config.osd.sizes.slider_height
+
+                function onWheel(event: WheelEvent) {
+                    const monitor = root.monitor;
+                    if (!monitor)
+                        return;
+                    if (event.angleDelta.y > 0)
+                        monitor.setBrightness(monitor.brightness + 0.1);
+                    else if (event.angleDelta.y < 0)
+                        monitor.setBrightness(monitor.brightness - 0.1);
+                }
+
+                FilledSlider {
+                    anchors.fill: parent
+
+                    icon: `brightness_${(Math.round(value * 6) + 1)}`
+                    value: root.brightness
+                    onMoved: root.monitor?.setBrightness(value)
+                }
+            }
+        }
+    }
+
+    component WrappedLoader: Loader {
+        required property bool shouldBeActive
+
+        Layout.preferredHeight: shouldBeActive ? Config.osd.sizes.slider_height : 0
+        opacity: shouldBeActive ? 1 : 0
+        active: opacity > 0
+        asynchronous: true
+        visible: active
+
+        Behavior on Layout.preferredHeight {
+            Anim {
+                easing.bezierCurve: Config.appearance.anim.curves.emphasized
+            }
+        }
+
+        Behavior on opacity {
+            Anim {}
+        }
+    }
+}

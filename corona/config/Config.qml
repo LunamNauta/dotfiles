@@ -13,6 +13,7 @@ Singleton {
     property alias bar: adapter.bar
     property alias border: adapter.border
     property alias dashboard: adapter.dashboard
+    property alias osd: adapter.osd
     property alias session: adapter.session
     property alias services: adapter.services
     property bool read_config_file: false
@@ -59,6 +60,7 @@ Singleton {
             property BarConfig bar: BarConfig{}
             property BorderConfig border: BorderConfig{}
             property DashboardConfig dashboard: DashboardConfig{}
+            property OsdConfig osd: OsdConfig {}
             property SessionConfig session: SessionConfig{}
             property ServiceConfig services: ServiceConfig{}
         }

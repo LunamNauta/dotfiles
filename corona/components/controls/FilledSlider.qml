@@ -62,7 +62,7 @@ Slider{
             color: Colors.palette.m3inverseSurface
             radius: Config.appearance.rounding.full
 
-            MouseArea{
+            CustomMouseArea{
                 id: handleInteraction
 
                 anchors.fill: parent

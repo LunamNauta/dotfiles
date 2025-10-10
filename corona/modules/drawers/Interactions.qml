@@ -53,6 +53,8 @@ CustomMouseArea{
 
         //visibilities.session = inRightPanel(panels.session, x, y);
         visibilities.dashboard = inTopPanel(panels.dashboard, x, y);
+        if (inRightPanel(panels.osd, x, y)){
+            panels.osd.show();
+        }
     }
-
 }

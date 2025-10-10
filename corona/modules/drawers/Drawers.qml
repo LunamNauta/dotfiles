@@ -14,8 +14,6 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-Item{
-    id: root3
 Variants{
     id: root
 
@@ -41,9 +39,9 @@ Variants{
             WlrLayershell.keyboardFocus: visibilities.session ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
             mask: Region{
-                x: bar.implicitWidth + Config.bar.padding * 2
+                x: bar.implicitWidth
                 y: Config.border.thickness
-                width: win.width - Config.border.thickness - bar.implicitWidth
+                width: win.width - bar.implicitWidth - Config.border.thickness * 2
                 height: win.height - Config.border.thickness * 2
                 intersection: Intersection.Xor
 
@@ -63,8 +61,8 @@ Variants{
                 Region{
                     required property Item modelData
 
-                    x: modelData.x + Config.border.thickness
-                    y: modelData.y
+                    x: modelData.x + bar.implicitWidth
+                    y: modelData.y + Config.border.thickness
                     width: modelData.width
                     height: modelData.height
                     intersection: Intersection.Subtract
@@ -77,6 +75,7 @@ Variants{
                 active: visibilities.dashboard || visibilities.session
                 windows: [win]
                 onCleared: {
+                    visibilities.osd = false;
                     visibilities.dashboard = false;
                     visibilities.session = false;
                 }
@@ -104,6 +103,7 @@ Variants{
             PersistentProperties{
                 id: visibilities
 
+                property bool osd
                 property bool session
                 property bool dashboard
                 property bool settings
@@ -145,5 +145,4 @@ Variants{
             }
         }
     }
-}
 }

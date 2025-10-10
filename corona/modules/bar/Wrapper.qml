@@ -70,7 +70,8 @@ ColumnLayout {
 
        spacing: Config.appearance.spacing.large
 
-        Workspaces {
+       Workspaces {
+            Layout.alignment: Qt.AlignHCenter
             id: workspaces
 
             Workspace { workspace_id: 1 }
@@ -96,8 +97,11 @@ ColumnLayout {
         }
     }
 
-    component BatteryInfoData: Item {
-        MaterialIcon {
+    component BatteryInfoData: ColumnLayout {
+        Layout.alignment: Qt.AlignHCenter
+
+        MaterialIcon{
+            Layout.alignment: Qt.AlignHCenter
             id: bat_icon
             //anchors.verticalCenter: parent.verticalCenter
             text: {
@@ -114,16 +118,21 @@ ColumnLayout {
             color: Colors.palette.m3onBackground
         }
         StyledText {
-            //anchors.left: bat_icon.right
-            //anchors.verticalCenter: parent.verticalCenter
+            Layout.alignment: Qt.AlignHCenter
             text: {
                 let perc = "";
                 if (Battery.battery_perc == 1) perc = "100%";
                 else if (Battery.battery_perc >= 0.1) perc = (Battery.battery_perc*100).toFixed(1) + "%";
                 else perc = (Battery.battery_perc*100).toFixed(2) + "%";
                 if (Battery.time_left == 0) return perc;
-                return perc + " • " + Battery.time_left.toFixed(2) + "h";
+                return perc; //+ " • " + Battery.time_left.toFixed(2) + "h";
             }
+            font.pointSize: Config.appearance.font.size.small * 0.8
+        }
+        StyledText {
+            Layout.alignment: Qt.AlignHCenter
+            text: Battery.time_left.toFixed(2) + "h"
+            font.pointSize: Config.appearance.font.size.small * 0.8
         }
     }
 

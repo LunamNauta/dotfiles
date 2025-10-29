@@ -28,6 +28,7 @@ set-config-link "$SCRIPTPATH/hypr" "$HOME/.config/hypr"
 set-config-link "$SCRIPTPATH/nvim" "$HOME/.config/nvim"
 set-config-link "$SCRIPTPATH/tmux" "$HOME/.config/tmux"
 set-config-link "$SCRIPTPATH/yazi" "$HOME/.config/yazi"
+set-config-link "$SCRIPTPATH/foot" "$HOME/.config/foot"
 set-config-link "$SCRIPTPATH/zsh" "$HOME/.config/zsh"
 
 # Basic Config Files

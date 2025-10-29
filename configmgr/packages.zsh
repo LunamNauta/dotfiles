@@ -68,7 +68,7 @@ arch_packages=(
     "qt6ct"
 
     # Terminal Life
-    "foot" #"alacritty"
+    "alacritty"
     "man-pages"
     "neovim"
     "man-db"

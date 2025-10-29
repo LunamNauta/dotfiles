@@ -111,7 +111,7 @@ fi
 # Set up GTK theme stuff
 log_message "Setting up GTK..."
 gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"
-gsettings set org.cinnamon.desktop.default-applications.terminal exec foot
+gsettings set org.cinnamon.desktop.default-applications.terminal exec alacritty
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 # Set up default app stuff

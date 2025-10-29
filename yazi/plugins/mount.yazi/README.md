@@ -1,18 +1,21 @@
 # mount.yazi
 
+> [!NOTE]
+> Yazi v25.2.7 or later is required for this plugin to work.
+
 A mount manager for Yazi, providing disk mount, unmount, and eject functionality.
 
 Supported platforms:
 
-- Linux with [`udisksctl`](https://github.com/storaged-project/udisks), `lsblk` and `eject` both provided by [`util-linux`](https://github.com/util-linux/util-linux)
-- macOS with `diskutil`, which is pre-installed
+- Linux with [`udisksctl`](https://github.com/storaged-project/udisks) and [`lsblk`](https://github.com/util-linux/util-linux)
+- macOS with `diskutil`
 
 https://github.com/user-attachments/assets/c6f780ab-458b-420f-85cf-2fc45fcfe3a2
 
 ## Installation
 
 ```sh
-ya pkg add yazi-rs/plugins:mount
+ya pack -a yazi-rs/plugins:mount
 ```
 
 ## Usage
@@ -20,14 +23,12 @@ ya pkg add yazi-rs/plugins:mount
 Add this to your `~/.config/yazi/keymap.toml`:
 
 ```toml
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on  = "M"
 run = "plugin mount"
 ```
 
-Note that, the keybindings above are just examples, please tune them up as needed to ensure they don't conflict with your other commands/plugins.
-
-## Actions
+Available keybindings:
 
 | Key binding  | Alternate key | Action                |
 | ------------ | ------------- | --------------------- |
@@ -42,7 +43,7 @@ Note that, the keybindings above are just examples, please tune them up as neede
 ## TODO
 
 - Custom keybindings
-- Windows support (I don't use Windows myself, PRs welcome!)
+- Windows support (I don't have an Windows machine for testing, PRs welcome!)
 - Support mount, unmount, and eject the entire disk
 
 ## License

@@ -56,6 +56,10 @@ for actual_package in ${actual_packages[@]}; do
     fi
 done
 
+log_message "Checking for flatpak"
+if ! command -v flatpak; then
+    sudo pacman -S flatpak
+fi
 log_message "Removing unused flatpaks..."
 actual_flatpaks=($(flatpak list --app --columns=application | tail -n +2))
 for actual_flatpak in ${actual_flatpaks[@]}; do
@@ -116,8 +120,6 @@ if ! [[ -z ${flatpak_packages[@]} ]]; then
         repo=${package#*:}
         flatpak install $repo $name
     done
-elif command -v flatpak &>/dev/null; then
-    sudo pacman -Rs flatpak
 fi
 
 # Remove any packages that were orphaned in any previous step

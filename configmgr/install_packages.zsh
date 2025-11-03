@@ -57,7 +57,7 @@ for actual_package in ${actual_packages[@]}; do
 done
 
 log_message "Checking for flatpak"
-if ! command -v flatpak; then
+if ! command -v flatpak &>/dev/null; then
     sudo pacman -S flatpak
 fi
 log_message "Removing unused flatpaks..."

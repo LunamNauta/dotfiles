@@ -1,0 +1,8 @@
+zsh/.zprofile
+zsh/.zprofile
+
+yazi/package.toml
+yazi/plugins
+yazi/keymap.toml-*
+yazi/theme.toml-*
+yazi/yazi.toml-*

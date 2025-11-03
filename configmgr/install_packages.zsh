@@ -1,47 +1,50 @@
-source ./packages.zsh
+local SCRIPT_PATH=${0:A:h}
+source $SCRIPT_PATH/utils.zsh
 
-current_tags=$1
+system_tags=($@)
+package_list=()
 
-log_message(){
-    print -P "%B%F{blue}$1%f%b"
-}
+for tag in ${system_tags[@]}; do
+    source $(script-path)/systems/${(L)tag}/${(L)tag}.zsh
+    package_list_name=${(L)tag}_packages
+    package_list+=(${(@P)package_list_name[@]})
+done
+for package in ${package_list[@]}; do
+    if [[ $package == submodule:* ]]; then
+        submodule_name=${(L)package#submodule:}
+        source $(script-path)/systems/submodules/$submodule_name.zsh
+        package_list_name=${submodule_name}_packages
+        package_list+=(${(@P)package_list_name[@]})
+    fi
+done
 
-compress_package_list(){
-    local in_array=("${(@P)2}")
-    local tag=$1
-    out_array=()
-    for package in "${in_array[@]}"; do
-        if [[ "$package" == *"?"*"${tag}"* || "$package" != *"?"* ]]; then
-            out_array+=("${package%%\?*}")
-        fi
-    done
-    echo ${out_array[@]}
-}
+native_packages=()
+aur_packages=()
+flatpak_packages=()
+ignored_packages=(
+    yay
+)
 
-# Compress all packages based on current tags
-arch_packages=($(compress_package_list $current_tags arch_packages))
-aur_packages=($(compress_package_list $current_tags aur_packages))
-flathub_packages=($(compress_package_list $current_tags flathub_packages))
-ignored_packages=($(compress_package_list $current_tags ignored_packages))
-
-# Enable multilib repository (needed for some packages)
-log_message "Enabling multilib repository..."
-#"sudo sed -i -e '/^\[multilib\]/{s/^/#/;n;s/^/#/}' /etc/pacman.conf" # Disable multilib
-sudo sed -i -e '/#\[multilib\]/,+1s/^#//' /etc/pacman.conf # Enable multilib
-
-# Update all packages
-log_message "Updating system..."
-if command -v yay &> /dev/null; then
-    yay -Syu
-else
-    sudo pacman -Syu
-fi
+for package in ${package_list[@]}; do
+    if [[ $package == submodule:* ]]; then
+        continue
+        #file_packages+=(${package#submodule:})
+    elif [[ $package == *=aur ]]; then
+        aur_packages+=(${package%=aur})
+    elif [[ $package == *=flatpak,* ]]; then
+        name=${package%%=*}
+        repo=${package#*,}
+        flatpak_packages+=(${name}:${repo})
+    else
+        native_packages+=($package)
+    fi
+done
 
 # Remove packages that were installed by anything other than this script (excluding dependencies)
 log_message "Removing unused packages..."
 actual_packages=($(pacman -Qeq))
 for actual_package in "${actual_packages[@]}"; do
-    if [[ " ${arch_packages[@]} " =~ " ${actual_package} " ]]; then
+    if [[ " ${native_packages[@]} " =~ " ${actual_package} " ]]; then
         continue
     elif [[ " ${aur_packages[@]} " =~ " ${actual_package} " ]]; then
         continue
@@ -53,71 +56,59 @@ for actual_package in "${actual_packages[@]}"; do
     fi
 done
 
-# Install packages using pacman
-log_message "Installing native packages..."
-sudo pacman -S --needed ${arch_packages[@]}
-
-# Install yay if it is not installed
-log_message "Checking for yay..."
-if ! command -v yay &> /dev/null; then
-    log_message "Installing yay..."
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    makepkg -si
-    cd ../
-    sudo rm -rf yay
+# Update all packages
+log_message "Updating system..."
+if command -v yay &> /dev/null; then 
+    yay -Syu
+else 
+    sudo pacman -Syu
 fi
 
-# Install rust. Needed for packages in the AUR (also a good thing to just have)
-if ! command -v rustup &> /dev/null; then
-    log_message "Installing rustup..." # Needed for xdg-terminal-exec-mkhl. Choose rustup during installation
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if ! [[ -z ${native_packages[@]} ]]; then
+    # Install packages using pacman
+    log_message "Installing native packages..."
+    sudo pacman -S --needed ${native_packages[@]}
 fi
 
-# Install packages using yay
-log_message "Installing aur packages..."
-yay -S --needed ${aur_packages[@]}
+if ! [[ -z ${aur_packages[@]} ]]; then
+    # Install yay if it is not installed
+    log_message "Checking for yay..."
+    if ! command -v yay &> /dev/null; then
+        log_message "Installing yay..."
+        git clone https://aur.archlinux.org/yay.git
+        cd yay
+        makepkg -si
+        cd ../
+        sudo rm -rf yay
+    fi
+
+    # Install packages using yay
+    log_message "Installing aur packages..."
+    yay -S --needed ${aur_packages[@]}
+fi
 
 # Install packages (from flathub) using flatpak
-log_message "Installing flathub packages..."
-flatpak install flathub ${flathub_packages[@]}
-
-# Add extensions to make yazi more useful
-log_message "Instsalling yazi extensions..."
-ya pkg add yazi-rs/plugins:full-border
-ya pkg add yazi-rs/plugins:mount
-ya pkg add imsi32/yatline
-ya pkg add yazi-rs/plugins:smart-enter
-
-# Remove any packages that were orphaned in any previous step
-log_message "Removing orphaned packages..."
-sudo pacman -Qdtq | ifne sudo pacman -Rns -
-sudo pacman -Qqd | ifne sudo pacman -Rsu
-
-# Enable necessary services
-log_message "Enabling services..."
-systemctl --user start pipewire-pulse
-sudo systemctl enable --now NetworkManager
-sudo systemctl enable --now bluetooth
-sudo systemctl enable --now libvirtd
-sudo systemctl enable sddm
-if [[ $current_tags == "desktop" ]]; then
-    sudo systemctl enable --now lactd
-elif [[ $current_tags == "laptop" ]]; then
-    sudo systemctl enable --now python3-validity
-    sudo systemctl enable --now tlp
+if ! [[ -z ${flathub_packages[@]} ]]; then
+    log_message "Installing flathub packages..."
+    for package in ${flathub_packages[@]}; do
+        name=${package%%:*}
+        repo=${package#*:}
+        flatpak install $repo $name
+    done
 fi
 
-# Set up GTK theme stuff
-log_message "Setting up GTK..."
-gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-lavender-standard+default"
-gsettings set org.cinnamon.desktop.default-applications.terminal exec alacritty
-gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+# Remove any packages that were orphaned in any previous step
+orphans=$(pacman -Qdtq)
+if [[ -n "$orphans" ]]; then
+    log_message "Removing orphaned packages..."
+    sudo pacman -Rns $(pacman -Qdtq)
+else
+    log_message "No orphans to remove..."
+fi
 
-# Set up default app stuff
-log_message "Setting up default apps..."
-xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
-
-# Make sure the user shell is ZSH
-log_message "Setting user shell..."
-sudo chsh -s /usr/bin/zsh loki
+for tag in ${system_tags[@]}; do
+    post_install_file=$(script-path)/systems/${(L)tag}/${(L)tag}_post_install.zsh
+    if [[ -f $post_install_file ]]; then
+        source $post_install_file
+    fi
+done

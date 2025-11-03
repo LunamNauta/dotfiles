@@ -1,34 +1,29 @@
-source install_dotfiles.zsh
-source install_packages.zsh
-source admin_install.zsh
+local SCRIPT_PATH=${0:A:h}
+source $SCRIPT_PATH/utils.zsh
 
-current_tags=$1
+source $(script-path)/install_packages.zsh $@
+source $(script-path)/install_admin.zsh $@
+source $(script-path)/push_dotfiles.zsh $@
 
-# Get the path of this script
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/../"
-
-sed -i '/^monitor =/d' "$SCRIPTPATH/hypr/hyprland.conf"
-if [[ $current_tags = "desktop" ]]; then
-    sed -i '1i monitor = , 1920x1080@120, auto, 1' "$SCRIPTPATH/hypr/hyprland.conf"
-elif [[ $current_tags = "laptop" ]]; then
-    sed -i '1i monitor = , 1920x1080@60, auto, 1.25' "$SCRIPTPATH/hypr/hyprland.conf"
+if command -v xdg-user-dirs-update &>/dev/null; then
+    if ! [ -d $HOME/xdg_dirs ]; then
+        mkdir -p $HOME/xdg_dirs
+    fi
+    xdg-user-dirs-update --set DOWNLOAD       $HOME/xdg_dirs/downloads
+    xdg-user-dirs-update --set DOCUMENTS      $HOME/xdg_dirs/documents
+    xdg-user-dirs-update --set TEMPLATES      $HOME/xdg_dirs/templates
+    xdg-user-dirs-update --set PICTURES       $HOME/xdg_dirs/pictures
+    xdg-user-dirs-update --set DESKTOP        $HOME/xdg_dirs/desktop
+    xdg-user-dirs-update --set PUBLICSHARE    $HOME/xdg_dirs/public
+    xdg-user-dirs-update --set VIDEOS         $HOME/xdg_dirs/videos
+    xdg-user-dirs-update --set MUSIC          $HOME/xdg_dirs/music
 fi
 
-if ! [ -d "$HOME/xdg_dirs" ]; then
-    mkdir -p "$HOME/xdg_dirs"
+if [[ -f $HOME/.face.icon ]]; then
+    rm -rf $HOME/.face.icon
 fi
-xdg-user-dirs-update --set DOWNLOAD "$HOME/xdg_dirs/downloads"
-xdg-user-dirs-update --set DOCUMENTS "$HOME/xdg_dirs/documents"
-xdg-user-dirs-update --set TEMPLATES "$HOME/xdg_dirs/templates"
-xdg-user-dirs-update --set PICTURES "$HOME/xdg_dirs/pictures"
-xdg-user-dirs-update --set DESKTOP "$HOME/xdg_dirs/desktop"
-xdg-user-dirs-update --set PUBLICSHARE "$HOME/xdg_dirs/public"
-xdg-user-dirs-update --set VIDEOS "$HOME/xdg_dirs/videos"
-xdg-user-dirs-update --set MUSIC "$HOME/xdg_dirs/music"
-
-if [[ -f "$HOME/.face.icon" ]]; then
-    rm -rf "$HOME/.face.icon"
+cp $(script-path)/../face.png $HOME/.face.icon
+if command -v setfacl &>/dev/null; then
+    setfacl -m u:sddm:x ~/
+    setfacl -m u:sddm:r ~/.face.icon
 fi
-cp "$SCRIPTPATH/face.png" "$HOME/.face.icon"
-setfacl -m u:sddm:x ~/
-setfacl -m u:sddm:r ~/.face.icon

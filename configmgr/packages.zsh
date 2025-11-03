@@ -194,7 +194,7 @@ aur_packages=(
     # Emulation
     "libretro-bluemsx-git"
     "libretro-retrodream"
-    "torzu"
+    //"torzu"
 
     # Virtual Machines
     "cemu"

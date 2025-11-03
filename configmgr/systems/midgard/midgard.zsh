@@ -9,6 +9,7 @@ midgard_packages=(
     base-devel
     linux
     base
+    sudo
 
     # Boot
     efibootmgr
@@ -71,9 +72,9 @@ midgard_packages=(
     jq
 
     # Desktop Theming
-    catppuccin-qt5ct-git
-    catppuccin-gtk-theme-mocha
-    btop-theme-catppuccin
+    catppuccin-qt5ct-git=aur
+    catppuccin-gtk-theme-mocha=aur
+    btop-theme-catppuccin=aur
     ttf-material-symbols-variable-git=aur
     ttf-cascadia-code-nerd
     ttf-cascadia-mono-nerd
@@ -144,6 +145,11 @@ midgard_packages=(
 )
 
 #-------------------------------------------------------------------
+
+# Enable multilib repository (needed for some packages)
+log_message "Enabling multilib repository..."
+sudo sed -i -e '/#\[multilib\]/,+1s/^#//' /etc/pacman.conf # Enable multilib
+#"sudo sed -i -e '/^\[multilib\]/{s/^/#/;n;s/^/#/}' /etc/pacman.conf" # Disable multilib
 
 # Install rust. Needed for packages in the AUR (also a good thing to just have)
 if ! command -v rustup &> /dev/null; then

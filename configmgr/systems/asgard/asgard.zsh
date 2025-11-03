@@ -9,6 +9,7 @@ asgard_packages=(
     base-devel
     linux
     base
+    sudo
 
     # Boot
     efibootmgr
@@ -72,9 +73,9 @@ asgard_packages=(
     jq
 
     # Desktop Theming
-    catppuccin-qt5ct-git 
-    catppuccin-gtk-theme-mocha
-    btop-theme-catppuccin
+    catppuccin-qt5ct-git=aur
+    catppuccin-gtk-theme-mocha=aur
+    btop-theme-catppuccin=aur
     ttf-material-symbols-variable-git=aur
     ttf-cascadia-code-nerd
     ttf-cascadia-mono-nerd

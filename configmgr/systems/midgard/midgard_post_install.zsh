@@ -1,19 +1,11 @@
 local SCRIPT_PATH=${0:A:h}
 source $SCRIPT_PATH/../../utils.zsh
 
-# Add extensions to make yazi more useful
-log_message "Instsalling yazi extensions..."
-ya pkg add yazi-rs/plugins:full-border
-ya pkg add yazi-rs/plugins:mount
-ya pkg add imsi32/yatline
-ya pkg add yazi-rs/plugins:smart-enter
-
 # Enable necessary services
 log_message "Enabling services..."
 systemctl --user start pipewire-pulse
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
-sudo systemctl enable --now lactd
 sudo systemctl enable --now python3-validity
 sudo systemctl enable --now tlp
 sudo systemctl enable sddm

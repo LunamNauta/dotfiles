@@ -1,1 +1,1 @@
-sed -i "/rounding = /c\rounding = $1" "$HOME/personal/dotfiles/hypr/hyprland.conf"
+sed -i "/rounding = /c\rounding = $1" "$HOME/.config/hypr/hyprland.conf"

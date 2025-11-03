@@ -7,4 +7,4 @@ ya pkg add imsi32/yatline-catppuccin
 ya pkg add yazi-rs/plugins:smart-enter
 
 # Fix hyprland stuff
-sed -i 's/monitor = , 1920x1080@120, auto, 1/monitor = , 1920x1080@60, auto, 1/' $HOME/.config/hypr/hyprland.conf
+sed -i 's/monitor = , 1920x1080@120, auto, 1/monitor = , 1920x1080@60, auto, 1.25/' $HOME/.config/hypr/hyprland.conf

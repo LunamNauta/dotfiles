@@ -6,23 +6,15 @@ if command -v plymouth &>/dev/null; then
     read -q "REPLY?Setup Plymouth (y/n): "
     if [[ $REPLY = "y" ]]; then
         echo
-        if ! [ -d /usr/share/plymouth/themes ]; then
-            sudo mkdir -p /usr/share/plymouth/themes
-        elif [ -d /usr/share/plymouth/themes/catppuccin-mocha ]; then
-            log_message "Removing plymouth catppuccin-mocha theme..."
-            sudo rm -rf /usr/share/plymouth/themes/catppuccin-mocha
-        fi
-        log_message "Adding plymouth catppuccin-mocha theme..."
-        sudo cp -r "$(script-path)/../plymouth/catppuccin-mocha" /usr/share/plymouth/themes
-
-        if ! [ -d /etc/plymouth ]; then
+        if ! [[ -d /etc/plymouth ]]; then
             sudo mkdir -p /etc/plymouth
-        elif [ -f /etc/plymouth/plymouthd.conf ]; then
+        elif [[ -e /etc/plymouth/plymouthd.conf ]]; then
             log_message "Removing plymouth config..."
             sudo rm -f /etc/plymouth/plymouthd.conf
         fi
         log_message "Adding plymouth config..."
         sudo cp -r "$(script-path)/../plymouth/plymouthd.conf" /etc/plymouth
+        sudo plymouth-set-default-theme -R catppuccin-mocha
     else
         echo
     fi

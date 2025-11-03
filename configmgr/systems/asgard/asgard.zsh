@@ -74,6 +74,7 @@ asgard_packages=(
     jq
 
     # Desktop Theming
+    plymouth-theme-catppuccin-mocha-git=aur
     catppuccin-qt5ct-git=aur
     catppuccin-gtk-theme-mocha=aur
     btop-theme-catppuccin=aur

@@ -7,6 +7,7 @@ midgard_packages=(
     zram-generator
     linux-headers
     base-devel
+    inetutils
     linux
     base
     sudo

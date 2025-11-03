@@ -3,6 +3,7 @@ source $SCRIPT_PATH/utils.zsh
 
 # Set up plymouth config
 if command -v plymouth &>/dev/null; then
+    # Set up Plymouth config
     read -q "REPLY?Setup Plymouth (y/n): "
     if [[ $REPLY = "y" ]]; then
         echo
@@ -21,6 +22,7 @@ if command -v plymouth &>/dev/null; then
 fi
 
 if command -v sddm &>/dev/null; then
+    # Set up SDDM config
     read -q "REPLY?Setup SDDM (y/n): "
     if [[ $REPLY = "y" ]]; then
         echo

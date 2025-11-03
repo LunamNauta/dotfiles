@@ -1,0 +1,9 @@
+apps_packages=(
+    man-pages
+    neovim
+    man-db
+    yazi
+    btop
+    tmux
+    gdu
+)

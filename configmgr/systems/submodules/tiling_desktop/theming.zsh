@@ -1,0 +1,17 @@
+theming_packages=(
+    plymouth-theme-catppuccin-mocha-git=aur
+    catppuccin-qt5ct-git=aur
+    catppuccin-gtk-theme-mocha=aur
+    ttf-material-symbols-variable-git=aur
+    ttf-cascadia-code-nerd
+    ttf-cascadia-mono-nerd
+    noto-fonts-cjk
+    ttf-liberation
+    qt5-graphicaleffects
+    qt5-quickcontrols2
+    qt6ct
+    papirus-icon-theme
+    breeze
+    sddm-silent-theme=aur
+    quickshell-git=aur
+)

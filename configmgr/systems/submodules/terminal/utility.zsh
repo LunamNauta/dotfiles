@@ -1,0 +1,13 @@
+utility_packages=(
+    lm_sensors
+    ddcutil
+    unzip
+    slurp
+    wget
+    less
+    7zip
+    git
+    zip
+    bc
+    jq
+)

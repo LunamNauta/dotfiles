@@ -1,0 +1,10 @@
+hyprland_packages=(
+    hyprpolkitagent
+    hyprsunset
+    hyprpaper
+    hypridle
+    hyprlock
+    hyprland
+    sddm
+    uwsm
+)

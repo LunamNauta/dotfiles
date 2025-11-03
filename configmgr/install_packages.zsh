@@ -13,7 +13,7 @@ for package in ${package_list[@]}; do
     if [[ $package == submodule:* ]]; then
         submodule_name=${(L)package#submodule:}
         source $(script-path)/systems/submodules/$submodule_name.zsh
-        package_list_name=${submodule_name}_packages
+        package_list_name=${submodule_name:t}_packages
         package_list+=(${(@P)package_list_name[@]})
     fi
 done
@@ -22,13 +22,13 @@ native_packages=()
 aur_packages=()
 flatpak_packages=()
 ignored_packages=(
+    flatpak
     yay
 )
 
 for package in ${package_list[@]}; do
     if [[ $package == submodule:* ]]; then
         continue
-        #file_packages+=(${package#submodule:})
     elif [[ $package == *=aur ]]; then
         aur_packages+=(${package%=aur})
     elif [[ $package == *=flatpak,* ]]; then
@@ -43,7 +43,7 @@ done
 # Remove packages that were installed by anything other than this script (excluding dependencies)
 log_message "Removing unused packages..."
 actual_packages=($(pacman -Qeq))
-for actual_package in "${actual_packages[@]}"; do
+for actual_package in ${actual_packages[@]}; do
     if [[ " ${native_packages[@]} " =~ " ${actual_package} " ]]; then
         continue
     elif [[ " ${aur_packages[@]} " =~ " ${actual_package} " ]]; then
@@ -53,6 +53,23 @@ for actual_package in "${actual_packages[@]}"; do
     else
         log_message "${actual_package} not found in package list..."
         sudo pacman -Rs $actual_package
+    fi
+done
+
+log_message "Removing unused flatpaks..."
+actual_flatpaks=($(flatpak list --app --columns=application | tail -n +2))
+for actual_flatpak in ${actual_flatpaks[@]}; do
+    found=0
+    for package in ${flatpak_packages[@]}; do
+        name=${package%%:*}
+        if [[ $name == $actual_flatpak ]]; then
+            found=1
+            break
+        fi
+    done
+    if [[ $found -ne 1 ]]; then
+        log_message "${actual_flatpak} not found in flatpak list..."
+        flatpak uninstall $actual_flatpak
     fi
 done
 
@@ -88,13 +105,19 @@ if ! [[ -z ${aur_packages[@]} ]]; then
 fi
 
 # Install packages (from flathub) using flatpak
-if ! [[ -z ${flathub_packages[@]} ]]; then
-    log_message "Installing flathub packages..."
-    for package in ${flathub_packages[@]}; do
+if ! [[ -z ${flatpak_packages[@]} ]]; then
+    if ! command -v flatpak &>/dev/null; then
+        log_message "Installing flatpak..."
+        sudo pacman -S flatpak
+    fi
+    log_message "Installing flatpak packages..."
+    for package in ${flatpak_packages[@]}; do
         name=${package%%:*}
         repo=${package#*:}
         flatpak install $repo $name
     done
+elif command -v flatpak &>/dev/null; then
+    sudo pacman -Rs flatpak
 fi
 
 # Remove any packages that were orphaned in any previous step

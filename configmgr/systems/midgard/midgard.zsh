@@ -2,123 +2,28 @@ local SCRIPT_PATH=${0:A:h}
 source $SCRIPT_PATH/../../utils.zsh
 
 midgard_packages=(
-    # Base
-    linux-firmware
-    zram-generator
-    linux-headers
-    base-devel
-    inetutils
-    linux
-    base
-    sudo
+    submodule:base
 
-    # Boot
-    efibootmgr
-    grub
+    submodule:boot/grub
 
-    # Filesystems
-    btrfs-progs
-    dosfstools
-    f2fs-tools
-    lvm2
+    submodule:networking
 
-    # Firmware
-    intel-ucode
-    fwupd
+    submodule:filesystems
 
-    # Networking
-    networkmanager
-    bluez-utils
-    blueman
+    submodule:audio
 
-    # Audio
-    pipewire-pulse
-    gst-libav
-    rhythmbox
-    pipewire
-    
-    # Build Tools
-    cmake
-    make
-    gcc
-    npm
-    gdb
+    submodule:build
 
-    # Terminal Theming
-    zsh-syntax-highlighting
-    zsh-autosuggestions
+    submodule:firmware/base
+    submodule:firmware/intel_cpu
 
-    # Terminal Utilities
-    alacritty
-    man-pages
-    neovim
-    man-db
-    yazi
-    btop
-    tmux
-    gdu
-    zsh
+    submodule:terminal/utility
+    submodule:terminal/apps
+    submodule:terminal/zsh
 
-    # Terminal Commands
-    lm_sensors
-    ddcutil
-    unzip
-    slurp
-    wget
-    less
-    7zip
-    git
-    zip
-    bc
-    jq
-
-    # Desktop Theming
-    plymouth-theme-catppuccin-mocha-git=aur
-    catppuccin-qt5ct-git=aur
-    catppuccin-gtk-theme-mocha=aur
-    btop-theme-catppuccin=aur
-    ttf-material-symbols-variable-git=aur
-    ttf-cascadia-code-nerd
-    ttf-cascadia-mono-nerd
-    noto-fonts-cjk
-    ttf-liberation
-    qt5-graphicaleffects
-    qt5-quickcontrols2
-    qt6ct
-    papirus-icon-theme
-    breeze
-    sddm-silent-theme=aur
-    quickshell-git=aur
-
-    # Desktop Utilities
-    xdg-terminal-exec-mkhl=aur
-    xdg-desktop-portal-wlr
-    xdg-user-dirs
-    gnome-disk-utility
-    libreoffice-fresh
-    librewolf-bin=aur
-    pavucontrol-qt
-    thunderbird
-    gwenview
-    discord
-    fuzzel
-    nemo
-
-    # Desktop Environment
-    hyprpolkitagent
-    hyprsunset
-    hyprpaper
-    hypridle
-    hyprlock
-    hyprland
-    sddm
-
-    # Virtualization
-    #virt-manager
-    #bridge-utils
-    #qemu-full
-    #cemu=aur
-    #dnsmasq
+    submodule:tiling_desktop/hyprland
+    submodule:tiling_desktop/theming
+    submodule:tiling_desktop/apps
 
     # Libraries
     python-dbus
@@ -139,8 +44,6 @@ midgard_packages=(
     wl-clipboard
     moreutils
     plymouth
-    flatpak
-    uwsm
     acpi
     tlp
     python-validity=aur

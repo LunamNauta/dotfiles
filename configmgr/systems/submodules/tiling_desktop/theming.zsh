@@ -12,6 +12,6 @@ theming_packages=(
     qt6ct
     papirus-icon-theme
     breeze
-    sddm-silent-theme=aur
+    #sddm-silent-theme=aur
     quickshell-git=aur
 )

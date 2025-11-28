@@ -27,6 +27,7 @@ midgard_packages=(
 
     # Libraries
     python-dbus
+    db-derby
     libmpeg2
     tinyxml2
     libgtop

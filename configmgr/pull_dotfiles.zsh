@@ -3,6 +3,7 @@ source $SCRIPT_PATH/utils.zsh
 
 if ! [[ -d $HOME/.config ]]; then exit; fi
 
+pull-config-copy $SCRIPT_PATH/../bluetuith          $HOME/.config/bluetuith    bluetuith
 pull-config-copy $SCRIPT_PATH/../alacritty          $HOME/.config/alacritty    alacritty
 pull-config-copy $SCRIPT_PATH/../fuzzel             $HOME/.config/fuzzel       fuzzel
 pull-config-copy $SCRIPT_PATH/../qt6ct              $HOME/.config/qt6ct        qt6ct

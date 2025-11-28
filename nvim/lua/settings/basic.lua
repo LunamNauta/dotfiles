@@ -41,10 +41,10 @@ Wvim.languages = {
     ['jdtls'] = {
         langs = {'java'}
     },
-    ['qmlls'] = {
-        langs = {'qmljs'},
-        opts = {cmd = {'qmlls6', '-E'}}
-    }
+    --['qmlls'] = {
+    --    langs = {'qmljs'},
+    --    opts = {cmd = {'qmlls6', '-E'}}
+    --}
 }
 
 vim.opt.autochdir = true

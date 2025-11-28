@@ -5,6 +5,6 @@ hyprland_packages=(
     hypridle
     hyprlock
     hyprland
-    sddm
+    #sddm
     uwsm
 )

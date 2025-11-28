@@ -56,6 +56,17 @@ asgard_packages=(
     moreutils
     plymouth
     acpi
+
+    arduino-ide-bin=aur
+    bluetuith=aur
+    bluez-obex
+    intellij-idea-ultimate-edition=aur
+    keepassxc
+    picard
+    rsync
+    sshfs
+    syncthing
+    tailscale
 )
 
 #-------------------------------------------------------------------

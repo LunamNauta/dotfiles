@@ -10,7 +10,7 @@ sudo systemctl enable --now python3-validity
 sudo systemctl enable --now tlp
 sudo systemctl enable --now tailscaled
 sudo systemctl enable --now sshd
-sudo systemctl enable sddm
+#sudo systemctl enable sddm
 
 # Set up GTK theme stuff
 log_message "Setting up GTK..."

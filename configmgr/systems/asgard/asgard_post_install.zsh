@@ -7,7 +7,7 @@ systemctl --user start pipewire-pulse
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now lactd
-sudo systemctl enable sddm
+#sudo systemctl enable sddm
 
 # Set up GTK theme stuff
 log_message "Setting up GTK..."

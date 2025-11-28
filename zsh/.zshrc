@@ -8,4 +8,9 @@ source ~/.config/zsh/colors.zsh
 source ~/.config/zsh/misc.zsh
 source ~/.config/zsh/path_update.zsh
 
-source ~/.config/zsh/prompt.zsh
+if [[ $TTY == /dev/tty1 ]]; then
+    uwsm start Hyprland
+    logout || exit
+else
+    source ~/.config/zsh/prompt.zsh
+fi

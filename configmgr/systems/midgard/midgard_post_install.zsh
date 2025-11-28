@@ -8,6 +8,8 @@ sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now python3-validity
 sudo systemctl enable --now tlp
+sudo systemctl enable --now tailscaled
+sudo systemctl enable --now sshd
 sudo systemctl enable sddm
 
 # Set up GTK theme stuff

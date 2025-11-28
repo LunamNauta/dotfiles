@@ -48,6 +48,17 @@ midgard_packages=(
     acpi
     tlp
     python-validity=aur
+
+    arduino-ide-bin=aur
+    bluetuith=aur
+    bluez-obex
+    intellij-idea-ultimate-edition=aur
+    keepassxc
+    picard
+    rsync
+    sshfs
+    syncthing
+    tailscale
 )
 
 #-------------------------------------------------------------------

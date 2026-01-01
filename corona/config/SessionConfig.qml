@@ -9,7 +9,7 @@ JsonObject{
     component Commands: JsonObject{
         property list<string> logout: ["uwsm", "stop"]
         property list<string> shutdown: ["systemctl", "poweroff"]
-        property list<string> hibernate: ["systemctl", "suspend"]
+        property list<string> suspend: ["systemctl", "suspend"]
         property list<string> reboot: ["systemctl", "reboot"]
     }
 

@@ -33,14 +33,14 @@ Column{
         command: Config.session.commands.shutdown
 
         KeyNavigation.up: logout
-        KeyNavigation.down: hibernate
+        KeyNavigation.down: suspend
     }
 
     SessionButton{
-        id: hibernate
+        id: suspend
 
         icon: "downloading"
-        command: Config.session.commands.hibernate
+        command: Config.session.commands.suspend
 
         KeyNavigation.up: shutdown
         KeyNavigation.down: reboot
@@ -52,7 +52,7 @@ Column{
         icon: "cached"
         command: Config.session.commands.reboot
 
-        KeyNavigation.up: hibernate
+        KeyNavigation.up: suspend
     }
 
     component SessionButton: StyledRect{

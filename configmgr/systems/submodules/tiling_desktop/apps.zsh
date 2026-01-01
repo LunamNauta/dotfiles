@@ -12,9 +12,9 @@ apps_packages=(
     gst-libav
 
     gnome-disk-utility
-    alacritty
     gwenview
     discord
     fuzzel
+    kitty
     nemo
 )

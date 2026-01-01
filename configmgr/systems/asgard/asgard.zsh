@@ -58,15 +58,20 @@ asgard_packages=(
     acpi
 
     arduino-ide-bin=aur
-    bluetuith=aur
+    bluetuith-bin=aur
     bluez-obex
     intellij-idea-ultimate-edition=aur
+    libreoffice-impress-templates
     keepassxc
     picard
     rsync
     sshfs
     syncthing
     tailscale
+
+    hunspell-de
+    hunspell-en_us
+    hyprshot
 )
 
 #-------------------------------------------------------------------

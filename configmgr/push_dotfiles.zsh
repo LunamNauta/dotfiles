@@ -6,9 +6,9 @@ system_tags=($@)
 if ! [[ -d $HOME/.config ]]; then mkdir -p "$HOME/.config"; fi
 
 push-config-copy $SCRIPT_PATH/../bluetuith          $HOME/.config/bluetuith    bluetuith
-push-config-copy $SCRIPT_PATH/../alacritty          $HOME/.config/alacritty    alacritty
 push-config-copy $SCRIPT_PATH/../fuzzel             $HOME/.config/fuzzel       fuzzel
 push-config-copy $SCRIPT_PATH/../qt6ct              $HOME/.config/qt6ct        qt6ct
+push-config-copy $SCRIPT_PATH/../kitty              $HOME/.config/kitty        kitty
 push-config-copy $SCRIPT_PATH/../btop               $HOME/.config/btop         btop
 push-config-copy $SCRIPT_PATH/../hypr               $HOME/.config/hypr         hyprland
 push-config-copy $SCRIPT_PATH/../nvim               $HOME/.config/nvim         nvim

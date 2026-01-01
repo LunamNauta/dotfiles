@@ -4,9 +4,9 @@ source $SCRIPT_PATH/utils.zsh
 if ! [[ -d $HOME/.config ]]; then exit; fi
 
 pull-config-copy $SCRIPT_PATH/../bluetuith          $HOME/.config/bluetuith    bluetuith
-pull-config-copy $SCRIPT_PATH/../alacritty          $HOME/.config/alacritty    alacritty
 pull-config-copy $SCRIPT_PATH/../fuzzel             $HOME/.config/fuzzel       fuzzel
 pull-config-copy $SCRIPT_PATH/../qt6ct              $HOME/.config/qt6ct        qt6ct
+pull-config-copy $SCRIPT_PATH/../kitty              $HOME/.config/kitty        kitty
 pull-config-copy $SCRIPT_PATH/../btop               $HOME/.config/btop         btop
 pull-config-copy $SCRIPT_PATH/../hypr               $HOME/.config/hypr         hyprland
 pull-config-copy $SCRIPT_PATH/../nvim               $HOME/.config/nvim         nvim

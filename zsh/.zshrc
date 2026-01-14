@@ -9,7 +9,8 @@ source ~/.config/zsh/misc.zsh
 source ~/.config/zsh/path_update.zsh
 
 if [[ $TTY == /dev/tty1 ]]; then
-    echo $(uwsm start Hyprland) >> /tmp/hyprland_start_tty1.txt
+    #echo $(uwsm start Hyprland) >> /tmp/hyprland_start_tty1.txt
+    echo $(start-hyprland) >> /tmp/hyprland_start_tty1.txt
     logout || exit
 else
     source ~/.config/zsh/prompt.zsh

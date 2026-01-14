@@ -27,7 +27,6 @@ midgard_packages=(
 
     # Libraries
     python-dbus
-    db-derby
     libmpeg2
     tinyxml2
     libgtop
@@ -52,13 +51,17 @@ midgard_packages=(
     arduino-ide-bin=aur
     bluetuith=aur
     bluez-obex
-    intellij-idea-ultimate-edition=aur
+    #libreoffice-impress-templates
     keepassxc
     picard
     rsync
     sshfs
     syncthing
     tailscale
+
+    hunspell-de
+    hunspell-en_us
+    hyprshot
 )
 
 #-------------------------------------------------------------------

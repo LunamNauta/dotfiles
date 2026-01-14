@@ -2,6 +2,7 @@ apps_packages=(
     man-pages
     neovim
     man-db
+    kitty
     yazi
     btop
     tmux

@@ -1,5 +1,6 @@
 utility_packages=(
     lm_sensors
+    unrar-free
     ddcutil
     unzip
     slurp

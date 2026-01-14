@@ -37,7 +37,6 @@ asgard_packages=(
 
     # Libraries
     python-dbus
-    db-derby
     libmpeg2
     tinyxml2
     libgtop
@@ -60,8 +59,7 @@ asgard_packages=(
     arduino-ide-bin=aur
     bluetuith-bin=aur
     bluez-obex
-    intellij-idea-ultimate-edition=aur
-    libreoffice-impress-templates
+    #libreoffice-impress-templates
     keepassxc
     picard
     rsync

@@ -21,7 +21,7 @@ symbol = " "
 
 [directory]
 read_only = " "
-truncation_length = 3
+truncation_length = 0
 truncation_symbol = "…/"
 
 [hostname]

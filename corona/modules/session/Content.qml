@@ -16,17 +16,6 @@ Column{
     spacing: Config.appearance.spacing.large
 
     SessionButton{
-        id: logout
-
-        icon: "logout"
-        command: Config.session.commands.logout
-
-        KeyNavigation.down: shutdown
-
-        Component.onCompleted: forceActiveFocus()
-    }
-
-    SessionButton{
         id: shutdown
 
         icon: "power_settings_new"

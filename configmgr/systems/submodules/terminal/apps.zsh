@@ -1,5 +1,6 @@
 apps_packages=(
     man-pages
+    starship
     neovim
     man-db
     kitty

@@ -8,9 +8,19 @@ return{{
             ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'rounded'}),
         }
         vim.diagnostic.config({virtual_text = false})
-        for k, v in pairs(Wvim.languages) do
-            local opts = vim.tbl_deep_extend("force", v.opts or {}, {capabilities = default_capabilities, handlers = default_handlers})
-            require("lspconfig")[k].setup(opts)
+        for server, lang in pairs(Wvim.languages) do
+            local opts = vim.tbl_deep_extend(
+                "force",
+                lang.opts or {},
+                {
+                    capabilities = default_capabilities,
+                    handlers = default_handlers,
+                }
+            )
+
+            -- New API (0.11+)
+            vim.lsp.config(server, opts)
+            vim.lsp.enable(server)
         end
     end
 }}

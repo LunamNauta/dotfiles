@@ -64,3 +64,89 @@ vim.g.mapleader = ' '
 vim.g.c_syntax_for_h = true
 
 vim.api.nvim_set_option("clipboard", "unnamedplus")
+
+local function set_background()
+    local hl = vim.api.nvim_set_hl
+
+    -- Core editor
+    hl(0, "Normal", { bg = "none" })
+    hl(0, "NormalNC", { bg = "none" })
+    hl(0, "EndOfBuffer", { bg = "none" })
+    hl(0, "SignColumn", { bg = "none" })
+    hl(0, "FoldColumn", { bg = "none" })
+    hl(0, "LineNr", { bg = "none" })
+    hl(0, "CursorLineNr", { bg = "none" })
+
+    -- Floating windows
+    hl(0, "NormalFloat", { bg = "none" })
+    hl(0, "FloatBorder", { bg = "none" })
+    hl(0, "WinSeparator", { bg = "none" })
+
+    -- Statusline / tabline
+    hl(0, "StatusLine", { bg = "none" })
+    hl(0, "StatusLineNC", { bg = "none" })
+    hl(0, "TabLine", { bg = "none" })
+    hl(0, "TabLineFill", { bg = "none" })
+    hl(0, "TabLineSel", { bg = "none" })
+
+    -- Popup menu (completion)
+    hl(0, "Pmenu", { bg = "none" })
+    hl(0, "PmenuSel", { bg = "none" })
+    hl(0, "PmenuBorder", { bg = "none" })
+
+    -- Diagnostics
+    hl(0, "DiagnosticVirtualTextError", { bg = "none" })
+    hl(0, "DiagnosticVirtualTextWarn", { bg = "none" })
+    hl(0, "DiagnosticVirtualTextInfo", { bg = "none" })
+    hl(0, "DiagnosticVirtualTextHint", { bg = "none" })
+
+    -- Telescope (explicit, just in case)
+    hl(0, "TelescopeNormal", { bg = "none" })
+    hl(0, "TelescopeBorder", { bg = "none" })
+    hl(0, "TelescopePromptNormal", { bg = "none" })
+    hl(0, "TelescopeResultsNormal", { bg = "none" })
+    hl(0, "TelescopePreviewNormal", { bg = "none" })
+
+    -- Selected item
+    hl(0, "TelescopeSelection", {
+        bg = "#11111b",
+        fg = "#cdd6f4",
+        bold = true
+    })
+
+    -- Optional: caret (`>` on the left)
+    hl(0, "TelescopeSelectionCaret", {
+        fg = "#b4befe",
+        bg = "NONE",
+    })
+end
+local function set_borders()
+    local hl = vim.api.nvim_set_hl
+    local border_color = "#b4befe"
+
+    -- Core UI borders
+    hl(0, "FloatBorder", { fg = border_color, bg = "none" })
+    hl(0, "WinSeparator", { fg = border_color, bg = "none" })
+
+    -- Floating window titles (0.11+)
+    hl(0, "FloatTitle", { fg = border_color, bg = "none" })
+
+    -- Telescope
+    hl(0, "TelescopeBorder", { fg = border_color, bg = "none" })
+    hl(0, "TelescopePromptBorder", { fg = border_color, bg = "none" })
+    hl(0, "TelescopeResultsBorder", { fg = border_color, bg = "none" })
+    hl(0, "TelescopePreviewBorder", { fg = border_color, bg = "none" })
+
+    -- Completion / popups
+    hl(0, "PmenuBorder", { fg = border_color, bg = "none" })
+
+    -- LSP UI
+    hl(0, "LspInfoBorder", { fg = border_color, bg = "none" })
+end
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        set_background()
+        set_borders()
+    end
+})
+vim.wo.fillchars='eob: '

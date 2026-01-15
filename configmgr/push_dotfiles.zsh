@@ -25,3 +25,5 @@ for tag in ${system_tags[@]}; do
         source $post_install_file
     fi
 done
+
+hyprctl reload

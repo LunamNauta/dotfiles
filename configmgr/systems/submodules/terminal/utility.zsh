@@ -2,6 +2,7 @@ utility_packages=(
     lm_sensors
     unrar-free
     ddcutil
+    socat
     unzip
     slurp
     wget

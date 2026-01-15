@@ -27,3 +27,5 @@ elif ! [[ -z $(tty | grep pts) ]]; then
 else
     source ~/.config/zsh/prompt.zsh
 fi
+
+export EDITOR=nvim

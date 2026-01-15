@@ -119,6 +119,13 @@ local function set_background()
         fg = "#b4befe",
         bg = "NONE",
     })
+
+    -- Barbar: selected buffer
+    hl(0, "BufferCurrent", { bg = "#11111b", fg = "#cdd6f4", bold = true })
+    hl(0, "BufferCurrentIndex", { bg = "#11111b", fg = "#b4befe" })
+    hl(0, "BufferCurrentIcon", { bg = "#11111b", fg = "#b4befe" })
+    hl(0, "BufferCurrentSign", { bg = "#11111b", fg = "#b4befe" })
+    hl(0, "BufferCurrentMod", { bg = "#11111b", fg = "#f38ba8" })
 end
 local function set_borders()
     local hl = vim.api.nvim_set_hl
@@ -149,4 +156,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         set_borders()
     end
 })
-vim.wo.fillchars='eob: '
+vim.opt.fillchars = { eob = " " }

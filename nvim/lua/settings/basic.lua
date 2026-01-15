@@ -116,20 +116,46 @@ local function set_background()
 
     -- Optional: caret (`>` on the left)
     hl(0, "TelescopeSelectionCaret", {
-        fg = "#b4befe",
+        fg = "NONE",
         bg = "NONE",
     })
 
-    -- Barbar: selected buffer
-    hl(0, "BufferCurrent", { bg = "#11111b", fg = "#cdd6f4", bold = true })
-    hl(0, "BufferCurrentIndex", { bg = "#11111b", fg = "#b4befe" })
-    hl(0, "BufferCurrentIcon", { bg = "#11111b", fg = "#b4befe" })
-    hl(0, "BufferCurrentSign", { bg = "#11111b", fg = "#b4befe" })
-    hl(0, "BufferCurrentMod", { bg = "#11111b", fg = "#f38ba8" })
+    local mocha = {
+        base     = "#1e1e2e",
+        surface0 = "#313244",
+        text     = "#cdd6f4",
+        peach    = "#fab387",
+        red      = "#f38ba8",
+        blue     = "#89b4fa",
+        mantle   = "#181825",
+    }
+
+    hl(0, "BufferCurrent",     { fg = "#ffffff", bg = "none", bold = true })
+    hl(0, "BufferCurrentIndex", { fg = "#ffffff", bg = "none" })
+    hl(0, "BufferCurrentSign",  { fg = "none",    bg = "none" })
+
+    hl(0, "BufferCurrentMod",  { fg = mocha.peach, bg = "none", bold = true })
+
+    hl(0, "BufferInactive",     { fg = mocha.text, bg = mocha.mantle })
+    hl(0, "BufferInactiveIndex", { fg = mocha.text, bg = mocha.mantle })
+    hl(0, "BufferInactiveSign",  { fg = "none",    bg = "none" })
+    hl(0, "BufferInactiveMod",   { fg = mocha.peach, bg = mocha.mantle })
+
+    hl(0, "BufferVisible",     { fg = mocha.text, bg = mocha.surface0 })
+    hl(0, "BufferVisibleIndex", { fg = mocha.text, bg = mocha.surface0 })
+    hl(0, "BufferVisibleSign",  { fg = "none",    bg = "none" })
+
+    hl(0, "BufferCurrentIcon",  { fg = mocha.blue, bg = "none" })
+    hl(0, "BufferInactiveIcon", { fg = mocha.blue, bg = mocha.black })
+
+    hl(0, "BufferCurrentTarget",  { fg = mocha.red, bg = "none", bold = true })
+    hl(0, "BufferInactiveTarget", { fg = mocha.red, bg = mocha.black, bold = true })
+
+    hl(0, "BufferFill", { bg = "none" }) -- Removes trailing bar
 end
 local function set_borders()
     local hl = vim.api.nvim_set_hl
-    local border_color = "#b4befe"
+    local border_color = "NONE"
 
     -- Core UI borders
     hl(0, "FloatBorder", { fg = border_color, bg = "none" })

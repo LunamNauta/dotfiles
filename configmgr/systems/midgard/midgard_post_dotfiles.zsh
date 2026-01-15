@@ -1,7 +1,7 @@
 # Add extensions to make yazi more useful
 log_message "Instsalling yazi extensions..."
-rm -r ~/.config/yazi/plugins
-rm ~/.config/yazi/package.toml
+rm -rf ~/.config/yazi/plugins
+rm -rf ~/.config/yazi/package.toml
 ya pkg add yazi-rs/plugins:full-border
 ya pkg add yazi-rs/plugins:mount
 ya pkg add yazi-rs/plugins:smart-enter

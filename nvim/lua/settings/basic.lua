@@ -7,7 +7,7 @@ Wvim.keymaps = {
     {m = 'n', k = '<LEADER>tn',   c = '<CMD>tabnew<CR>'},
     {m = 'n', k = '<LEADER>tk',   c = '<CMD>bdelete<CR>'},
     {m = 'n', k = 'gt',           c = function() vim.cmd('BufferGoto ' .. vim.v.count) end},
-    {m = 'n', k = '<LEADER>ff',   c = '<CMD>Telescope file_browser<CR>'},
+    {m = 'n', k = '<LEADER>ff',   c = '<CMD>Telescope file_browser hidden=true no_ignore=true<CR>'},
     {m = 'n', k = '<LEADER>di',   c = vim.lsp.buf.hover},
     {m = 'n', k = '<LEADER>de',   c = function() vim.diagnostic.open_float({border = 'rounded'}) end},
     {m = 'n', k = '<LEADER>ddef', c = vim.lsp.buf.definition},

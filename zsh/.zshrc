@@ -13,5 +13,5 @@ if [[ $TTY == /dev/tty1 ]]; then
     echo $(start-hyprland) >> /tmp/hyprland_start_tty1.txt
     logout || exit
 else
-    source ~/.config/zsh/prompt.zsh
+    #source ~/.config/zsh/prompt.zsh
 fi

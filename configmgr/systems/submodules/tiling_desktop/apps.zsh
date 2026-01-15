@@ -17,4 +17,6 @@ apps_packages=(
     fuzzel
     kitty
     nemo
+
+    obsidian
 )

@@ -1,5 +1,5 @@
 import type { package_list } from "../src/types";
-import { log_message } from "../src/utils";
+import { sudo_interactive_props, log_message } from "../src/utils";
 
 let packages: package_list = {
     pacman: [
@@ -68,6 +68,11 @@ let packages: package_list = {
 async function pre_install(){
     log_message("Enabling multilib repository...");
     Bun.spawnSync(["sudo", "sed", "-i", "-e", "'/#\[multilib\]/,+1s/^#//'", "/etc/pacman.conf"]);
+    console.log("");
+
+    log_message("Disabling docker autostart...");
+    await Bun.spawn(["sudo", "systemctl", "disable", "--now", "docker"], sudo_interactive_props).exited;
+    await Bun.spawn(["sudo", "systemctl", "disable", "--now", "docker.socket"], sudo_interactive_props).exited;
     console.log("");
 }
 

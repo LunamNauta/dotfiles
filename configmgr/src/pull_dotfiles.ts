@@ -7,7 +7,7 @@ if (command_exists("fuzzel")) await pull_config("../../fuzzel", `${homedir()}/.c
 if (command_exists("qt6ct")) await pull_config("../../qt6ct", `${homedir()}/.config/qt6ct`);
 if (command_exists("kitty")) await pull_config("../../kitty", `${homedir()}/.config/kitty`);
 if (command_exists("btop")) await pull_config("../../btop", `${homedir()}/.config/btop`);
-if (command_exists("hypr")) await pull_config("../../hypr", `${homedir()}/.config/hypr`);
+if (command_exists("hyprland")) await pull_config("../../hypr", `${homedir()}/.config/hypr`);
 if (command_exists("nvim")) await pull_config("../../nvim", `${homedir()}/.config/nvim`);
 if (command_exists("tmux")) await pull_config("../../tmux", `${homedir()}/.config/tmux`);
 if (command_exists("tmux")) await pull_config("../../tmux/.tmux.conf", `${homedir()}/.tmux.conf`);

@@ -61,10 +61,12 @@ async function pre_install(){
     log_message("Enabling multilib repository...");
     Bun.spawnSync(["sudo", "sed", "-i", "-e", "'/#\[multilib\]/,+1s/^#//'", "/etc/pacman.conf"]);
     console.log("");
+}
 
+async function post_install(){
     log_message("Enabling TLP service...");
     await Bun.spawn(["sudo", "systemctl", "enable", "--now", "tlp"], sudo_interactive_props).exited;
     console.log("");
 }
 
-export { packages, pre_install };
+export { packages, pre_install, post_install };

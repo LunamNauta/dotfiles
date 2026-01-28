@@ -50,9 +50,18 @@ let packages: package_list = {
         "vlc-plugin-ffmpeg",
         "inotify-tools",
         "moreutils",
-        "plymouth"
+        "plymouth",
+
+        // These docker packages conflict with 'docker-desktop'
+        //"docker-compose",
+        //"docker-buildx",
+        "docker",
     ],
-    aur: null,
+    aur: [
+        "docker-desktop",
+        "python-validity",
+        "mongodb-bin"
+    ],
     flatpak: null
 };
 

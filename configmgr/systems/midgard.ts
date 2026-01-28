@@ -1,5 +1,5 @@
 import type { package_list } from "../src/types";
-import { log_message } from "../src/utils";
+import { sudo_interactive_props, log_message } from "../src/utils";
 
 let packages: package_list = {
     pacman: [
@@ -13,6 +13,8 @@ let packages: package_list = {
 
         "module:firmware/base",
         "module:firmware/intel/cpu",
+
+        "module:drivers/gpu",
 
         "module:terminal/utilities",
         "module:terminal/apps",
@@ -39,15 +41,29 @@ let packages: package_list = {
         "vlc-plugin-ffmpeg",
         "inotify-tools",
         "moreutils",
-        "plymouth"
+        "plymouth",
+
+        // These docker packages conflict with 'docker-desktop'
+        //"docker-compose",
+        //"docker-buildx",
+        "docker",
+        "tlp"
     ],
-    aur: null,
+    aur: [
+        "docker-desktop",
+        "python-validity",
+        "mongodb-bin"
+    ],
     flatpak: null
 };
 
 async function pre_install(){
     log_message("Enabling multilib repository...");
     Bun.spawnSync(["sudo", "sed", "-i", "-e", "'/#\[multilib\]/,+1s/^#//'", "/etc/pacman.conf"]);
+    console.log("");
+
+    log_message("Enabling TLP service...");
+    await Bun.spawn(["sudo", "systemctl", "enable", "--now", "tlp"], sudo_interactive_props).exited;
     console.log("");
 }
 

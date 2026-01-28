@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
+cd $SCRIPT_DIR/../src/
+. ../scripts/utils.sh
+bun run ./install_admin.ts

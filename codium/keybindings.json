@@ -1,0 +1,21 @@
+[
+    {
+        "key": "ctrl+shift+q",
+        "command": "workbench.action.terminal.newWithProfile",
+        "args": { "profileName": "zsh" }
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.terminal.focus",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "find-it-faster.findFiles"
+    }
+]

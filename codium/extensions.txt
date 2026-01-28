@@ -1,0 +1,8 @@
+alexdauenhauer.catppuccin-noctis-icons
+asvetliakov.vscode-neovim
+catppuccin.catppuccin-vsc
+catppuccin.catppuccin-vsc-icons
+llvm-vs-code-extensions.vscode-clangd
+markdown-inline-preview.markdown-inline-preview
+tomrijndorp.find-it-faster
+twxs.cmake

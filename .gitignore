@@ -1,5 +1,6 @@
 zsh/.zprofile
 zsh/.zcompdump
+zsh/.zsh_history
 
 yazi/package.toml
 yazi/plugins

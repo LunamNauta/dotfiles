@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
+cd $SCRIPT_DIR/../src/
+. ../scripts/utils.sh
+
+if ! [ -n "$1" ]; then
+    log_error "Missing option to 'configmgr'"
+    exit -1
+fi
+
+if [ $1 = "pull" ]; then
+    ../scripts/pull_dotfiles
+    if [ $? -ne 0 ]; then exit -1; fi
+elif [ $1 = "push" ]; then
+    ../scripts/push_dotfiles
+    if [ $? -ne 0 ]; then exit -1; fi
+elif [ $1 = "install" ]; then
+    if ! [ -n "$2" ]; then
+        log_error "Missing option to 'configmgr install'"
+        exit 1
+    fi
+
+    if [ $2 = "packages" ] || [ $2 = "both" ]; then
+        ../scripts/install_packages $3
+        if [ $? -ne 0 ]; then exit -1; fi
+    fi
+    if [ $2 = "admin" ] || [ $2 = "both" ]; then
+        ../scripts/install_admin
+        if [ $? -ne 0 ]; then exit -1; fi
+    fi
+    if ! [ $2 = "admin" ] && ! [ $2 = "packages" ] && ! [ $2 = "both" ]; then
+        log_error "Invalid option to 'configmgr install'"
+        exit 1
+    fi
+else
+    log_error "Invalid option to 'configmgr'"
+    exit 1
+fi

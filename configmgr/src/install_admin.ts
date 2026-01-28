@@ -19,6 +19,7 @@ async function tlp_setup(){
         await Bun.spawn(["sudo", "rm", "-f", "/etc/tlp.conf"], sudo_interactive_props).exited;
         console.log("");
     }
+    log_message("Inserting new TLP config...");
     await Bun.spawn(["sudo", "cp", "../../tlp/tlp.conf", "/etc/tlp.conf"], sudo_interactive_props).exited;
     await Bun.spawn(["sudo", "systemctl", "restart", "tlp"], sudo_interactive_props).exited;
 }

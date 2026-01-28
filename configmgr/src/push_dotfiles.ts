@@ -1,5 +1,5 @@
 import { command_exists, log_message, push_config } from "./utils";
-import { homedir } from "node:os";
+import { homedir, hostname } from "node:os";
 
 if (command_exists("starship")) await push_config("../../starship.toml", `${homedir()}/.config/starship.toml`);
 if (command_exists("bluetuith")) await push_config("../../bluetuith",    `${homedir()}/.config/bluetuith`);
@@ -9,7 +9,8 @@ if (command_exists("kitty")) await push_config("../../kitty", `${homedir()}/.con
 if (command_exists("btop")) await push_config("../../btop", `${homedir()}/.config/btop`);
 if (command_exists("hyprland")){
     await push_config("../../hypr", `${homedir()}/.config/hypr`);
-    Bun.spawnSync(["sed", "-i", "'s/monitor = , 1920x1080@60, auto, 1.25/monitor = , 1920x1080@120, auto, 1/'", `${homedir()}/.config/hypr/hyprland.conf`]);
+    if (hostname() == "asgard") Bun.spawnSync(["sed", "-i", "s/monitor = , 1920x1080@60, auto, 1.20/monitor = , 1920x1080@120, auto, 1/", `${homedir()}/.config/hypr/hyprland.conf`]);
+    else if (hostname() == "midgard") Bun.spawnSync(["sed", "-i", "s/monitor = , 1920x1080@120, auto, 1/monitor = , 1920x1080@60, auto, 1.20/", `${homedir()}/.config/hypr/hyprland.conf`]);
     Bun.spawnSync(["hyprctl", "reload"]);
 }
 if (command_exists("nvim")) await push_config("../../nvim", `${homedir()}/.config/nvim`);

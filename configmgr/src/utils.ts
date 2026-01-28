@@ -22,15 +22,15 @@ function command_exists(command: string){
 
 async function push_config(config_path: string, to_path: string){
     log_message(`Pushing config ${path.basename(config_path)} to ${to_path}`);
-    Bun.spawnSync(["mkdir", "-p", path.dirname(to_path)]);
+    await Bun.spawn(["mkdir", "-p", path.dirname(to_path)]).exited;
     if (await Bun.file(to_path).exists) Bun.spawnSync(["rm", "-rf", to_path]);
-    Bun.spawnSync(["cp", "-r", config_path, to_path]);
+    await Bun.spawn(["cp", "-r", config_path, to_path]).exited;
 }
 
 async function pull_config(config_path: string, to_path: string){
     log_message(`Pulling config ${path.basename(to_path)} from ${config_path}`);
     if (await Bun.file(config_path).exists) Bun.spawnSync(["rm", "-rf", config_path]);
-    Bun.spawnSync(["cp", "-r", to_path, config_path]);
+    Bun.spawn(["cp", "-r", to_path, config_path]);
 }
 
 export {

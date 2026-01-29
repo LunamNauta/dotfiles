@@ -17,6 +17,7 @@ async function hyprland_special(){
         }
     }
     Bun.spawnSync(["hyprctl", "reload"]);
+    Bun.spawnSync(["sh", `${homedir()}/.config/hypr/scripts/border_when_alone.zsh`]);
 }
 async function yazi_special(){
     log_message("Installing yazi plugins");

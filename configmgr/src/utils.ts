@@ -1,4 +1,3 @@
-import { homedir } from "node:os";
 import path from "node:path";
 
 const reset: string = "\x1b[0m";
@@ -33,10 +32,31 @@ async function pull_config(config_path: string, to_path: string){
     Bun.spawn(["cp", "-r", to_path, config_path]);
 }
 
+async function edit_config(config_path: string, header: string, newlines: string[]){
+    const replacement = newlines.join("\n").trim();
+
+    const text = await Bun.file(config_path).text();
+    const lines = text.split("\n");
+
+    const start = lines.findIndex(line => line.includes("CONFIGMGR: " + header));
+    if (start == -1) return;
+    let end = start + 1;
+    for (; end < lines.length && !lines[end]?.includes("CONFIGMGR:"); end++);
+
+    const result = [
+        ...lines.slice(0, start + 1),
+        replacement,
+        ...lines.slice(end),
+    ];
+
+    await Bun.write(config_path, result.join("\n"));
+}
+
 export {
     sudo_interactive_props,
     log_message,
     command_exists,
     push_config,
-    pull_config
+    pull_config,
+    edit_config
 }

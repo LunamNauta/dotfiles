@@ -1,3 +1,4 @@
+import { readdir } from "node:fs/promises";
 import path from "node:path";
 
 const reset: string = "\x1b[0m";
@@ -19,6 +20,43 @@ function command_exists(command: string){
     return Bun.spawnSync(["sh", "-c", "command -v " + command]).exitCode == 0;
 }
 
+async function wipe_configmgr_edits(path: string){
+    const file = Bun.file(path);
+    const stat = await file.stat();
+    if (!Boolean(stat.mode & 0o200)) return;
+    if (stat.isDirectory()){
+        const files = await readdir(path, { recursive: true, withFileTypes: true });
+        for (let a = 0; a < files.length; a++){
+            if (files[a]?.isDirectory()) continue;
+            const new_path = files[a]?.parentPath + "/" + files[a]?.name;
+            await wipe_configmgr_edits(new_path);
+        }
+        return;
+    }
+
+    const text = await Bun.file(path).text();
+    const lines = text.split("\n");
+
+    const result: string[] = [];
+    let in_section = false;
+
+    for (const line of lines){
+        if (line.includes("CONFIGMGR:")){
+            if (in_section){
+                result.push(line);
+                in_section = false;
+            }
+            else{
+                result.push(line);
+                in_section = true;
+            }
+        }
+        else if (!in_section) result.push(line);
+    }
+
+    await Bun.write(path, result.join("\n"));
+}
+
 async function push_config(config_path: string, to_path: string){
     log_message(`Pushing config ${path.basename(config_path)} to ${to_path}`);
     await Bun.spawn(["mkdir", "-p", path.dirname(to_path)]).exited;
@@ -29,7 +67,8 @@ async function push_config(config_path: string, to_path: string){
 async function pull_config(config_path: string, to_path: string){
     log_message(`Pulling config ${path.basename(to_path)} from ${config_path}`);
     if (await Bun.file(config_path).exists) Bun.spawnSync(["rm", "-rf", config_path]);
-    Bun.spawn(["cp", "-r", to_path, config_path]);
+    await Bun.spawn(["cp", "-r", to_path, config_path]).exited;
+    await wipe_configmgr_edits(config_path);
 }
 
 async function edit_config(config_path: string, header: string, newlines: string[]){
@@ -58,5 +97,6 @@ export {
     command_exists,
     push_config,
     pull_config,
-    edit_config
+    edit_config,
+    wipe_configmgr_edits
 }

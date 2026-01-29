@@ -72,11 +72,11 @@ async function pre_install(){
 }
 
 async function post_install(){
-    log_message("Disabling docker autostart...");
-    await Bun.spawn(["sudo", "systemctl", "disable", "--now", "docker"], sudo_interactive_props).exited;
-    await Bun.spawn(["sudo", "systemctl", "disable", "--now", "docker.socket"], sudo_interactive_props).exited;
-    await Bun.spawn(["systemctl", "--user", "disable", "--now", "docker-desktop"], sudo_interactive_props).exited;
-    console.log("");
+    // log_message("Disabling docker autostart...");
+    // await Bun.spawn(["sudo", "systemctl", "disable", "--now", "docker"], sudo_interactive_props).exited;
+    // await Bun.spawn(["sudo", "systemctl", "disable", "--now", "docker.socket"], sudo_interactive_props).exited;
+    // await Bun.spawn(["systemctl", "--user", "disable", "--now", "docker-desktop"], sudo_interactive_props).exited;
+    // console.log("");
 }
 
 export { packages, pre_install, post_install };

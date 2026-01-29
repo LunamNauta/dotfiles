@@ -3,8 +3,18 @@ import { homedir, hostname } from "node:os";
 
 async function hyprland_special(){
     switch (hostname()){
-        case "asgard":  edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "MONITOR DATA", ["monitor = , 1920x1080@120, auto, 1"]);    break;
-        case "midgard": edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "MONITOR DATA", ["monitor = , 1920x1080@60, auto, 1.20"]); break;
+        case "asgard":{
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "MONITOR DATA", ["monitor = , 1920x1080@120, auto, 1"]);
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "GAPS", ["gaps_in = 0,0,0,0", "gaps_out = 4,4,4,29"]);
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "ROUNDING", ["rounding = 14"]);
+            break;
+        }
+        case "midgard":{
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "MONITOR DATA", ["monitor = , 1920x1080@60, auto, 1.20"]);
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "GAPS", ["gaps_in = 0,0,0,0", "gaps_out = 2,2,2,36"]);
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "ROUNDING", ["rounding = 14"]);
+            break;
+        }
     }
     Bun.spawnSync(["hyprctl", "reload"]);
 }

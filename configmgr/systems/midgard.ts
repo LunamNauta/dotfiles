@@ -14,7 +14,7 @@ let packages: package_list = {
         "module:firmware/base",
         "module:firmware/intel/cpu",
 
-        "module:drivers/gpu",
+        "module:drivers/intel/gpu",
 
         "module:terminal/utilities",
         "module:terminal/apps",

@@ -1,4 +1,4 @@
 # Bun completions
-[ -s "/home/loki/.bun/_bun" ] && source "/home/loki/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

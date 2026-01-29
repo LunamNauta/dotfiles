@@ -6,7 +6,7 @@ import QtQuick
 Item{
     id: root
 
-    property string source: "/home/loki/personal/dotfiles/backgrounds/Sakura_Trees.jpg"
+    property string source: Quickshell.env("HOME") + "/personal/dotfiles/backgrounds/Sakura_Trees.jpg"
 
     Image{
         source: root.source

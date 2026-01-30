@@ -1,6 +1,7 @@
 import qs.modules
 import qs.components
 import qs.config
+import qs.services
 
 import "modules/background"
 
@@ -63,6 +64,15 @@ ShellRoot{
                     Workspace { workspace_id: 9 }
                     Workspace { workspace_id: 10 }
                 }
+
+                Loader{
+                    active: BatteryData.batteries.length != 0
+                    sourceComponent: BatteryInfo{}
+                }
+                component BatteryInfo: RowLayout{
+                    StyledText{ text: "|" }
+                    Battery{}
+                }
             }
         }
 
@@ -76,6 +86,7 @@ ShellRoot{
             implicitWidth: right_elements.implicitWidth + Config.appearance.padding.smaller
             implicitHeight: right_elements.implicitHeight + Config.appearance.padding.smaller
 
+            color: "#1e1e2e"
             radius: 8
 
             RowLayout{

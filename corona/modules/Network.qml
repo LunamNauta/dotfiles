@@ -19,7 +19,7 @@ Item{
         
         animate: true
 
-        text: Network.active != null ? Icons.getNetworkIcon(Network.active.strength) : "signal_wifi_off"
+        text: NetworkData.active != null ? Icons.getNetworkIcon(NetworkData.active.strength) : "signal_wifi_off"
 
         Process{
             id: open_network_manager

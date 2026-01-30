@@ -18,5 +18,6 @@
             "path": "/usr/bin/qmake"
         }
     ],
-    "qt-qml.doNotAskForQmllsDownload": true
+    "qt-qml.doNotAskForQmllsDownload": true,
+    "git.autofetch": true
 }

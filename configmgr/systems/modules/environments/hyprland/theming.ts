@@ -17,6 +17,7 @@ let packages: package_list = {
     ],
     aur: [
         "quickshell-git",
+        "noctalia-shell",
 
         "plymouth-theme-catppuccin-mocha-git",
         "catppuccin-gtk-theme-mocha",

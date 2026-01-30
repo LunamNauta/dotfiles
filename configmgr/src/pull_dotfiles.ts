@@ -1,6 +1,12 @@
 import { command_exists, log_message, pull_config } from "./utils";
 import { homedir } from "node:os";
 
+async function hyprland_special(){
+    log_message("Scraping settings from Noctalia shell");
+    await pull_config("../../noctalia/colors.json", `${homedir()}/.config/noctalia/colors.json`);
+    await pull_config("../../noctalia/plugins.json", `${homedir()}/.config/noctalia/plugins.json`);
+    await pull_config("../../noctalia/settings.json", `${homedir()}/.config/noctalia/settings.json`);
+}
 async function vscode_special(){
     log_message("Scraping extensions from vscode");
     const extensions_file = Bun.file("../../vscode/extensions.txt");
@@ -15,7 +21,7 @@ let push_info = [
   {command: "qt6ct",     to: "../../qt6ct",                   from: `${homedir()}/.config/qt6ct`},
   {command: "kitty",     to: "../../kitty",                   from: `${homedir()}/.config/kitty`},
   {command: "btop",      to: "../../btop",                    from: `${homedir()}/.config/btop`},
-  {command: "hyprland",  to: "../../hypr",                    from: `${homedir()}/.config/hypr`},
+  {command: "hyprland",  to: "../../hypr",                    from: `${homedir()}/.config/hypr`, special: hyprland_special},
   {command: "nvim",      to: "../../nvim",                    from: `${homedir()}/.config/nvim`},
   {command: "tmux",      to: "../../tmux",                    from: `${homedir()}/.config/tmux`},
   {command: "tmux",      to: "../../tmux/.tmux.conf",         from: `${homedir()}/.tmux.conf`},

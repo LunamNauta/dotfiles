@@ -16,6 +16,12 @@ async function hyprland_special(){
             break;
         }
     }
+
+    log_message("Setting up Noctalia shell");
+    await push_config("../../noctalia/colors.json", `${homedir()}/.config/noctalia/colors.json`);
+    await push_config("../../noctalia/plugins.json", `${homedir()}/.config/noctalia/plugins.json`);
+    await push_config("../../noctalia/settings.json", `${homedir()}/.config/noctalia/settings.json`);
+    
     Bun.spawnSync(["hyprctl", "reload"]);
     Bun.spawnSync(["sh", `${homedir()}/.config/hypr/scripts/border_when_alone.zsh`]);
 }

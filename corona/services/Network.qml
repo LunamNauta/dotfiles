@@ -1,10 +1,10 @@
 pragma Singleton
 
-import Quickshell.Io
 import Quickshell
+import Quickshell.Io
 import QtQuick
 
-Singleton {
+Singleton{
     id: root
 
     readonly property AccessPoint active: networks.find(n => n.active) ?? null
@@ -15,42 +15,42 @@ Singleton {
 
     reloadableId: "network"
 
-    function enableWifi(enabled: bool): void {
+    function enableWifi(enabled: bool): void{
         const cmd = enabled ? "on" : "off";
         enable_wifi_proc.exec(["nmcli", "radio", "wifi", cmd]);
     }
 
-    function toggleWifi(): void {
+    function toggleWifi(): void{
         const cmd = wifi_enabled ? "off" : "on";
         enable_wifi_proc.exec(["nmcli", "radio", "wifi", cmd]);
     }
 
-    function rescanWifi(): void {
+    function rescanWifi(): void{
         rescan_proc.running = true;
     }
 
-    function connectToNetwork(ssid: string, password: string): void {
+    function connectToNetwork(ssid: string, password: string): void{
         // TODO: Implement password
         connect_proc.exec(["nmcli", "conn", "up", ssid]);
     }
 
-    function disconnectFromNetwork(): void {
+    function disconnectFromNetwork(): void{
         if (active) disconnect_proc.exec(["nmcli", "connection", "down", active.ssid]);
     }
 
-    function getWifiStatus(): void {
+    function getWifiStatus(): void{
         wifi_status_proc.running = true;
     }
 
-    Process {
+    Process{
         running: true
         command: ["nmcli", "m"]
-        stdout: SplitParser {
+        stdout: SplitParser{
             onRead: get_networks.running = true
         }
     }
 
-    Process {
+    Process{
         id: wifi_status_proc
 
         running: true
@@ -59,14 +59,14 @@ Singleton {
             LANG: "C",
             LC_ALL: "C"
         })
-        stdout: StdioCollector {
+        stdout: StdioCollector{
             onStreamFinished: {
                 root.wifi_enabled = text.trim() === "enabled";
             }
         }
     }
 
-    Process {
+    Process{
         id: enable_wifi_proc
 
         onExited: {
@@ -75,7 +75,7 @@ Singleton {
         }
     }
 
-    Process {
+    Process{
         id: rescan_proc
 
         command: ["nmcli", "dev", "wifi", "list", "--rescan", "yes"]
@@ -84,26 +84,26 @@ Singleton {
         }
     }
 
-    Process {
+    Process{
         id: connect_proc
 
-        stdout: SplitParser {
+        stdout: SplitParser{
             onRead: get_networks.running = true
         }
-        stderr: StdioCollector {
+        stderr: StdioCollector{
             onStreamFinished: console.warn("Network connection error:", text)
         }
     }
 
-    Process {
+    Process{
         id: disconnect_proc
 
-        stdout: SplitParser {
+        stdout: SplitParser{
             onRead: get_networks.running = true
         }
     }
 
-    Process {
+    Process{
         id: get_networks
 
         running: true
@@ -112,7 +112,7 @@ Singleton {
             LANG: "C",
             LC_ALL: "C"
         })
-        stdout: StdioCollector {
+        stdout: StdioCollector{
             onStreamFinished: {
                 const PLACEHOLDER = "STRINGWHICHHOPEFULLYWONTBEUSED";
                 const rep = new RegExp("\\\\:", "g");
@@ -162,7 +162,7 @@ Singleton {
         }
     }
 
-    component AccessPoint: QtObject {
+    component AccessPoint: QtObject{
         required property var last_ipc_object
         readonly property string ssid: last_ipc_object.ssid
         readonly property string bssid: last_ipc_object.bssid
@@ -173,9 +173,9 @@ Singleton {
         readonly property bool isSecure: security.length > 0
     }
 
-    Component {
+    Component{
         id: ap_comp
 
-        AccessPoint {}
+        AccessPoint{}
     }
 }

@@ -4,7 +4,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import qs.components.containers
+// import qs.components.containers
 import qs.components
 import qs.services
 
@@ -44,13 +44,17 @@ ColumnLayout {
         next_workspace_proc.exec({command: ["bash", "-c", cmd]})
     }
 
-    ColumnLayout {
+    RowLayout {
         id: workspaces_row
 
-        anchors {
-            verticalCenter: parent.verticalCenter
-        }
+        Layout.alignment: Qt.AlignVCenter
+
         spacing: 3
+
+        MouseArea{
+            anchors.fill: parent
+            onWheel: next_workspace(wheel.angleDelta.y)
+        }
 
         Repeater {
             model: workspaces
@@ -58,26 +62,26 @@ ColumnLayout {
             delegate: Rectangle {
                 required property Workspace modelData;
 
-                width: 15
-                height: 15
-                radius: 15
+                width: 20
+                height: 20
+                radius: 20
                 //color: Hyprland.workspaces.values[modelData.name].active ? "#4a9eff" : "#333333"
                 color: "#00000000"
                 border.color: "#00000000"
                 border.width: 0
 
-                MouseArea {
+                MouseArea{
                     anchors.fill: parent
                     onClicked: modelData.switch_to()
-                    onWheel: next_workspace(wheel.angleDelta.y)
                 }
 
-                Text {
-                    text: modelData.is_occupied() ? '' : ''
+                StyledText{
+                    animate: true
+                    text: modelData.is_occupied() ? (modelData.is_active() ? '​' : '') : ''
                     anchors.centerIn: parent
                     //color: Hyprland.workspaces.values[modelData.name].active ? "#ffffff" : "#cccccc"
-                    color: modelData.is_active() ? Colors.palette.m3primary : Colors.palette.m3outlineVariant
-                    font.pixelSize: 20
+                    color: modelData.is_active() ? "#b4befe" : "#45475a"
+                    font.pointSize: 20
                     font.family: "CaskaydiaCove NFM"
                 }
             }

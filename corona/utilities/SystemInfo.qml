@@ -1,8 +1,8 @@
 pragma Singleton
 
-import QtQuick
 import Quickshell
 import Quickshell.Io
+import QtQuick
 
 Singleton{
     id: root
@@ -57,9 +57,5 @@ Singleton{
             if (minutes > 0 || !str) str += `${str ? ", " : ""}${minutes} minute${minutes === 1 ? "" : "s"}`;
             root.uptime = str;
         }
-    }
-
-    Text{
-        text: root.uptime
     }
 }

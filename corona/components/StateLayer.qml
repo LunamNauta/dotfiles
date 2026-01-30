@@ -1,4 +1,4 @@
-import qs.services
+// import qs.services
 import qs.config
 
 import QtQuick
@@ -7,7 +7,7 @@ MouseArea{
     id: root
 
     property bool disabled
-    property color color: Colors.palette.m3onSurface
+    property color color: "#cdd6f4" // Colors.palette.m3onSurface
     property real radius: parent?.radius ?? 0
     property alias rect: hover_layer
 

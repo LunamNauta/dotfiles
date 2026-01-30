@@ -16,12 +16,12 @@ Text{
 
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
-    color: Colors.palette.m3onSurface
+    // color: Colors.palette.m3onSurface
     font.family: Config.appearance.font.family.sans
     font.pointSize: Config.appearance.font.size.smaller
 
     Behavior on color{
-        CAnim{}
+        // CAnim{}
     }
 
     Behavior on text{
@@ -43,7 +43,7 @@ Text{
     component Anim: NumberAnimation{
         target: root
         property: root.animate_prop
-        duration: root.animate_duration / 2
+        // duration: root.animate_duration / 2
         easing.type: Easing.BezierSpline
     }
 }

@@ -2,7 +2,7 @@ pragma Singleton
 
 import Quickshell
 
-Singleton {
+Singleton{
     id: root
 
     readonly property string home: Quickshell.env("HOME")

@@ -6,7 +6,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 
-Singleton {
+Singleton{
     id: root
 
     readonly property var toplevels: Hyprland.toplevels
@@ -20,7 +20,7 @@ Singleton {
 
     signal configReloaded
 
-    function dispatch(request: string): void {
+    function dispatch(request: string): void{
         Hyprland.dispatch(request);
     }
 

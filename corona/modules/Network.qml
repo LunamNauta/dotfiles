@@ -19,8 +19,6 @@ Item{
         
         animate: true
 
-        color: "#cdd6f4"
-
         text: Network.active != null ? Icons.getNetworkIcon(Network.active.strength) : "signal_wifi_off"
 
         Process{

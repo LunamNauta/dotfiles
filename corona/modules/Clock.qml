@@ -15,8 +15,6 @@ Item{
     StyledText{
         id: clock
 
-        color: "#cdd6f4"
-
         text: DateTime.format("HH:mm:ss ddd MMM dd")
 
         font.pointSize: Config.appearance.font.size.small

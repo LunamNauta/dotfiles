@@ -16,7 +16,7 @@ Text{
 
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
-    // color: Colors.palette.m3onSurface
+    color: "#cdd6f4" // Colors.palette.m3onSurface
     font.family: Config.appearance.font.family.sans
     font.pointSize: Config.appearance.font.size.smaller
 

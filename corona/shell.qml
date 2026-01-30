@@ -2,94 +2,96 @@ import qs.modules
 import qs.components
 import qs.config
 
+import "modules/background"
+
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-PanelWindow{
-    anchors.left: true
-    anchors.right: true
-    anchors.top: true
+ShellRoot{
+    Background{}
 
-    implicitWidth: right_block.implicitWidth + Config.appearance.padding.small
-    implicitHeight: right_block.implicitHeight + Config.appearance.padding.small
+    PanelWindow{
+        anchors.left: true
+        anchors.right: true
+        anchors.top: true
 
-    StyledRect{
-        anchors.fill: parent
-        color: "#11111b"
-        radius: 0
-    }
+        implicitWidth: right_block.implicitWidth + Config.appearance.padding.small
+        implicitHeight: right_block.implicitHeight + Config.appearance.padding.small
 
-    StyledRect{
-        id: left_block
+        StyledRect{
+            anchors.fill: parent
+            color: "#11111b"
+            radius: 0
+        }
 
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: Config.appearance.padding.small
-
-        implicitWidth: left_elements.implicitWidth + Config.appearance.padding.smaller
-        implicitHeight: left_elements.implicitHeight + Config.appearance.padding.smaller
-
-        color: "#1e1e2e"
-        radius: 8
-
-        RowLayout{
-            id: left_elements
+        StyledRect{
+            id: left_block
 
             anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: Config.appearance.padding.small
 
-            anchors.margins: 5
-            spacing: 10
+            implicitWidth: left_elements.implicitWidth + Config.appearance.padding.smaller
+            implicitHeight: left_elements.implicitHeight + Config.appearance.padding.smaller
 
-            Workspaces {
-                id: worksspaces
+            color: "#1e1e2e"
+            radius: 8
 
-                Layout.alignment: Qt.AlignVCenter
+            RowLayout{
+                id: left_elements
 
-                Workspace { workspace_id: 1 }
-                Workspace { workspace_id: 2 }
-                Workspace { workspace_id: 3 }
-                Workspace { workspace_id: 4 }
-                Workspace { workspace_id: 5 }
-                Workspace { workspace_id: 6 }
-                Workspace { workspace_id: 7 }
-                Workspace { workspace_id: 8 }
-                Workspace { workspace_id: 9 }
-                Workspace { workspace_id: 10 }
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                anchors.margins: 5
+                spacing: 10
+
+                Workspaces {
+                    id: worksspaces
+
+                    Layout.alignment: Qt.AlignVCenter
+
+                    Workspace { workspace_id: 1 }
+                    Workspace { workspace_id: 2 }
+                    Workspace { workspace_id: 3 }
+                    Workspace { workspace_id: 4 }
+                    Workspace { workspace_id: 5 }
+                    Workspace { workspace_id: 6 }
+                    Workspace { workspace_id: 7 }
+                    Workspace { workspace_id: 8 }
+                    Workspace { workspace_id: 9 }
+                    Workspace { workspace_id: 10 }
+                }
             }
         }
-    }
 
-    StyledRect{
-        id: right_block
-
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: Config.appearance.padding.small
-
-        implicitWidth: right_elements.implicitWidth + Config.appearance.padding.smaller
-        implicitHeight: right_elements.implicitHeight + Config.appearance.padding.smaller
-
-        color: "#1e1e2e"
-        radius: 8
-
-        RowLayout{
-            id: right_elements
+        StyledRect{
+            id: right_block
 
             anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: Config.appearance.padding.small
 
-            anchors.margins: 5
-            spacing: 10
+            implicitWidth: right_elements.implicitWidth + Config.appearance.padding.smaller
+            implicitHeight: right_elements.implicitHeight + Config.appearance.padding.smaller
 
-            Clock{}
-            StyledText{
-                color: "#cdd6f4"
-                text: "|"
+            radius: 8
+
+            RowLayout{
+                id: right_elements
+
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                anchors.margins: 5
+                spacing: 10
+
+                Clock{}
+                StyledText{ text: "|" }
+                Network{}
+                Bluetooth{}
             }
-            Network{}
-            Bluetooth{}
         }
     }
 }

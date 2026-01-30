@@ -17,8 +17,6 @@ Item{
     MaterialIcon{
         id: bluetooth
 
-        color: "#cdd6f4"
-
         animate: true
 
         text: {

@@ -6,9 +6,9 @@ return{
         opts = {
             transparent_background = true,
             flavour = "mocha",
-            no_italic = true,
-            no_bold = true,
-            no_underline = true
+            -- no_italic = true,
+            -- no_bold = true,
+            -- no_underline = true
         }
     }
 }

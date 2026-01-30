@@ -32,7 +32,7 @@ Wvim.languages = {
         opts = {settings = {['rust-analyzer'] = {diagnostics = {enable = true}}}}
     },
     ['ts_ls'] = {
-        langs = {'javascript', 'typescript', 'tsx'}
+        langs = {'javascript', 'typescript', 'tsx', "json"}
     },
     ['omnisharp'] = {
         langs = {'c_sharp'},
@@ -64,6 +64,10 @@ vim.g.mapleader = ' '
 vim.g.c_syntax_for_h = true
 
 vim.api.nvim_set_option("clipboard", "unnamedplus")
+-- Prevent 'c' from putting removed text in clipboard
+vim.keymap.set("n", "c", '"_c', { noremap = true })
+vim.keymap.set("v", "c", '"_c', { noremap = true })
+
 
 local function set_background()
     local hl = vim.api.nvim_set_hl

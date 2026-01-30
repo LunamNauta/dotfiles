@@ -29,3 +29,25 @@ else
 fi
 
 export EDITOR=nvim
+
+export NEWT_COLORS="
+    root=#1e1e2e,#1e1e2e
+    border=#b4befe,#1e1e2e
+    window=#1e1e2e,#1e1e2e
+    shadow=#11111b,#11111b
+    title=#b4befe,#1e1e2e
+    button=#1e1e2e,#b4befe
+    button_active=#1e1e2e,#FFFF00
+    actbutton=#FFFF00,#1e1e2e
+    compactbutton=#b4befe,#1e1e2e
+    checkbox=#eba0ac,#1e1e2e
+    entry=#a6e3a1,#1e1e2e
+    disentry=#1e1e2e,#000000
+    textbox=#a6e3a1,#1e1e2e
+    acttextbox=#FF00FF,#1e1e2e
+    label=#b4befe,#1e1e2e
+    listbox=#cdd6f4,#1e1e2e
+    actlistbox=#cba6f7,#1e1e2e
+    sellistbox=#eba0ac,#1e1e2e
+    actsellistbox=#1e1e2e,#b4befe
+"

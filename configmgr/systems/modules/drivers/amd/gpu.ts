@@ -8,6 +8,7 @@ let packages: package_list = {
         "lib32-vulkan-radeon",
         "xf86-video-amdgpu",
         "vulkan-radeon",
+        "rocm-smi-lib",
         "lact"
     ],
     aur: null,

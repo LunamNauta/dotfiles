@@ -1,0 +1,22 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "material-icon-theme",
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+
+    "chat.disableAIFeatures": true,
+    "terminal.integrated.initialHint": false,
+    "telemetry.feedback.enabled": false,
+    "telemetry.editStats.enabled": false,
+    "telemetry.telemetryLevel": "off",
+    "editor.fontFamily": "'CaskaydiaCove Nerd Font Mono', 'monospace', monospace",
+    "editor.fontLigatures": true,
+    "workbench.startupEditor": "none",
+    "qt-core.additionalQtPaths": [
+        {
+            "name": "Qt-5.15.18-linux-g++_from_PATH",
+            "path": "/usr/bin/qmake"
+        }
+    ],
+    "qt-qml.doNotAskForQmllsDownload": true
+}

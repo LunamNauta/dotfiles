@@ -1,5 +1,12 @@
-import { command_exists, pull_config } from "./utils";
+import { command_exists, log_message, pull_config } from "./utils";
 import { homedir } from "node:os";
+
+async function vscode_special(){
+    log_message("Scraping extensions from vscode");
+    const extensions_file = Bun.file("../../vscode/extensions.txt");
+    const proc_get_extensions = Bun.spawnSync(["code", "--list-extensions"]);
+    extensions_file.write(proc_get_extensions.stdout.toString());
+}
 
 let push_info = [
   {command: "starship",  to: "../../starship.toml",           from: `${homedir()}/.config/starship.toml`},
@@ -15,10 +22,12 @@ let push_info = [
   {command: "yazi",      to: "../../yazi",                    from: `${homedir()}/.config/yazi`},
   {command: "zsh",       to: "../../zsh",                     from: `${homedir()}/.config/zsh`},
   {command: "zsh",       to: "../../zsh/.zshenv",             from: `${homedir()}/.zshenv`},
-  {command: "gdu",       to: "../../gdu/.gdu.yaml",           from: `${homedir()}/.gdu.yaml`}
+  {command: "gdu",       to: "../../gdu/.gdu.yaml",           from: `${homedir()}/.gdu.yaml`},
+  {command: "code",    to: "../../vscode/keybindings.json", from: `${homedir()}/.config/Code/User/keybindings.json`},
+  {command: "code",    to: "../../vscode/settings.json",    from: `${homedir()}/.config/Code/User/settings.json`, special: vscode_special},
 ];
 for (const info of push_info){
     if (!command_exists(info.command)) continue;
     await pull_config(info.to, info.from);
-    //if (info.special) info.special();
+    if (info.special) info.special();
 }

@@ -5,13 +5,13 @@ async function hyprland_special(){
     switch (hostname()){
         case "asgard":{
             await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "MONITOR DATA", ["monitor = , 1920x1080@120, auto, 1"]);
-            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "GAPS", ["gaps_in = 0,0,0,0", "gaps_out = 4,4,4,29"]);
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "GAPS", ["gaps_in = 0,0,0,0", "gaps_out = 0,0,0,0"]);
             await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "ROUNDING", ["rounding = 14"]);
             break;
         }
         case "midgard":{
             await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "MONITOR DATA", ["monitor = , 1920x1080@60, auto, 1.20"]);
-            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "GAPS", ["gaps_in = 0,0,0,0", "gaps_out = 2,2,2,36"]);
+            await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "GAPS", ["gaps_in = 0,0,0,0", "gaps_out = 0,0,0,0"]);
             await edit_config(`${homedir()}/.config/hypr/hyprland.conf`, "ROUNDING", ["rounding = 14"]);
             break;
         }
@@ -28,6 +28,12 @@ async function yazi_special(){
     Bun.spawnSync(["ya", "pkg", "add", "yazi-rs/plugins:smart-enter"]);
     Bun.spawnSync(["ya", "pkg", "add", "dedukun/bookmarks"]);
 }
+async function vscode_special(){
+    log_message("Installing vscode extensions");
+    const proc_cat = Bun.spawnSync(["cat", "../../vscode/extensions.txt"]);
+    const proc_install = Bun.spawn(["xargs", "-n", "1", "code", "--install-extension"], { stdin: proc_cat.stdout, stderr: 'inherit' });
+    await proc_install.exited;
+}
 
 let push_info = [
   {command: "starship",  from: "../../starship.toml",           to: `${homedir()}/.config/starship.toml`},
@@ -43,7 +49,9 @@ let push_info = [
   {command: "yazi",      from: "../../yazi",                    to: `${homedir()}/.config/yazi`, special: yazi_special},
   {command: "zsh",       from: "../../zsh",                     to: `${homedir()}/.config/zsh`},
   {command: "zsh",       from: "../../zsh/.zshenv",             to: `${homedir()}/.zshenv`},
-  {command: "gdu",       from: "../../gdu/.gdu.yaml",           to: `${homedir()}/.gdu.yaml`}
+  {command: "gdu",       from: "../../gdu/.gdu.yaml",           to: `${homedir()}/.gdu.yaml`},
+   {command: "code",    from: "../../vscode/keybindings.json", to: `${homedir()}/.config/Code/User/keybindings.json`},
+  {command: "code",    from: "../../vscode/settings.json",    to: `${homedir()}/.config/Code/User/settings.json`, special: vscode_special},
 ];
 for (const info of push_info){
     if (!command_exists(info.command)) continue;

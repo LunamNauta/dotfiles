@@ -1,0 +1,14 @@
+bbenoist.qml
+catppuccin.catppuccin-vsc
+github.remotehub
+guichina.code-telescope
+ms-azuretools.vscode-containers
+ms-azuretools.vscode-docker
+ms-vscode-remote.remote-containers
+ms-vscode.cmake-tools
+ms-vscode.cpptools
+ms-vscode.cpptools-extension-pack
+ms-vscode.remote-repositories
+pkief.material-icon-theme
+theqtcompany.qt-core
+theqtcompany.qt-qml

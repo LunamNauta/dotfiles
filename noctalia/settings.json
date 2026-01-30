@@ -143,9 +143,17 @@
             ],
             "right": [
                 {
+                    "defaultSettings": {
+                        "hideBackground": false,
+                        "minimumThreshold": 10
+                    },
                     "id": "plugin:catwalk"
                 },
                 {
+                    "defaultSettings": {
+                        "hideInactive": false,
+                        "removeMargins": false
+                    },
                     "id": "plugin:privacy-indicator"
                 },
                 {
@@ -318,10 +326,10 @@
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
-        "allowPasswordWithFprintd": false,
+        "allowPasswordWithFprintd": true,
         "animationDisabled": false,
         "animationSpeed": 1,
-        "autoStartAuth": false,
+        "autoStartAuth": true,
         "avatarImage": "/home/loki/personal/dotfiles/face.png",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
@@ -380,12 +388,12 @@
     },
     "nightLight": {
         "autoSchedule": true,
-        "dayTemp": "6500",
+        "dayTemp": "4887",
         "enabled": false,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4000"
+        "nightTemp": "4054"
     },
     "notifications": {
         "backgroundOpacity": 1,

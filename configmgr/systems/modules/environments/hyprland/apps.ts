@@ -19,7 +19,8 @@ let packages: package_list = {
         "nemo"
     ],
     aur: [
-        "librewolf-bin"
+        "librewolf-bin",
+        "visual-studio-code-bin"
     ],
     flatpak: null
 };

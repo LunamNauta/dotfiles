@@ -17,6 +17,8 @@ ShellRoot{
         anchors.right: true
         anchors.top: true
 
+        margins.bottom: 2
+    
         implicitWidth: right_block.implicitWidth + Config.appearance.padding.small
         implicitHeight: right_block.implicitHeight + Config.appearance.padding.small
 

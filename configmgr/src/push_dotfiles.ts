@@ -21,7 +21,8 @@ async function hyprland_special(){
     await push_config("../../noctalia/colors.json", `${homedir()}/.config/noctalia/colors.json`);
     await push_config("../../noctalia/plugins.json", `${homedir()}/.config/noctalia/plugins.json`);
     await push_config("../../noctalia/settings.json", `${homedir()}/.config/noctalia/settings.json`);
-    
+    await push_config("../../noctalia/colorschemes", `${homedir()}/.config/noctalia/colorschemes`);
+
     Bun.spawnSync(["hyprctl", "reload"]);
     Bun.spawnSync(["sh", `${homedir()}/.config/hypr/scripts/border_when_alone.zsh`]);
 }

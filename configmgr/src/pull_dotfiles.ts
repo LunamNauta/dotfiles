@@ -6,6 +6,8 @@ async function hyprland_special(){
     await pull_config("../../noctalia/colors.json", `${homedir()}/.config/noctalia/colors.json`);
     await pull_config("../../noctalia/plugins.json", `${homedir()}/.config/noctalia/plugins.json`);
     await pull_config("../../noctalia/settings.json", `${homedir()}/.config/noctalia/settings.json`);
+    await pull_config("../../noctalia/colorschemes", `${homedir()}/.config/noctalia/colorschemes`);
+
 }
 async function vscode_special(){
     log_message("Scraping extensions from vscode");

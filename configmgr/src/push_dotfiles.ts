@@ -28,12 +28,6 @@ async function yazi_special(){
     Bun.spawnSync(["ya", "pkg", "add", "yazi-rs/plugins:smart-enter"]);
     Bun.spawnSync(["ya", "pkg", "add", "dedukun/bookmarks"]);
 }
-async function vscodium_special(){
-    log_message("Installing vscodium extensions");
-    const proc_cat = Bun.spawnSync(["cat", "../../codium/extensions.txt"]);
-    const proc_install = Bun.spawn(["xargs", "-n", "1", "codium", "--install-extension"], { stdin: proc_cat.stdout, stderr: 'inherit' });
-    await proc_install.exited;
-}
 
 let push_info = [
   {command: "starship",  from: "../../starship.toml",           to: `${homedir()}/.config/starship.toml`},
@@ -49,9 +43,7 @@ let push_info = [
   {command: "yazi",      from: "../../yazi",                    to: `${homedir()}/.config/yazi`, special: yazi_special},
   {command: "zsh",       from: "../../zsh",                     to: `${homedir()}/.config/zsh`},
   {command: "zsh",       from: "../../zsh/.zshenv",             to: `${homedir()}/.zshenv`},
-  {command: "gdu",       from: "../../gdu/.gdu.yaml",           to: `${homedir()}/.gdu.yaml`},
-  {command: "codium",    from: "../../codium/keybindings.json", to: `${homedir()}/.config/VSCodium/User/keybindings.json`},
-  {command: "codium",    from: "../../codium/settings.json",    to: `${homedir()}/.config/VSCodium/User/settings.json`, special: vscodium_special},
+  {command: "gdu",       from: "../../gdu/.gdu.yaml",           to: `${homedir()}/.gdu.yaml`}
 ];
 for (const info of push_info){
     if (!command_exists(info.command)) continue;

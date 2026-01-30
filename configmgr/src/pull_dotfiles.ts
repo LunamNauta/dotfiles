@@ -1,12 +1,5 @@
-import { command_exists, log_message, pull_config } from "./utils";
-import { homedir, hostname } from "node:os";
-
-async function vscodium_special(){
-    log_message("Scraping extensions from vscodium");
-    const extensions_file = Bun.file("../../codium/extensions.txt");
-    const proc_get_extensions = Bun.spawnSync(["codium", "--list-extensions"]);
-    extensions_file.write(proc_get_extensions.stdout.toString());
-}
+import { command_exists, pull_config } from "./utils";
+import { homedir } from "node:os";
 
 let push_info = [
   {command: "starship",  to: "../../starship.toml",           from: `${homedir()}/.config/starship.toml`},
@@ -22,12 +15,10 @@ let push_info = [
   {command: "yazi",      to: "../../yazi",                    from: `${homedir()}/.config/yazi`},
   {command: "zsh",       to: "../../zsh",                     from: `${homedir()}/.config/zsh`},
   {command: "zsh",       to: "../../zsh/.zshenv",             from: `${homedir()}/.zshenv`},
-  {command: "gdu",       to: "../../gdu/.gdu.yaml",           from: `${homedir()}/.gdu.yaml`},
-  {command: "codium",    to: "../../codium/keybindings.json", from: `${homedir()}/.config/VSCodium/User/keybindings.json`},
-  {command: "codium",    to: "../../codium/settings.json",    from: `${homedir()}/.config/VSCodium/User/settings.json`, special: vscodium_special},
+  {command: "gdu",       to: "../../gdu/.gdu.yaml",           from: `${homedir()}/.gdu.yaml`}
 ];
 for (const info of push_info){
     if (!command_exists(info.command)) continue;
     await pull_config(info.to, info.from);
-    if (info.special) info.special();
+    //if (info.special) info.special();
 }

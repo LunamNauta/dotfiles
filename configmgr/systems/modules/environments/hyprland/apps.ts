@@ -19,8 +19,7 @@ let packages: package_list = {
         "nemo"
     ],
     aur: [
-        "librewolf-bin",
-        "vscodium-bin"
+        "librewolf-bin"
     ],
     flatpak: null
 };

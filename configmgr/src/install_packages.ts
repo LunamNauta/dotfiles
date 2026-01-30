@@ -72,7 +72,8 @@ for (const pre_install_func of pre_install_funcs) await pre_install_func();
 
 log_message("Reading current package list...");
 const proc_curr_packages = Bun.spawnSync(["pacman", "-Qeq"]);
-const curr_packages = await proc_curr_packages.stdout.toString().split("\n");
+const curr_packages = proc_curr_packages.stdout.toString().split("\n");
+console.log("");
 
 log_message("Updating system...");
 const update_command: string[] = command_exists("yay") ? ["yay", "-Syu"] : ["sudo", "pacman", "-Syu"];
@@ -85,22 +86,19 @@ for (const curr_package of curr_packages){
     if (curr_package.replace(/\p{White_Space}+/gu, "").length == 0) continue;
     if (curr_package.endsWith("-debug")) continue;
 
-    const pacman_index = desired_packages.pacman?.findIndex(val => val == curr_package);
-    if (pacman_index != undefined && pacman_index != -1){
-        desired_packages.pacman?.splice(pacman_index, 1);
-        continue;
-    }
-    const aur_index = desired_packages.aur?.findIndex(val => val == curr_package);
-    if (aur_index != undefined && aur_index != -1){
-        desired_packages.aur?.splice(aur_index, 1);
-        continue;
-    }
+    if (desired_packages.pacman?.includes(curr_package)) continue;
+    if (desired_packages.aur?.includes(curr_package)) continue;
     if (ignored_packages.includes(curr_package)) continue;
+
     log_message(`'${curr_package}' not found in desired package list...`);
     const proc_remove_package = Bun.spawn(["sudo", "pacman", "-Rs", curr_package], sudo_interactive_props);
     await proc_remove_package.exited;
 }
 console.log("");
+
+if (desired_packages.pacman != null) desired_packages.pacman = desired_packages.pacman.filter(val => !curr_packages.includes(val));
+if (desired_packages.aur != null) desired_packages.aur = desired_packages.aur.filter(val => !curr_packages.includes(val));
+if (desired_packages.flatpak != null) desired_packages.flatpak = desired_packages.flatpak.filter(val => !curr_packages.includes(val[0]!));
 
 log_message("Checking for yay...");
 if (!command_exists("yay")){
@@ -132,7 +130,7 @@ else console.log("");
 
 log_message("Reading current flatpak list...");
 const proc_curr_flatpaks = Bun.spawnSync(["flatpak", "list", "--app", "--columns=application"]);
-const curr_flatpaks = await proc_curr_flatpaks.stdout.toString().split("\n");
+const curr_flatpaks = proc_curr_flatpaks.stdout.toString().split("\n");
 console.log("");
 
 log_message("Removing unused flatpaks...");
@@ -180,7 +178,7 @@ if (desired_packages.flatpak?.length != 0){
 
 log_message("Searching for orphaned packages...");
 const proc_orphaned_packages = Bun.spawnSync(["pacman", "-Qdtq"]);
-const orphaned_packages = await proc_orphaned_packages.stdout.toString().split("\n");
+const orphaned_packages = proc_orphaned_packages.stdout.toString().split("\n");
 for (let a = 0; a < orphaned_packages.length; a++){
     const orphaned_package = orphaned_packages[a]!;
     if (orphaned_package.replaceAll(/\p{White_Space}+/gu, "").length == 0){

@@ -32,7 +32,7 @@ let push_info = [
   {command: "tmux",      to: "../../tmux",                    from: `${homedir()}/.config/tmux`},
   {command: "tmux",      to: "../../tmux/.tmux.conf",         from: `${homedir()}/.tmux.conf`},
   {command: "yazi",      to: "../../yazi",                    from: `${homedir()}/.config/yazi`},
-  {command: "zsh",       to: "../../zsh",                     from: `${homedir()}/.config/zsh`, zsh_special: zsh_special},
+  {command: "zsh",       to: "../../zsh",                     from: `${homedir()}/.config/zsh`, special: zsh_special},
   {command: "zsh",       to: "../../zsh/.zshenv",             from: `${homedir()}/.zshenv`},
   {command: "gdu",       to: "../../gdu/.gdu.yaml",           from: `${homedir()}/.gdu.yaml`},
   {command: "code",    to: "../../vscode/keybindings.json", from: `${homedir()}/.config/Code/User/keybindings.json`},

@@ -453,7 +453,7 @@
             },
             {
                 "action": "suspend",
-                "command": "",
+                "command": "systemctl suspend-then-hibernate",
                 "countdownEnabled": true,
                 "enabled": true
             },

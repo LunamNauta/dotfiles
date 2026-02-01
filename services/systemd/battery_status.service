@@ -2,7 +2,7 @@
 Description=Battery info collector
 
 [Service]
-ExecStart=%h/.local/services/battery_daemon.sh
+ExecStart=%h/.local/services/battery_status.sh
 Restart=always
 
 [Install]

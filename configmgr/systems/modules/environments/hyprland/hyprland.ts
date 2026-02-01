@@ -8,7 +8,8 @@ let packages: package_list = {
         "hypridle",
         "hyprlock",
         "hyprland",
-        "hyprshot"
+        "hyprshot",
+        "wlsunset"
     ],
     aur: null,
     flatpak: null

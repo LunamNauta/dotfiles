@@ -175,7 +175,7 @@
                     "unreadBadgeColor": "primary"
                 },
                 {
-                    "deviceNativePath": "",
+                    "deviceNativePath": "BAT1",
                     "displayMode": "onhover",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,

@@ -41,6 +41,11 @@ async function vscode_special(){
     const proc_install = Bun.spawn(["xargs", "-n", "1", "code", "--install-extension"], { stdin: proc_cat.stdout, stderr: 'inherit' });
     await proc_install.exited;
 }
+async function zsh_special(){
+    await push_config("../../services/bin/battery_status.sh", `${homedir()}/.local/services/battery_status.sh`);
+    await push_config("../../services/systemd/battery_status.service", `${homedir()}/.config/systemd/user/battery_status.service`);
+    Bun.spawnSync(["systemctl", "--user", "enable", "--now", "battery_status"]);
+}
 
 let push_info = [
   {command: "starship",  from: "../../starship.toml",           to: `${homedir()}/.config/starship.toml`},
@@ -54,7 +59,7 @@ let push_info = [
   {command: "tmux",      from: "../../tmux",                    to: `${homedir()}/.config/tmux`},
   {command: "tmux",      from: "../../tmux/.tmux.conf",         to: `${homedir()}/.tmux.conf`},
   {command: "yazi",      from: "../../yazi",                    to: `${homedir()}/.config/yazi`, special: yazi_special},
-  {command: "zsh",       from: "../../zsh",                     to: `${homedir()}/.config/zsh`},
+  {command: "zsh",       from: "../../zsh",                     to: `${homedir()}/.config/zsh`, special: zsh_special},
   {command: "zsh",       from: "../../zsh/.zshenv",             to: `${homedir()}/.zshenv`},
   {command: "gdu",       from: "../../gdu/.gdu.yaml",           to: `${homedir()}/.gdu.yaml`},
    {command: "code",    from: "../../vscode/keybindings.json", to: `${homedir()}/.config/Code/User/keybindings.json`},

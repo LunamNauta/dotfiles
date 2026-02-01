@@ -8,6 +8,7 @@ source ~/.config/zsh/colors.zsh
 source ~/.config/zsh/misc.zsh
 source ~/.config/zsh/path_update.zsh
 
+: '
 if [[ $TTY == /dev/tty1 ]]; then
     echo $(start-hyprland) >> /tmp/hyprland_start_tty1.txt
     logout || exit
@@ -27,6 +28,9 @@ elif ! [[ -z $(tty | grep pts) ]]; then
 else
     source ~/.config/zsh/prompt.zsh
 fi
+'
+
+source ~/.config/zsh/prompt.zsh
 
 export EDITOR=nvim
 

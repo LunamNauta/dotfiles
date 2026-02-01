@@ -1,0 +1,9 @@
+[Unit]
+Description=Battery info collector
+
+[Service]
+ExecStart=%h/.local/services/battery_daemon.sh
+Restart=always
+
+[Install]
+WantedBy=default.target

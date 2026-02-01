@@ -8,10 +8,12 @@ source ~/.config/zsh/colors.zsh
 source ~/.config/zsh/misc.zsh
 source ~/.config/zsh/path_update.zsh
 
-: '
 if [[ $TTY == /dev/tty1 ]]; then
     echo $(start-hyprland) >> /tmp/hyprland_start_tty1.txt
     logout || exit
+fi
+
+: '
 elif ! [[ -z $(tty | grep pts) ]]; then
     eval "$(starship init zsh)"
     PROMPT_NEEDS_NEWLINE=false

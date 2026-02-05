@@ -336,7 +336,7 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "autoStartAuth": true,
-        "avatarImage": "/home/loki/personal/dotfiles/face.png",
+        "avatarImage": "~/personal/dotfiles/face.png",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
         "dimmerOpacity": 0.15,
@@ -539,7 +539,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/loki/personal/dotfiles/backgrounds",
+        "directory": "~/personal/dotfiles/backgrounds",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",

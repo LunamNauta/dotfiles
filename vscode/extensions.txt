@@ -2,6 +2,7 @@ bbenoist.qml
 catppuccin.catppuccin-vsc
 github.remotehub
 guichina.code-telescope
+llvm-vs-code-extensions.vscode-clangd
 ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
 ms-vscode-remote.remote-containers
@@ -12,5 +13,7 @@ ms-vscode.cpptools-extension-pack
 ms-vscode.cpptools-themes
 ms-vscode.remote-repositories
 pkief.material-icon-theme
+shd101wyy.markdown-preview-enhanced
 theqtcompany.qt-core
 theqtcompany.qt-qml
+tomoki1207.pdf

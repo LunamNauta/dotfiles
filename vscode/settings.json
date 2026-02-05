@@ -19,5 +19,7 @@
         }
     ],
     "qt-qml.doNotAskForQmllsDownload": true,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "editor.inlayHints.enabled": "off"
 }

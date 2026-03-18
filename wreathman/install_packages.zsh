@@ -43,7 +43,7 @@ current_aur_packages=("${(@f)$(comm -12 <(pacman -Qeq | sort) <(pacman -Qmq | so
 current_flatpak_packages=("${(@f)$(flatpak list --app --columns=application,origin | awk '{print $1 " " $2}')}")
 current_appimage_packages=($HOME/applications/*.appimage(N:t:r))
 
-# Gather unwanted packages (excluding appimages)
+# Gather unwanted packages
 #------------------------------------------------------
 unwanted_native_packages=($(printf "%s\n" "${current_native_packages[@]}" | grep -vxF -f <(printf "%s\n" "${native_packages[@]}")))
 unwanted_aur_packages=($(printf "%s\n" "${current_aur_packages[@]}" | grep -vxF -f <(printf "%s\n" "${aur_packages[@]}")))
@@ -63,7 +63,7 @@ unwanted_native_packages=(${unwanted_native_packages[@]:#fuse2})
 unwanted_aur_packages=(${unwanted_aur_packages[@]:#yay})
 unwanted_aur_packages=(${unwanted_aur_packages[@]:#*-debug})
 
-# Remove unwanted packages (excluding appimages)
+# Remove unwanted packages
 #------------------------------------------------------
 for native_package in "${unwanted_native_packages[@]}"; do
     log_message "$native_package not found in desired native packages"

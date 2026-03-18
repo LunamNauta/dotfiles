@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+export SCRIPT_PATH="$(dirname $(realpath $0))"
+source "$SCRIPT_PATH/utilities.zsh"
+
+function validate_system(){
+    if [[ ! -f "$SCRIPT_PATH/machines/$1.zsh" ]]; then
+        log_error "Error: Invalid system name"
+        exit
+    fi
+    export SYSTEM_NAME="$1"
+}
+
+if [[ $1 == install ]]; then
+    validate_system $2
+    source "$SCRIPT_PATH/install_packages.zsh"
+elif [[ $1 == admin ]]; then
+    source "$SCRIPT_PATH/install_admin.zsh"
+elif [[ $1 == push ]]; then
+    validate_system $2
+    source "$SCRIPT_PATH/push_dotfiles.zsh"
+elif [[ $1 == pull ]]; then
+    validate_system $2
+    source "$SCRIPT_PATH/pull_dotfiles.zsh"
+elif [[ $1 == all ]]; then
+    validate_system $2
+    source "$SCRIPT_PATH/install_packages.zsh"
+    source "$SCRIPT_PATH/install_admin.zsh"
+    source "$SCRIPT_PATH/push_dotfiles.zsh"
+else
+    log_error "Error: Invalid mode"
+    exit
+fi

@@ -45,11 +45,11 @@ function hyprland_special(){
         log_message "Fixing hyprland configuration..." none
         if [[ $SYSTEM_NAME == "asgard" ]]; then
             edit_config "$HOME/.config/hypr/hyprland.conf" "MONITOR DATA" "monitor = , 1920x1080@120, auto, 1"
-            edit_config "$HOME/.config/hypr/hyprland.conf" "GAPS" "gaps_in = 0,0,0,0" "gaps_out = 0,0,0,0"
+            edit_config "$HOME/.config/hypr/hyprland.conf" "GAPS" "gaps_in = 0,0,0,0" "gaps_out = 2,2,2,2"
             edit_config "$HOME/.config/hypr/hyprland.conf" "ROUNDING" "rounding = 14"
         elif [[ $SYSTEM_NAME == "midgard" ]]; then
-            edit_config "$HOME/.config/hypr/hyprland.conf" "MONITOR DATA" "monitor = , 1920x1080@60, auto, 1"
-            edit_config "$HOME/.config/hypr/hyprland.conf" "GAPS" "gaps_in = 0,0,0,0" "gaps_out = 0,0,0,0"
+            edit_config "$HOME/.config/hypr/hyprland.conf" "MONITOR DATA" "monitor = , 1920x1080@60, auto, 1.20"
+            edit_config "$HOME/.config/hypr/hyprland.conf" "GAPS" "gaps_in = 0,0,0,0" "gaps_out = 2,2,2,2"
             edit_config "$HOME/.config/hypr/hyprland.conf" "ROUNDING" "rounding = 14"
         fi
 

@@ -228,6 +228,8 @@ native_packages+=(
     "plymouth"
 )
 aur_packages+=(
+    "arduino-avr-core"
+    "arduino-ide-bin"
     "docker-desktop"
     "python-validity"
     "mongodb-bin"

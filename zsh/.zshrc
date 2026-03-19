@@ -8,11 +8,6 @@ source ~/.config/zsh/colors.zsh
 source ~/.config/zsh/misc.zsh
 source ~/.config/zsh/path_update.zsh
 
-if [[ $TTY == /dev/tty1 ]]; then
-    echo $(start-hyprland) >> /tmp/hyprland_start_tty1.txt
-    logout || exit
-fi
-
 : '
 elif ! [[ -z $(tty | grep pts) ]]; then
     eval "$(starship init zsh)"
@@ -57,3 +52,8 @@ export NEWT_COLORS="
     sellistbox=#eba0ac,#1e1e2e
     actsellistbox=#1e1e2e,#b4befe
 "
+
+if [[ $TTY == /dev/tty1 ]]; then
+    echo $(niri-session -l) >> /tmp/niri_start_tty1.txt
+    logout || exit
+fi

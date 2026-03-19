@@ -111,7 +111,6 @@ function zsh_special(){
 
 dotfile_mapping=(
     "cmd:bluetuith '$SCRIPT_PATH/../bluetuith'               '$HOME/.config/bluetuith'"
-    "cmd:fuzzel    '$SCRIPT_PATH/../fuzzel'                  '$HOME/.config/fuzzel'"
     "cmd:qt6ct     '$SCRIPT_PATH/../qt6ct'                   '$HOME/.config/qt6ct'"
     "cmd:kitty     '$SCRIPT_PATH/../kitty'                   '$HOME/.config/kitty'"
     "cmd:btop      '$SCRIPT_PATH/../btop'                    '$HOME/.config/btop'"      

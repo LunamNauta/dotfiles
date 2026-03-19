@@ -141,6 +141,9 @@ native_packages+=(
     "hyprland"
     "hyprshot"
     "wlsunset"
+
+    "niri"
+    "xwayland-satellite"
 )
 # Utilities
 native_packages+=(

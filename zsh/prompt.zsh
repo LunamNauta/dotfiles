@@ -68,7 +68,12 @@ precmd() {
     source /tmp/battery_status
 
     LEFT="%F{#cdd6f4}┌─(%F{#b4befe}$(whoami)@$(hostname))─%F{cdd6f4}[%F{#94e2d5}${PWD/#$HOME/~}%F{cdd6f4}]"
-    RIGHT="$(get_git_info) $(date +%H:%M:%S) | $symbol $percent%%  $time  $state"
+    if [[ -f /tmp/batteryy_status ]]; then
+        source /tmp/batteryy_status
+        RIGHT="$(get_git_info) $(date +%H:%M:%S) | $symbol $percent%%  $time  $state"
+    else
+        RIGHT="$(get_git_info) $(date +%H:%M:%S)"
+    fi
     RIGHTWIDTH=$(( $COLUMNS - $(visible_length $LEFT) ))
     print -P "$LEFT${(l:$RIGHTWIDTH:: :)RIGHT}"
 

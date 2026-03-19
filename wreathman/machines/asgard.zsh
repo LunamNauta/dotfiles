@@ -151,6 +151,9 @@ native_packages+=(
     "hyprland"
     "hyprshot"
     "wlsunset"
+
+    "niri"
+    "xwayland-satellite"
 )
 # Utilities
 native_packages+=(
@@ -219,10 +222,7 @@ aur_packages+=(
 )
 flatpak_packages+=(
     "com.modrinth.ModrinthApp flathub"
-)
-# Osu
-appimage_packages+=(
-    "osu https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
+    "sh.ppy.osu flathub"
 )
 # Steam
 native_packages+=(

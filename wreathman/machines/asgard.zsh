@@ -120,6 +120,8 @@ native_packages+=(
     # Brightness
     "brightnessctl"
     "ddcutil"
+    # Audio
+    "playerctl"
 )
 # Apps
 native_packages+=(

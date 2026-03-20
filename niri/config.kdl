@@ -20,7 +20,7 @@ input {
         accel-profile "flat"
     }
 
-    focus-follows-mouse max-scroll-amount="100%"
+    // focus-follows-mouse max-scroll-amount="100%"
 }
 
 output "HDMI-A-1" {
@@ -28,6 +28,7 @@ output "HDMI-A-1" {
     scale 1
     transform "normal"
     position x=0 y=0
+    backdrop-color "#11111b"
 }
 
 layout {
@@ -136,7 +137,7 @@ binds {
     XF86Bluetooth { spawn "qc" "-c" "noctalia-shell" "call" "bluetooth" "toggle"; }
     XF86WLAN { spawn "qc" "-c" "noctalia-shell" "call" "wifi" "toggle"; }
 
-    Mod+M repeat=false { toggle-overview; }
+    Mod+A repeat=false { toggle-overview; }
 
     Mod+C repeat=false { close-window; }
 

@@ -124,4 +124,5 @@ dotfile_mapping=(
     "cmd:gdu       '$SCRIPT_PATH/../gdu/.gdu.yaml'           '$HOME/.gdu.yaml'"
     "cmd:code      '$SCRIPT_PATH/../vscode/keybindings.json' '$HOME/.config/Code/User/keybindings.json' vscode_special"
     "cmd:code      '$SCRIPT_PATH/../vscode/settings.json'    '$HOME/.config/Code/User/settings.json'"
+    "cmd:niri      '$SCRIPT_PATH/../niri'                    '$HOME/.config/niri'"
 )

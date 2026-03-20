@@ -68,7 +68,6 @@ vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.keymap.set("n", "c", '"_c', { noremap = true })
 vim.keymap.set("v", "c", '"_c', { noremap = true })
 
-
 local function set_background()
     local hl = vim.api.nvim_set_hl
 
